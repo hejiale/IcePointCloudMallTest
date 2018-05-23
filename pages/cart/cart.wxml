@@ -1,0 +1,74 @@
+<wxs module="filter" src="../../utils/ipcConfig.wxs"></wxs>
+<view class="page">
+  <view class='topView'>
+    <view class='titleView'>
+      <text class='topText'>商品列表</text>
+      <text class='editText' bindtap='onTapEdit' wx:if="{{!canEdit && cartList.length > 0}}">编辑</text>
+      <text class='editText' bindtap='onTapEdit' wx:if="{{canEdit && cartList.length > 0}}">保存</text>
+    </view>
+    <!-- <view class='topLine'>
+    </view> -->
+  </view>
+  <view class="contentView" wx:if="{{cartList.length > 0}}">
+    <scroll-view>
+      <block wx:for-items="{{cartList}}">
+        <view class="openView" wx:if="{{canEdit}}">
+          <view class="onSelectView" bindtap="onDeleteCart" data-key="{{item}}">
+            <image src="../images/icon_cartReduce@2x.png" class="iconSelectedImage" mode="aspectFit"></image>
+          </view>
+          <view class="cartView">
+            <view class='productImageView'>
+              <image src="{{item.photos[0]}}" mode="aspectFit" class="productImage"></image>
+            </view>
+            <view class="productInfo">
+              <text class="productNameText">{{item.goods.goodsName}}</text>
+              <view class='openPriceView'>
+                <text class="price">￥ {{item.specifications != null ? item.specifications.price : item.goods.goodsRetailPrice}} </text>
+                <view class='shelvesImage' wx:if="{{item.code != 200 && item.code != 305}}" style='color: #999;border: 1px solid #999;'>已失效</view>
+                <view class='shelvesImage' wx:elif="{{item.code == 305}}" style='color: #FF4848;border: 1px solid #FF4848;'>库存不足</view>
+              </view>
+              <view class='editCartNumView'>
+                <image class='reduceCartImage' src='../images/icon_reduceCart@2x.png' mode="aspectFit" bindtap='onReduce' data-key="{{item}}"></image>
+                <text class='cartNumText'>{{item.shoppingCart.count}}</text>
+                <image class='reduceCartImage' src='../images/icon_plusCart@2x.png' mode="aspectFit" bindtap='onCrease' data-key="{{item}}"></image>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="unOpenView" wx:else data-key="{{item}}">
+          <view class="onSelectView" bindtap='onSelectCart' data-key='{{item}}'>
+            <icon class='iconSelectedImage' type="{{item.selected ? 'success' : 'circle'}}" color='#63a0d4'></icon>
+          </view>
+          <view class='cartView'>
+            <view class='productImageView'>
+              <image src="{{item.photos[0]}}" class="productImage" mode="aspectFit"></image>
+            </view>
+            <view class="productInfo">
+              <text class="productNameText">{{item.goods.goodsName}}</text>
+              <view class='specificationsView'>
+                <text class='specificationsText'>{{item.specification}}</text>
+                <view class='shelvesImage' wx:if="{{item.code != 200 && item.code != 305}}" style='color: #999;border: 1px solid #999;'>已失效</view>
+                <view class='shelvesImage' wx:elif="{{item.code == 305}}" style='color: #FF4848;border: 1px solid #FF4848;'>库存不足</view>
+              </view>
+              <view class="priceView">
+                <text class="price">￥ {{item.specifications != null ? item.specifications.price : item.goods.goodsRetailPrice}}</text>
+                <text class="numText">x {{item.shoppingCart.count}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+  <view class="footView" wx:if="{{cartList.length > 0}}">
+    <view class='normalBottomView' wx:if="{{!canEdit}}" bindtap='onBook'>
+      <text class="totalOrderPriceText">￥ {{filter.numberToFix(totalPrice)}} 结算</text>
+    </view>
+    <view class="chooseAllView" wx:if="{{canEdit}}" bindtap='onCleanCart'>
+      <text class="totalOrderPriceText">全部删除</text>
+    </view>
+  </view>
+  <view class='emptyCartView' wx:else>
+    <image src='../images/icon_emptyCart@2x.png' class='emptyImage' mode="aspectFit"></image>
+  </view>
+</view>

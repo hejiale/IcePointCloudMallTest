@@ -1,0 +1,23 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/order/order",
+    "pages/address/address",
+    "pages/editAddress/editAddress",
+    "pages/productDetail/productDetail",
+    "pages/bookOrder/bookOrder",
+    "pages/bindPhone/bindPhone",
+    "pages/cart/cart",
+    "pages/store/store",
+    "pages/productList/productList",
+    "pages/tryGlass/tryGlass",
+    "pages/searchPage/searchPage",
+    "pages/person/person",
+    "pages/orderDetail/orderDetail"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black"
+  }
+}

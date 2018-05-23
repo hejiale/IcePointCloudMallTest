@@ -1,0 +1,29 @@
+<view class="page">
+  <view class='topView'>
+    <view class='searchView'>
+      <image class='seachImage' src='../images/icon_seach@2x.png' mode="aspectFit"></image>
+      <input class='searchInput' placeholder='请输入你想要搜索的门店' placeholder-style='color: #999999;' bindconfirm="onSearchInput" value="{{keyword}}" confirm-type='search'></input>
+    </view>
+  </view>
+  <view class="storeListView">
+    <block wx:for-items="{{storeList}}">
+      <view class="contentView" bindtap="onSelectStore" data-key="{{item}}">
+        <view class='storeNameView'>
+          <text class="contentText">{{item.name}}</text>
+          <view class='distanceView' wx:if="{{item.distanceStr != null}}" catchtap='onMap' data-key="{{item}}">
+            <image class='addressImage' src='../images/address@2x.png' mode="aspectFit"></image>
+            <text class='distanceText'>{{item.distanceStr}}</text>
+          </view>
+        </view>
+        <image class='storeImage' style='height: {{imageHeight}}px;' src='{{item.pictures[0]}}' wx:if="{{item.pictures[0].length > 0}}"></image>
+        <view class='storeAddressView' style='{{item.pictures[0].length > 0 ? "margin-top: 10px;":"margin-top: 0px;"}}'>
+          <text class="addressText">{{item.region + item.address}}</text>
+          <image class='storeContacterLine' src='../images/icon_columnLine@2x.png'></image>
+          <view class='callPhoneView' catchtap ="onCall" data-key="{{item}}">
+            <image class='callImage' src='../images/store_phone@2x.png' mode="aspectFit"></image>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

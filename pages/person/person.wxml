@@ -1,0 +1,74 @@
+<view class="page">
+  <!-- <view class="personView">
+    <view class='topCoverView'></view>
+    <view class="headView">
+      <view class="photo_wrap">
+        <image src="{{userInfo.avatarUrl}}" class="photo" mode="aspectFit"></image>
+        <view class='personInfoView'>
+          <text class="userName">{{userInfo.nickName}}</text>
+          <text class="memberCardNum">会员号 暂无</text>
+        </view>
+        <view class='scanCodeView'>
+          <image class='scanCodeImage' src='../images/person_scanCode@2x.png' mode="aspectFit"></image>
+        </view>
+      </view>
+      <view class='headLine'></view>
+      <view class='memberInfoView'>
+        <view class='memberLevelView'>
+          <text class='memberInfoValue'>{{memberCustomer.memberlevel}}</text>
+          <text class='memberInfoTitle'>会员等级</text>
+        </view>
+        <view class='memberPointView'>
+          <text class='memberInfoValue'>{{memberCustomer.integral}}</text>
+          <text class='memberInfoTitle'>积分</text>
+        </view>
+        <view class='memberBalanceView'>
+          <text class='memberInfoValue'>{{memberCustomer.balance}}</text>
+          <text class='memberInfoTitle'>储值余额</text>
+        </view>
+      </view>
+    </view>
+    <view class='topCoverView'></view>
+    <view class="listView">
+      <navigator url="" class="navigator">
+        <view class="titleContent">
+          <image src="../images/person_orderList@2x.png" mode="aspectFit" class="leftImage"></image>
+          <text class="Text">订单</text>
+        </view>
+        <image src="../images/icon_arrow@2x.png" class="arrowImage"></image>
+      </navigator>
+      <view class='listLine'></view>
+      <navigator url="../order/order" class="navigator">
+        <view class="titleContent">
+          <image src="../images/person_bookOrder@2x.png" class="leftImage"></image>
+          <text class="Text">预定</text>
+        </view>
+        <image src="../images/icon_arrow@2x.png" class="arrowImage"></image>
+      </navigator>
+      <view class='listLine'></view>
+      <navigator url="" class="navigator">
+        <view class="titleContent">
+          <image src="../images/person_booking@2x.png" class="leftImage"></image>
+          <text class="Text">预约</text>
+        </view>
+        <image src="../images/icon_arrow@2x.png" class="arrowImage"></image>
+      </navigator>
+      <view class='listLine'></view>
+      <navigator url="" class="navigator">
+        <view class="titleContent">
+          <image src="../images/person_card@2x.png" class="leftImage"></image>
+          <text class="Text">卡券</text>
+        </view>
+        <image src="../images/icon_arrow@2x.png" class="arrowImage"></image>
+      </navigator>
+      <view class='listLine'></view>
+      <navigator url="" class="navigator">
+        <view class="titleContent">
+          <image src="../images/person_setting@2x.png" class="leftImage"></image>
+          <text class="Text">设置</text>
+        </view>
+        <image src="../images/icon_arrow@2x.png" class="arrowImage"></image>
+      </navigator>
+    </view>
+  </view> -->
+</view>

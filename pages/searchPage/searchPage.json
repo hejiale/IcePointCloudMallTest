@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "商品搜索",
+  "usingComponents": {
+    "wxc-loadmore": "../../dist/packages/@minui/wxc-loadmore/dist/index"
+  },
+  "component": true
+}

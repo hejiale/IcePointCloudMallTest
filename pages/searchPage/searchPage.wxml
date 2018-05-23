@@ -1,0 +1,95 @@
+<view class="showPropertyBgView {{showOrHide}}">
+  <view id="classViewCover" bindtap="onBgClicked" catchtouchmove='true'></view>
+  <view class="popContentView">
+    <view class="propertyClassView">
+      <scroll-view scroll-y="true" class="propertyScrollView" style="height:calc(100% - 40px)">
+        <view class="priceView">
+          <text class="TitleText">价格</text>
+          <view class="priceSpaceView">
+            <text class="priceSpaceText">价格区间(元)</text>
+            <input placeholder="最低价" class="inputPriceText" type="number" bindblur="onStartPriceClicked" value="{{lowPriceStr}}" style='margin-left: 25px;' />
+            <view class="priceSpace"></view>
+            <input placeholder="最高价" class="inputPriceText" type="number" bindblur="onEndPriceClicked" value="{{heighPriceStr}}" />
+          </view>
+        </view>
+        <view class="popClassView">
+          <text class="TitleText">类别</text>
+          <view class="classesView">
+            <block wx:for-items="{{classList}}" wx:for-index="idx">
+              <view class="classItem" style="background-color: #F0F0F0;" wx:if="{{!item.selected}}" data-key="{{item}}" bindtap='onChooseClass' id='{{idx}}'>
+                <text class="classItemText" style="color:#222">{{item.type.typeName}}</text>
+              </view>
+              <view class="classItem" style="background-color: #4D9FD8;" wx:else data-key="{{item}}" bindtap='onChooseClass' id='{{idx}}'>
+                <text class="classItemText" style="color: #FFFFFF;">{{item.type.typeName}}</text>
+              </view>
+            </block>
+          </view>
+        </view>
+        <block wx:for-items="{{parameterList}}" wx:for-item="value" wx:if="{{hasClassSelect}}">
+          <view class="popPropertyView">
+            <view class="popPropertyTitleView">
+              <text class="TitleText">{{value.parameter.parameterName}}</text>
+            </view>
+            <view class='propertysView'>
+              <block wx:for-items="{{value.goodsParameters}}">
+                <view class="classItem" data-key="{{item}}" bindtap="onSelectProperty" style="background-color: #F0F0F0;" wx:if="{{!item.selected}}">
+                  <text class="classItemText" style="color:#222">{{item.parameterValue}}</text>
+                </view>
+                <view class="classItem" data-key="{{item}}" bindtap="onSelectProperty" style="background-color: #4D9FD8;" wx:else>
+                  <text class="classItemText" style="color:#FFFFFF">{{item.parameterValue}}</text>
+                </view>
+              </block>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+    <view class="footView">
+      <view class="resetView" bindtap="onResetProperty">
+        重置
+      </view>
+      <view class="sureView" bindtap="onSureFilterProducts">
+        确定
+      </view>
+    </view>
+  </view>
+</view>
+<view class="searchContentView">
+  <view class="topMenuView">
+    <view class="search-input">
+      <image class="search-icon" src="../images/icon_seach@2x.png" mode="aspectFit" />
+      <input class="inputSearch" placeholder="请输入您要搜索的商品" placeholder-style="font-size: 14px;color:#999999;" bindconfirm="onSearchInput" value="{{keyWord}}" confirm-type='search' />
+    </view>
+    <view class="searchRightView" bindtap='onClassClicked'>
+      <image class='filter-icon' src='../images/icon_filterClass@2x.png' mode="aspectFit"></image>
+    </view>
+  </view>
+  <view class="hotSearchView {{isShowSearchView}}">
+    <view class="hotSearchTopView">
+      <text class="hotTitle">最近搜索</text>
+      <text style="font-size: 12px;color: #999999;margin-right: 0px;width: 80px;text-align: center;" bindtap="onClearHistoryWords">清空</text>
+    </view>
+    <view class="hotItemView">
+      <block wx:for-items="{{historySearchWords}}">
+        <view class="searchClassItem" style="background-color: #FFFFFF;" data-key="{{item}}" bindtap='onLastesItem'>
+          <label class="searchClassItemText">{{item}}</label>
+        </view>
+      </block>
+    </view>
+  </view>
+  <scroll-view scroll-y="true" class="productListView {{isShowProductList}}" bindscrolltolower="onLoadMore" lower-threshold='100' scroll-top="{{scrollTop}}" style='height:{{scrollHeight}}px;'>
+    <block wx:for-items="{{allProductList}}">
+      <view class='productContentView' bindtap="onProductDetail" data-key="{{item}}">
+        <view class="productView">
+          <image src="{{item.photoUrl}}" class="productImage" style='height:{{doubleLayoutHeight}}px;'></image>
+          <view class="productInfoView">
+            <text class="productText">{{item.goodsName}}</text>
+            <text class="priceText">￥{{item.price}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+    <wxc-loadmore wx:if="{{isEndLoad}}" is-end="{{true}}" text="到底啦" _pid="{{_pid}}">
+    </wxc-loadmore>
+  </scroll-view>
+</view>

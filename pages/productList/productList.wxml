@@ -1,0 +1,25 @@
+<view class="page">
+  <view style='{{templateObject.layout == "2" ? "background-color: #F5F5F5;":"background-color: white;"}};height: 100%;'>
+    <image src='{{templateObject.mainPic[0]}}' style='width: 100%;height:{{(deviceWidth*9)/16}}px;'></image>
+    <scroll-view scroll-y="true" class="productListView">
+      <block wx:for-items="{{templateObject.productBeans}}">
+        <view class='productContentView' bindtap='onGoodsDetail' data-key='{{item}}' wx:if="{{templateObject.layout == '2'}}">
+          <view class="productView">
+            <image src="{{item.picture}}" class="productImage" bindtap="onProductDetail" data-key="{{item}}" style='height:{{doubleLayoutHeight}}px;' wx:if="{{item.picture != null}}"></image>
+            <view class="productInfoView">
+              <text class="productText">{{item.goodsName}}</text>
+              <text class="priceText">￥{{item.price}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="productSingleView" bindtap='onGoodsDetail' data-key='{{item}}' wx:else>
+          <image src="{{item.picture}}" class="productSingleImage" bindtap="onProductDetail" data-key="{{item}}" style='height:{{doubleLayoutHeight}}px;'></image>
+          <view class="productSingleInfoView">
+            <text class="productSingleText">{{item.goodsName}}</text>
+            <text class="priceSingleText">￥{{item.price}}</text>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</view>

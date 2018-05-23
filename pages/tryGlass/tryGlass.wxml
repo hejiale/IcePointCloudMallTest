@@ -1,0 +1,3 @@
+<view class="page">
+<web-view src="{{tryLinkURL}}" bindmessage="bindGetMsg"></web-view>
+</view>

@@ -1,0 +1,231 @@
+
+.scroll-container {
+  width: 100%;
+  padding-bottom: 40px;
+}
+
+.CellItem {
+  margin-top: 5px;
+  width: 100%;
+  background-color: #fbf9fe;
+}
+
+.CellContentView {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: white;
+}
+
+.addressInfoView {
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.cellLine {
+  margin-top: 1px;
+  margin-left: 0px;
+  width: 100%;
+  height: 1px;
+}
+
+.addressBottomView {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1px;
+  width: 100%;
+  height: 50px;
+}
+
+.addressRightView {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10%;
+  height: 100%;
+}
+
+.addressArrowImage {
+  width: 8px;
+  height: 14px;
+}
+
+.topView {
+  display: flex;
+  align-items: center;
+  height: 35px;
+}
+
+.nameView {
+  margin-left: 20px;
+}
+
+.userNameText {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.phoneView {
+  margin-left: 20px;
+}
+
+.phoneText {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.addressView {
+  margin-left: 20px;
+}
+
+.addressText {
+   width: 100%;
+  font-size: 14px;
+  word-wrap:break-word;
+  word-break:break-all;
+}
+
+.defaultAddressView {
+  display: flex;
+  align-items: center;
+  margin: 0px;
+  width: 50%;
+  height: 100%;
+}
+
+.defaultAddressImage {
+  margin-left: 20px;
+  width: 23px;
+  height: 23px;
+}
+
+.defaultText{
+  margin-left: 10px;
+  font-size: 14px;
+  color: #63a0d4;
+}
+
+.editAddressView {
+  display: flex;
+  align-items: center;
+  margin:0px;
+  width: 25%;
+  height: 100%;
+}
+
+.deleteAddressView {
+  display: flex;
+  align-items: center;
+  margin: 0px;
+  width: 25%;
+  height: 100%;
+}
+
+.editAddressImage {
+  margin-left: 20px;
+  width: 57px;
+  height: 19px;
+}
+
+.deleteAddressImage {
+  margin-left: 20px;
+  width: 53px;
+  height: 18px;
+}
+
+.line {
+  background-color: #dcdcdc;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 1px;
+}
+
+.bottomView {
+  width: 100%;
+  margin-bottom: 0px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.leftView {
+  margin-left: 5px;
+  width: 150px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+.icon {
+  margin-left: 5px;
+}
+
+.iconText {
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.rightView {
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.editView {
+  margin-left: 0px;
+  margin-top: 0px;
+  width: 50%;
+  line-height: 40px;
+}
+
+.editText {
+  font-size: 12px;
+  color: orange;
+}
+
+.deleteView {
+  margin-right: 0px;
+  margin-top: 0px;
+  width: 50%;
+  line-height: 40px;
+}
+
+.deleteText {
+  font-size: 12px;
+}
+
+.emptyCartView{
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0px;
+  width: 100%;
+  height: calc(100% - 40px);
+  background-color: white;
+}
+
+.emptyImage{
+  width: 182px;
+  height: 218px;
+}
+
+.footView {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+}
+
+.footText {
+  background-color: #63a0d4;
+  color: white;
+  font-size: 15px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}

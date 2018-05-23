@@ -1,0 +1,30 @@
+//保留两位操作
+var filter = {
+  numberToFix: function (value) {
+    console.log(value);
+
+    if(value == null){
+      return "0.00";
+    }
+
+    if (parseFloat(value) == 0 || value.length == 0){
+      return "0.00";
+    }
+    var value = Math.round(parseFloat(value) * 100) / 100;
+    var xsd = value.toString().split(".");
+    if (xsd.length == 1) {
+      value = value.toString() + ".00";
+      return value;
+    }
+    if (xsd.length > 1) {
+      if (xsd[1].length < 2) {
+        value = value.toString() + "0";
+      }
+      return value;
+    }
+  }
+}
+
+module.exports = {
+  numberToFix: filter.numberToFix
+}

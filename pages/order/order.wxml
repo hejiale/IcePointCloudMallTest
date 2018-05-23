@@ -1,0 +1,57 @@
+<wxs module="filter" src="../../utils/ipcConfig.wxs"></wxs>
+<view class="page">
+  <view class='topView'>
+    <view class='searchView'>
+      <image class='seachImage' src='../images/icon_seach@2x.png'></image>
+      <input class='searchInput' placeholder='请输入您要搜索的订单号' placeholder-style='color: #999999;' bindconfirm="onSearchInput" value="{{keyword}}" confirm-type='search'></input>
+    </view>
+    <view class='searchMenuView'>
+      <view class='orderMenuView' wx:if="{{orderType == null}}" style='color:#4D9FD8;' bindtap='onAllOrder'>全部订单</view>
+      <view class='orderMenuView' wx:else style='color:#999;' bindtap='onAllOrder'>全部订单</view>
+      <view class='orderMenuView' bindtap='onUnPay' wx:if="{{orderType == 'NOT_PAY'}}" style='color: #4d9fd8;'>待付款</view>
+      <view class='orderMenuView' bindtap='onUnPay' wx:else style='color: #999;'>待付款</view>
+      <view class='orderMenuView' bindtap='onUndelivery' wx:if="{{orderType == 'PENDING_DELIVERY'}}" style='color: #4d9fd8;'>待发货</view>
+      <view class='orderMenuView' bindtap='onUndelivery' wx:else style='color: #999;'>待发货</view>
+      <view class='orderMenuView' bindtap='onUnGoods' wx:if="{{orderType == 'GOODS_TO_BE_RECEIVED'}}" style='color: #4d9fd8;'>待收货</view>
+      <view class='orderMenuView' bindtap='onUnGoods' wx:else style='color: #999;'>待收货</view>
+    </view>
+  </view>
+  <scroll-view scroll-y="true" class="scrollView" bindscrolltolower="onLoadMore" lower-threshold='200' wx:if="{{orderList.length > 0}}">
+    <block wx:for-items="{{orderList}}">
+      <view class="contentView" bindtap="onOrderDetail" data-key="{{item}}">
+        <view class="codeView">
+          <text class="title">订单号：{{item.order.orderSerialNumber}}</text>
+          <text class="statusTitle">{{item.order.statusName}}</text>
+        </view>
+        <view class='line'></view>
+        <view class='productListView'>
+          <block wx:for-items="{{item.snapshots}}">
+            <view class='productContentView'>
+              <image mode="aspectFit" class="productImage" src='{{item.goodsOrder.photoUrl}}'></image>
+              <view class="productInfo">
+                <text class="productNameText">{{item.goodsOrder.name}}</text>
+                <text class='specificationsText'>{{item.specification}}</text>
+                <view class="priceView">
+                  <text class="numText">x{{item.goodsOrder.count}}</text>
+                  <text class="price">￥ {{filter.numberToFix(item.goodsOrder.price)}}</text>
+                </view>
+              </view>
+            </view>
+            <view class='line'></view>
+          </block>
+        </view>
+        <view class='orderPriceView'>
+          <view class='totalAmountView'>
+            <text class='totalAmountTitle'>总金额:</text>
+            <text class='totalAmountValue'>￥{{filter.numberToFix(item.order.amountPayable)}}</text>
+          </view>
+          <button class='payButton' wx:if="{{item.order.orderStatus == 'NOT_PAY'}}" catchtap ='onPayOrder' data-key="{{item.order}}">去付款</button>
+          <button class='payButton' wx:if="{{item.order.orderStatus == 'GOODS_TO_BE_RECEIVED'}}" catchtap ='onDeliveryOrder' data-key="{{item.order}}">确认收货</button>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+  <view class='emptyCartView' wx:else>
+    <image src='../images/icon_emptyOrder@2x.png' class='emptyImage' mode="aspectFit"></image>
+  </view>
+</view>

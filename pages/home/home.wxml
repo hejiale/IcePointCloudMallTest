@@ -1,0 +1,94 @@
+<wxc-loading class="J_loading" image="https://s10.mogucdn.com/mlcdn/c45406/170607_5241335cb37ka3ab7781ddh504ggh_200x200.png" slip="http://s10.mogucdn.com/p1/160715/upload_ifrgmmzwmyydknldhezdambqmeyde_200x200.png" _pid="{{_pid}}"></wxc-loading>
+<view class='classContentView {{isShowClassView}}'>
+  <view id="classViewCover" bindtap="onBgClicked"></view>
+  <view class='classMainView'>
+    <block wx:for-items="{{classList}}">
+      <view class='classItem' style='{{currentType == item.typeName ? "color: #222;border: 1px solid #222;":"color: #999;border: 1px solid #e6e6e6"}}' bindtap="onClassItemClicked2" data-key="{{item}}">{{item.typeName}}</view>
+    </block>
+    <view class='closeCoverView' bindtap='onCloseClassCover'>
+      <image class='closeCoverImage' src='../images/home_closeCover@2x.png' mode="aspectFit"></image>
+    </view>
+  </view>
+</view>
+<view class="page">
+  <view class="contentView" style='{{classList.length > 1 ? "height: 95px;":"height: 45px;"}}'>
+    <view class="search-input-view">
+      <view class="search-input">
+        <image class="search-icon" src="../images/home_search@2x.png" mode="aspectFit" />
+        <text class="inputSearch" bindtap='onSearchProduct'>请输入您要搜索的商品</text>
+      </view>
+    </view>
+    <view class='classMenuView' wx:if="{{classList.length > 1}}">
+      <scroll-view class="scroll-view-x" scroll-x="true" scroll-left="{{scrollLeft}}">
+        <ul class="hengxiangul">
+          <li wx:for="{{classList}}" bindtap="onClassItemClicked" data-key="{{item}}" id="classOutItem-{{item.typeId}}">
+            <text class='liText' style='color: #222222;' wx:if="{{currentType == item.typeName}}">{{item.typeName}}</text>
+            <text class='liText' style='color: #999999;' wx:else>{{item.typeName}}</text>
+            <view class='liBottomLine' wx:if="{{currentType == item.typeName}}"></view>
+          </li>
+        </ul>
+      </scroll-view>
+      <view class='openView' bindtap='onShowClassView'>
+        <image class='openMenuImage' src='../images/icon_downArrow@2x.png' mode="aspectFit"></image>
+      </view>
+    </view>
+  </view>
+  <view class='templateContentView {{isShowTemplateView}}' style='{{classList.length > 1 ? "top: 95px;":"top: 45px;"}}' wx:if="{{templateList.length > 0}}">
+    <block wx:for-items="{{templateList}}" wx:for-item="template">
+      <view class='templateSessionView'>
+        <image src='{{template.mainPic[0]}}' style='width: 100%;height:{{(deviceWidth*9)/16}}px;' bindtap='onTemplateDetail' data-key='{{template}}' wx:if="{{template.mainPic.length > 0}}"></image>
+        <view class='templateTitleView' bindtap='onTemplateDetail' data-key='{{template}}'>
+          <text class='templateMainTitle'>{{template.mainTitle}}</text>
+          <text class='templateSubTitle'>{{template.subTitle}}</text>
+        </view>
+        <view wx:if="{{template.layout != '0'}}" style='{{template.layout == "2" ? "width: calc(100% - 5px);padding-bottom:5px;":"width: 100%;padding-bottom:0px;"}}'>
+          <block wx:for-items="{{template.productBeans}}">
+            <view class='productView' wx:if="{{item.shopWindow}}" bindtap='onGoodsDetail' data-key='{{item}}' wx:if="{{template.layout == '2' && item.shopWindow}}">
+              <image class="productImage" src='{{item.picture}}' data-key="{{item}}" style='height:{{doubleLayoutHeight}}px;' wx:if="{{template.layout == '2'}}"></image>
+              <image class="productImage" src='{{item.picture}}' data-key="{{item}}" style='height:{{singleLayoutHeight}}px;' wx:else></image>
+              <view class="productInfoView">
+                <text class="productText">{{item.goodsName}}</text>
+                <text class="priceText">￥{{item.price}}</text>
+              </view>
+            </view>
+            <view class='productLayoutView' bindtap='onGoodsDetail' data-key='{{item}}' wx:elif="{{template.layout == '1' && item.shopWindow}}">
+              <image class="productImage" src='{{item.picture}}' data-key="{{item}}" style='height:{{doubleLayoutHeight}}px;' wx:if="{{template.layout == '2'}}"></image>
+              <image class="productImage" src='{{item.picture}}' data-key="{{item}}" style='height:{{singleLayoutHeight}}px;' wx:else></image>
+              <view class="productInfoView">
+                <text class="productText">{{item.goodsName}}</text>
+                <text class="priceText">￥{{item.price}}</text>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class='emptyCartView {{isShowEmpty}}' style='{{classList.length > 1 ? "top: 95px;":"top: 45px;"}}'>
+    <image src='../images/icon_emptyTemplate@2x.png' class='emptyImage' mode="aspectFit"></image>
+  </view>
+  <scroll-view scroll-y="true" class='productListView {{isShowProductListView}}' bindscrolltolower="onLoadMore" lower-threshold='200' style='{{classList.length > 1 ? "top: 95px;":"top: 45px;"}}'>
+    <block wx:for-items="{{productList}}">
+      <view class='productSubView' bindtap='onGoodsDetail' data-key='{{item}}'>
+        <image class="productImage" src='{{item.photoUrl}}' style='height:{{doubleLayoutHeight}}px;'></image>
+        <view class="productInfoView">
+          <text class="productText">{{item.goodsName}}</text>
+          <text class="priceText">￥{{item.price}}</text>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+  <view class='bottomCoverMenuView'>
+    <view class='personMenu' bindtap='onBottomMenuToPerson'>
+      <image class='personMenuImage' mode="aspectFit" src="../images/person_menu@2x.png"></image>
+    </view>
+    <image class='lineMenuImage' mode="aspectFit" src="../images/line_menu@2x.png" mode="aspectFit"></image>
+    <view class='personMenu' bindtap='onBottomMenuToOrder'>
+      <image class='personMenuImage' mode="aspectFit" src="../images/order_menu@2x.png"></image>
+    </view>
+    <image class='lineMenuImage' mode="aspectFit" src="../images/line_menu@2x.png" mode="aspectFit"></image>
+    <view class='personMenu' bindtap='onBottomMenuToCart'>
+      <image class='personMenuImage' mode="aspectFit" src="../images/cart_menu@2x.png"></image>
+    </view>
+  </view>
+</view>
