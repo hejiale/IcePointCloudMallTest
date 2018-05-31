@@ -1,1 +1,7 @@
-{"navigationBarTitleText":"订单"}
+{
+  "navigationBarTitleText": "订单",
+  "usingComponents": {
+    "wxc-loadmore": "../../dist/packages/@minui/wxc-loadmore/dist/index"
+  },
+  "component": true
+}

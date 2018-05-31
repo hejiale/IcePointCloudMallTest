@@ -1,5 +1,5 @@
-// var HostURL = 'https://dev.icepointcloud.com';
-var HostURL = 'http://192.168.1.45:8080';
+var HostURL = 'https://dev.icepointcloud.com';
+// var HostURL = 'http://192.168.1.45:8080';
 var LocalHostURL = 'http://192.168.1.45:9080';
 //端口
 var port = '/wechat/api/mall';
@@ -83,6 +83,23 @@ function getCompanyTemplate(options, callBack) {
     })
 }
 
+//获取专场详情
+function getTemplateDetail(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '/getTemplateInfoDetail',
+    method: 'GET'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
 
 //验证手机验证码并绑定手机号
 function verityPhoneCode(options, callBack) {
@@ -151,7 +168,7 @@ function wechatPayOrder(options, callBack) {
     method: 'POST'
   }
 
-  localHttp(msg).then(
+  http(msg).then(
     data => {
       typeof callBack == "function" && callBack(data)
     }).catch(e => {
@@ -169,7 +186,7 @@ function wechatCompletePayOrder(options, callBack) {
     method: 'POST'
   }
 
-  localHttp(msg).then(
+  http(msg).then(
     data => {
       typeof callBack == "function" && callBack(data)
     }).catch(e => {
@@ -187,7 +204,7 @@ function wechatCancelPayOrder(options, callBack) {
     method: 'POST'
   }
 
-  localHttp(msg).then(
+  http(msg).then(
     data => {
       typeof callBack == "function" && callBack(data)
     }).catch(e => {
@@ -427,7 +444,7 @@ function queryStoreList(options, callBack) {
   }
 
   //localHttp
-  localHttp(msg).then(
+  http(msg).then(
     data => {
       typeof callBack == "function" && callBack(data)
     }).catch(e => {
@@ -715,6 +732,7 @@ module.exports = {
   getCompanyInfo: getCompanyInfo,
   getMemberInfo: getMemberInfo,
   getCompanyTemplate: getCompanyTemplate,
+  getTemplateDetail: getTemplateDetail,
   payOrder: payOrder,
   updateOrderStatus: updateOrderStatus,
   wechatPayOrder: wechatPayOrder,

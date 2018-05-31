@@ -1,5 +1,4 @@
 // pages/productDetail/productDetail.js
-
 var WxParse = require('../../wxParse/wxParse.js');
 var Login = require('../../utils/Login.js')
 var Config = require('../../utils/Config.js')
@@ -8,20 +7,10 @@ var request = require('../../utils/Request.js')
 
 Page({
   data: {
-    DetailObject: null,
     isSelectDetail: true,
-    showParameterView: 'hide',
-    goodsId: null,
-    deviceWidth: 0,
-    deviceHeight: 0,
-    parameterObject: null,
     selectParameters: [],
-    parameterPrice: null,
     cartNum: 1,
-    isToOrder: false,
-    tryGlassToOrder: false,
     isFirstShowParameter: true,
-    cartCount: 0
   },
   onLoad: function (options) {
     var that = this;
@@ -41,7 +30,7 @@ Page({
       })
     })
   },
-  onShow: function () {
+  onShow: function (res) {
     var that = this;
 
     if (that.data.tryGlassToOrder) {
@@ -50,6 +39,11 @@ Page({
     }
     //查询购物车数量
     that.queryCartCount();
+
+    var pages = getCurrentPages();
+    if (pages.length == 1) {
+      that.setData({ isFromShare: true });
+    }
   },
   onBook: function (event) {
     var that = this;
@@ -173,7 +167,7 @@ Page({
           icon: "none"
         })
       } else {
-        that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1, selectParameters: [], isFirstShowParameter: true });
+        that.setData({ showParameterView: false, parameterObject: null, cartNum: 1, selectParameters: [], isFirstShowParameter: true });
         that.queryCartCountRequest();
 
         wx.showToast({
@@ -187,7 +181,7 @@ Page({
 
     Config.Config.orderProducts = that.bindOrderProduct();
 
-    that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1, selectParameters: [], isFirstShowParameter: true });
+    that.setData({ showParameterView: false, parameterObject: null, cartNum: 1, selectParameters: [], isFirstShowParameter: true });
 
     wx.navigateTo({
       url: '../bookOrder/bookOrder?isFromCart=0',
@@ -246,7 +240,7 @@ Page({
   },
   onCoverClick: function () {
     var that = this;
-    that.setData({ showParameterView: 'hide', parameterObject: null, cartNum: 1, selectParameters: [], isFirstShowParameter: true });
+    that.setData({ showParameterView: false, parameterObject: null, cartNum: 1, selectParameters: [], isFirstShowParameter: true });
   },
   //点击商品规格参数method
   onSelectParameter: function (e) {
@@ -276,6 +270,14 @@ Page({
       wx.showLoading({});
       that.queryParameterRequest();
     }
+  },
+  //返回首页
+  onToHomePage: function () {
+    app.globalData.menuScene = null;
+
+    wx.reLaunch({
+      url: '../home/home'
+    })
   },
   //查询商品规格参数请求
   queryParameterRequest: function () {
@@ -337,7 +339,7 @@ Page({
           }
         }
       }
-      that.setData({ parameterObject: data, showParameterView: '' });
+      that.setData({ parameterObject: data, showParameterView: true });
       wx.hideLoading();
     })
   },
@@ -369,5 +371,15 @@ Page({
     request.queryCartCount(function (data) {
       that.setData({ cartCount: data.result });
     });
+  },
+  //转发
+  onShareAppMessage: function (res) {
+    console.log(res.target)
+
+    var that = this;
+    return {
+      title: that.data.DetailObject.goods.goodsName,
+      path: '/pages/productDetail/productDetail?id=' + that.data.goodsId
+    }
   }
 })

@@ -1,0 +1,20 @@
+<template name="StoreTemplate">
+  <view class="contentView" bindtap="onSelectStore" data-key="{{item}}">
+    <view class='storeNameView'>
+      <text class="contentText">{{item.name}}</text>
+      <view class='distanceView' wx:if="{{item.distanceStr != null}}" catchtap='onMap' data-key="{{item}}">
+        <!-- <image class='addressImage' src='../images/address@2x.png' mode="aspectFit"></image> -->
+        <text class='navigationText'>导航</text>
+        <text class='distanceText'>{{item.distanceStr}}</text>
+      </view>
+    </view>
+    <image class='storeImage' style='height: {{imageHeight}}px;' src='{{item.pictures[0]}}' wx:if="{{item.pictures[0].length > 0}}"></image>
+    <view class='storeAddressView' style='{{item.pictures[0].length > 0 ? "margin-top: 10px;":"margin-top: 0px;"}}'>
+      <text class="addressText">{{item.region + item.address}}</text>
+      <image class='storeContacterLine' src='../images/icon_columnLine@2x.png'></image>
+      <view class='callPhoneView' catchtap="onCall" data-key="{{item}}">
+        <image class='callImage' src='../images/store_phone@2x.png' mode="aspectFit"></image>
+      </view>
+    </view>
+  </view>
+</template>

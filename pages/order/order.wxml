@@ -1,4 +1,4 @@
-<wxs module="filter" src="../../utils/ipcConfig.wxs"></wxs>
+<import src="Template/OrderTemplate.wxml" />
 <view class="page">
   <view class='topView'>
     <view class='searchView'>
@@ -16,40 +16,12 @@
       <view class='orderMenuView' bindtap='onUnGoods' wx:else style='color: #999;'>待收货</view>
     </view>
   </view>
-  <scroll-view scroll-y="true" class="scrollView" bindscrolltolower="onLoadMore" lower-threshold='200' wx:if="{{orderList.length > 0}}">
+  <scroll-view scroll-y="true" class="scrollView" bindscrolltolower="onLoadMore" style='height:{{scrollHeight}}px;' wx:if="{{orderList.length > 0}}">
     <block wx:for-items="{{orderList}}">
-      <view class="contentView" bindtap="onOrderDetail" data-key="{{item}}">
-        <view class="codeView">
-          <text class="title">订单号：{{item.order.orderSerialNumber}}</text>
-          <text class="statusTitle">{{item.order.statusName}}</text>
-        </view>
-        <view class='line'></view>
-        <view class='productListView'>
-          <block wx:for-items="{{item.snapshots}}">
-            <view class='productContentView'>
-              <image mode="aspectFit" class="productImage" src='{{item.goodsOrder.photoUrl}}'></image>
-              <view class="productInfo">
-                <text class="productNameText">{{item.goodsOrder.name}}</text>
-                <text class='specificationsText'>{{item.specification}}</text>
-                <view class="priceView">
-                  <text class="numText">x{{item.goodsOrder.count}}</text>
-                  <text class="price">￥ {{filter.numberToFix(item.goodsOrder.price)}}</text>
-                </view>
-              </view>
-            </view>
-            <view class='line'></view>
-          </block>
-        </view>
-        <view class='orderPriceView'>
-          <view class='totalAmountView'>
-            <text class='totalAmountTitle'>总金额:</text>
-            <text class='totalAmountValue'>￥{{filter.numberToFix(item.order.amountPayable)}}</text>
-          </view>
-          <button class='payButton' wx:if="{{item.order.orderStatus == 'NOT_PAY'}}" catchtap ='onPayOrder' data-key="{{item.order}}">去付款</button>
-          <button class='payButton' wx:if="{{item.order.orderStatus == 'GOODS_TO_BE_RECEIVED'}}" catchtap ='onDeliveryOrder' data-key="{{item.order}}">确认收货</button>
-        </view>
-      </view>
+      <template is="OrderTemplate" data="{{item}}"></template>
     </block>
+    <wxc-loadmore wx:if="{{isEndLoad}}" is-end="{{true}}" text="到底啦" _pid="{{_pid}}">
+    </wxc-loadmore>
   </scroll-view>
   <view class='emptyCartView' wx:else>
     <image src='../images/icon_emptyOrder@2x.png' class='emptyImage' mode="aspectFit"></image>

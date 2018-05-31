@@ -48,12 +48,9 @@ var app = getApp();
 
 Page({
   data: {
-    isSendCode: false,
-    isCanBind: false,
     bindPhone: '',
     bindCode: '',
     clock: '获取验证码',
-    userInfo: null,
     isShowMemberRightsMemo: 'hide',
     isShowInfoAlert: '',
     isShowContent: 'hide'
@@ -85,8 +82,8 @@ Page({
       let options = {
         validCode: that.data.bindCode,
         phone: that.data.bindPhone,
-        userAccount: Login.Customer.weChatUser.openId,
-        weChatAccount: Login.Customer.weChatAccountObject.wechatAccount
+        userAccount: Login.Customer.openId,
+        weChatAccount: Login.Customer.wechatAccount
       };
 
       request.verityPhoneCode(options, function (data) {
@@ -114,13 +111,11 @@ Page({
       return
     }
 
-    console.log(app.globalData.weChatUser);
-
     if (!that.data.isSendCode) {
       let options = {
         phone: that.data.bindPhone,
-        userAccount: Login.Customer.weChatUser.openId,
-        weChatAccount: Login.Customer.weChatAccountObject.wechatAccount
+        userAccount: Login.Customer.openId,
+        weChatAccount: Login.Customer.wechatAccount
       };
 
       request.sendVerityCode(options, function (data) {

@@ -12,16 +12,29 @@ function getImageAutoHeight(cb) {
   })
 }
 
+function parseStatusName(status) {
+  if (status == 'NOT_PAY') {
+    return '未支付';
+  } else if (status == 'PENDING_DELIVERY') {
+    return '待发货';
+  } else if (status == 'GOODS_TO_BE_RECEIVED') {
+    return '待收货';
+  } else if (status == 'COMPLETE_TRANSACTION') {
+    return '交易完成';
+  } else if (status == 'CLOSED') {
+    return '交易关闭';
+  }
+}
+
 var Config = {
   //本地保存商品搜索记录key
   historySearchWords: 'historySearchWordsKey',
   //下单商品集合
-  orderProducts: null,
-  //专场详情object
-  templateObject: null,
+  orderProducts: null
 }
 
 module.exports = {
   getImageAutoHeight: getImageAutoHeight,
+  parseStatusName: parseStatusName,
   Config
 }

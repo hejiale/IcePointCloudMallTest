@@ -1,13 +1,14 @@
+
 //保留两位操作
 var filter = {
   numberToFix: function (value) {
     console.log(value);
 
-    if(value == null){
+    if (value == null) {
       return "0.00";
     }
 
-    if (parseFloat(value) == 0 || value.length == 0){
+    if (parseFloat(value) == 0 || value.length == 0) {
       return "0.00";
     }
     var value = Math.round(parseFloat(value) * 100) / 100;

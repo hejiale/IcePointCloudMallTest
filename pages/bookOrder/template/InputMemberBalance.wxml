@@ -1,0 +1,60 @@
+<template name="inputBalance">
+  <wxs module="filter" src="../../../utils/ipcConfig.wxs"></wxs>
+  <view class='memberRightsEditView'>
+    <view class="classViewCover"></view>
+    <view class='memberRightsBgView'>
+      <view class='memberBgTitleView'>
+        <text class='memberBgTitle'>会员权益</text>
+        <text class='memberCancleButton' bindtap='onCoverClicked'>取消</text>
+      </view>
+      <view class='memberRightsBgLine'></view>
+      <view class='offsetAmountView'>
+        <text class='offsetAmountTitle'>剩余应付金额</text>
+        <text class='offsetAmountValue'>￥ {{filter.numberToFix(payInfo.inputShouldPrice)}}</text>
+      </view>
+      <view class='offsetUseAmountView'>
+        <text class='offsetUseAmountTitle'>客户储值余额</text>
+        <text class='offsetUseAmountValue'>￥ {{payInfo.memberInfo.mallCustomer.balance}}</text>
+      </view>
+      <view class='offsetAmountInputView'>
+        <input class='offsetAmountInput' placeholder='请输入储值抵扣金额' placeholder-style='color:#999999;font-size: 15px;' bindinput='textFieldInput' type='digit' value='{{payInfo.inputValue}}'></input>
+      </view>
+      <view class='memberRightsBgBottomLine'></view>
+      <view class='memberRightsSureButton' bindtap='onSure' wx:if="{{payInfo.canPayStaus}}">确定</view>
+      <view class='memberRightsUpBalanceButton' wx:elif="{{payInfo.upBalanceStatus}}">储值余额不足</view>
+      <view class='memberRightsUpBalanceButton' wx:elif="{{payInfo.overcapStatus}}">已超抵扣上限</view>
+    </view>
+  </view>
+</template>
+<template name="inputPoint">
+  <wxs module="filter" src="../../../utils/ipcConfig.wxs"></wxs>
+  <view class='memberRightsEditView'>
+    <view class="classViewCover"></view>
+    <view class='memberRightsBgView'>
+      <view class='memberBgTitleView'>
+        <text class='memberBgTitle'>会员权益</text>
+        <text class='memberCancleButton' bindtap='onCoverClicked'>取消</text>
+      </view>
+      <view class='memberRightsBgLine'></view>
+      <view class='offsetAmountView'>
+        <text class='offsetAmountTitle'>剩余应付金额</text>
+        <text class='offsetAmountValue'>￥ {{filter.numberToFix(payInfo.inputShouldPrice)}}</text>
+      </view>
+      <view class='offsetUseAmountView'>
+        <text class='offsetUseAmountTitle'>账户积分</text>
+        <text class='offsetUseAmountValue'>{{payInfo.memberInfo.mallCustomer.integral}}</text>
+      </view>
+      <view class='offsetUseAmountView'>
+        <text class='offsetUseAmountTitle'>抵扣金额</text>
+        <text class='offsetUseAmountValue'>￥ {{filter.numberToFix(payInfo.inputPointPrice)}}</text>
+      </view>
+      <view class='offsetAmountInputView'>
+        <input class='offsetAmountInput' placeholder='请输入抵扣积分' placeholder-style='color:#999999;font-size: 15px;' bindinput='textFieldInput' type='number' value='{{payInfo.inputValue}}'></input>
+      </view>
+      <view class='memberRightsBgBottomLine'></view>
+       <view class='memberRightsSureButton' bindtap='onSure' wx:if="{{payInfo.canPayStaus}}">确定</view> 
+      <view class='memberRightsUpBalanceButton' wx:elif="{{payInfo.overcapStatus}}">已超抵扣上限</view>
+      <view class='memberRightsUpBalanceButton' wx:elif="{{payInfo.upBalanceStatus}}">积分不足</view> 
+    </view>
+  </view>
+</template>

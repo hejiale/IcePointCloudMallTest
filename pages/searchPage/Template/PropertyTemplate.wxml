@@ -1,0 +1,58 @@
+<template name='PropertyTemplate'>
+  <view class="showPropertyBgView">
+    <view id="classViewCover" bindtap="onBgClicked"></view>
+    <view class="popContentView">
+      <view class="propertyClassView">
+        <scroll-view scroll-y="true" class="propertyScrollView" style="height:calc(100% - 40px)">
+          <view class="priceView">
+            <text class="TitleText">价格</text>
+            <view class="priceSpaceView">
+              <text class="priceSpaceText">价格区间(元)</text>
+              <input placeholder="最低价" class="inputPriceText" type="number" bindblur="onStartPriceClicked" value="{{lowPriceStr}}" style='margin-left: 25px;' />
+              <view class="priceSpace"></view>
+              <input placeholder="最高价" class="inputPriceText" type="number" bindblur="onEndPriceClicked" value="{{heighPriceStr}}" />
+            </view>
+          </view>
+          <view class="popClassView">
+            <text class="TitleText">类别</text>
+            <view class="classesView">
+              <block wx:for-items="{{classList}}" wx:for-index="idx">
+                <view class="classItem" style="background-color: #F0F0F0;" wx:if="{{!item.selected}}" data-key="{{item}}" bindtap='onChooseClass' id='{{idx}}'>
+                  <text class="classItemText" style="color:#222">{{item.type.typeName}}</text>
+                </view>
+                <view class="classItem" style="background-color: #4D9FD8;" wx:else data-key="{{item}}" bindtap='onChooseClass' id='{{idx}}'>
+                  <text class="classItemText" style="color: #FFFFFF;">{{item.type.typeName}}</text>
+                </view>
+              </block>
+            </view>
+          </view>
+          <block wx:for-items="{{parameterList}}" wx:for-item="value" wx:if="{{hasClassSelect}}">
+            <view class="popPropertyView">
+              <view class="popPropertyTitleView">
+                <text class="TitleText">{{value.parameter.parameterName}}</text>
+              </view>
+              <view class='propertysView'>
+                <block wx:for-items="{{value.goodsParameters}}">
+                  <view class="classItem" data-key="{{item}}" bindtap="onSelectProperty" style="background-color: #F0F0F0;" wx:if="{{!item.selected}}">
+                    <text class="classItemText" style="color:#222">{{item.parameterValue}}</text>
+                  </view>
+                  <view class="classItem" data-key="{{item}}" bindtap="onSelectProperty" style="background-color: #4D9FD8;" wx:else>
+                    <text class="classItemText" style="color:#FFFFFF">{{item.parameterValue}}</text>
+                  </view>
+                </block>
+              </view>
+            </view>
+          </block>
+        </scroll-view>
+      </view>
+      <view class="footView">
+        <view class="resetView" bindtap="onResetProperty">
+          重置
+        </view>
+        <view class="sureView" bindtap="onSureFilterProducts">
+          确定
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

@@ -1,36 +1,8 @@
+<import src="Template/AddressTemplate.wxml" />
 <view class="page">
   <scroll-view class="scroll-container" scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" style="height:calc(100% - 1px)" wx:if="{{addressList.length > 0}}">
     <block wx:for-items="{{addressList}}">
-      <view class="CellItem">
-        <view class="CellContentView">
-          <view class="addressInfoView" bindtap='onChooseAddress' data-key='{{item}}'>
-            <view class="topView">
-              <view class="nameView">
-                <text class="userNameText">{{item.name}}</text>
-              </view>
-              <view class="phoneView">
-                <text class="phoneText">{{item.phone}}</text>
-              </view>
-            </view>
-            <view class="addressView">
-              <text class="addressText">{{item.region + ' ' + item.address}}</text>
-            </view>
-          </view>
-          <image class="cellLine" src='../images/icon_line@2x.png'></image>
-          <view class='addressBottomView'>
-            <view class='defaultAddressView' bindtap='onSetDefault' data-key='{{item}}'>
-              <icon class='defaultAddressImage' type="{{item.default ? 'success' : 'circle'}}" color='#63a0d4'></icon>
-              <text class='defaultText'>{{item.default ? '默认' : '设为默认'}}</text>
-            </view>
-            <view class='editAddressView' bindtap='editAddress' data-key='{{item}}'>
-              <image class='editAddressImage' src='../images/icon_editAddress@2x.png' mode="aspectFit"></image>
-            </view>
-            <view class='deleteAddressView' bindtap='onDeleteAddress' data-key='{{item}}'>
-              <image class='deleteAddressImage' src='../images/icon_deleteAddress@2x.png' mode="aspectFit"></image>
-            </view>
-          </view>
-        </view>
-      </view>
+      <template is="AddressTemplate" data="{{item}}"></template>
     </block>
   </scroll-view>
   <view class='emptyCartView' wx:else>

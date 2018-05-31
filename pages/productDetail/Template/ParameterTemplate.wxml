@@ -1,0 +1,52 @@
+<template name="ParameterTemplate">
+  <view class='parameterMainView {{showParameterView}}'>
+    <view id="classViewCover"></view>
+    <view class='parameterContentView'>
+      <view class='topTitleView'>
+        <text style='font-size: 17px;text-align: center;padding-top: 10px;padding-bottom: 10px;font-weight: 500;'>商品规格</text>
+        <text class='topCancleButton' bindtap='onCoverClick'>取消</text>
+      </view>
+      <image class="parameterLineImage" src='../images/icon_line@2x.png' mode="aspectFit"></image>
+      <view class='parameterInfoView'>
+        <view class='parameterRightView'>
+          <text class="productName">{{DetailObject.goods.goodsName}}</text>
+          <text class="priceText">￥{{parameterPrice}}</text>
+        </view>
+        <image src="{{DetailObject.photos[0]}}" class="parameterImage" mode="aspectFit" />
+      </view>
+      <scroll-view class='specificationsView' scroll-y="true" style='height: {{parameterObject.specifications.length > 0 ? 100 : 0}}px;'>
+        <block wx:for-items="{{parameterObject.specifications}}">
+          <view class="popPropertyView">
+            <view class="popPropertyTitleView">
+              <text class="TitleText">{{item.name}}</text>
+            </view>
+            <view class='propertysView'>
+              <block wx:for-items="{{item.values}}">
+                <view class="classItem" data-key="{{item}}" style="background-color: #FFFFFF;border: 1px solid #dcdcdc;" wx:if="{{item.enableSelect && !item.selected}}" bindtap="onSelectParameter">
+                  <text class="classItemText" style="color:#222222">{{item.value}}</text>
+                </view>
+                <view class="classItem" data-key="{{item}}" style="background-color: #F2F8FF;border: 1px solid #4D9FD8;" wx:elif="{{item.enableSelect && item.selected}}" bindtap="onSelectParameter">
+                  <text class="classItemText" style="color:#4D9FD8">{{item.value}}</text>
+                </view>
+                <view class="classItem" data-key="{{item}}" bindtap="onSelectParameter" style="background-color: #F0F0F0;border: 1px solid #dcdcdc;" wx:else>
+                  <text class="classItemText" style="color:#dcdcdc">{{item.value}}</text>
+                </view>
+              </block>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+      <view class='parameterNumView'>
+        <view class='editCartNumView'>
+          <image class='reduceCartImage' src='../images/icon_reduceCart@2x.png' mode="aspectFit" bindtap='onReduceCart'></image>
+          <text class='cartNumText'>{{cartNum}}</text>
+          <image class='reduceCartImage' src='../images/icon_plusCart@2x.png' mode="aspectFit" bindtap='onAddCart'></image>
+        </view>
+      </view>
+      <image class="parameterLineImage" src='../images/icon_line@2x.png' mode="aspectFit"></image>
+      <view class='parameterFootView' bindtap='onSelectParameterToCart'>
+        <text class='parameterFootText'>选好了</text>
+      </view>
+    </view>
+  </view>
+</template>

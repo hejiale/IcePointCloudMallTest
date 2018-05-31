@@ -5,8 +5,7 @@ var app = getApp();
 
 Page({
   data: {
-    addressList: null,
-    orderSelectAddressId: null
+    
   },
 
   onLoad: function (options) {
@@ -77,7 +76,7 @@ Page({
     var prevPage = pages[pages.length - 2]  //上一个页面
 
     prevPage.setData({
-      selectAddressId: item.id
+      currentAddress: item
     })
     wx.navigateBack()
   },

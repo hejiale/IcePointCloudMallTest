@@ -1,0 +1,444 @@
+/* Component/OrderDetailComponent.wxss */
+
+.scrollView {
+  margin: 0px;
+  width: 100%;
+}
+
+.orderStatusView {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  width: 100%;
+  height: 60px;
+  background-color: white;
+}
+
+.orderStatusTitle {
+  margin-left: 10px;
+  font-size: 20px;
+  color: #222;
+  font-weight: 500;
+}
+
+.orderCodeTitle {
+  margin-right: 10px;
+  font-size: 14px;
+  color: #999;
+  text-align: right;
+}
+
+.deliveryModeView {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  background-color: white;
+  width: 100%;
+  height: 60px;
+}
+
+.deliveryModeLeftView {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  height: 20px;
+}
+
+.deliveryModeRightText{
+  margin-right: 10px;
+  font-size: 16px;
+  color: #333333;
+  text-align: right;
+}
+
+.pickUpGoodsImage {
+  width: 20px;
+  height: 20px;
+}
+
+.pickUpGoodsTitle {
+  margin-left: 10px;
+  width: 70px;
+  height: 20px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.addressInfoView {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  width: 100%;
+  height: 80px;
+  background-color: white;
+}
+
+.addressIconImage {
+  margin-left: 10px;
+  width: 23px;
+  height: 32px;
+}
+
+.contactInfoView {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  width: calc(100% - 53px);
+}
+
+.contactNameView {
+  display: flex;
+  width: 100%;
+}
+
+.contactNameText {
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.contactAddressView {
+  display: flex;
+  margin-left: 0px;
+  width: 100%;
+}
+
+.contactAddressText {
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+}
+
+.rightIconImage {
+  margin: 0px;
+  width: 20px;
+  height: 20px;
+}
+
+.productContentView {
+  display: flex;
+  flex-flow: column;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.productView {
+  display: flex;
+  width: 100%;
+  height: 84px;
+  align-items: center;
+  background-color: white;
+}
+
+.productImage {
+  margin-left: 10px;
+  width: 54px;
+  height: 54px;
+}
+
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  width: calc(100% - 84px);
+}
+
+.productNameText {
+  font-size: 16px;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-weight: 500;
+}
+
+.specificationsText {
+  font-size: 13px;
+  color: #999999;
+  height: 25px;
+  line-height: 25px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.priceView {
+  margin-right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.numText {
+  font-size: 14px;
+  text-align: right;
+  color: #666666;
+}
+
+.price {
+  font-size: 14px;
+  color: #666666;
+}
+
+.shouldPayAmountView {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  width: 100%;
+  height: 60px;
+  background-color: white;
+}
+
+.shouldPayAmountTitle {
+  margin-left: 10px;
+  width: 50%;
+  font-size: 16px;
+  color: #222;
+  font-weight: 500;
+}
+
+.shouldPayAmountText {
+  margin-right: 10px;
+  width: 50%;
+  text-align: right;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.memberRightsView {
+  display: flex;
+  margin-top: 5px;
+  width: 100%;
+  height: 167px;
+  background-color: white;
+}
+
+.shouldPayIconImage {
+  margin-left: 10px;
+  width: 21px;
+  height: 20px;
+}
+
+.memberRightsIconImage {
+  margin-left: 10px;
+  margin-top: 17px;
+  width: 20px;
+  height: 16px;
+}
+
+.memberContentView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 8px;
+  width: calc(100% - 35px);
+  height: 100%;
+}
+
+.memberRightsTitleView {
+  margin: 0px;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.memberLineImage {
+  margin: 0px;
+  width: 100%;
+  height: 1px;
+}
+
+.memberDiscountView {
+  display: flex;
+  flex-direction: column;
+  margin: 0px;
+  width: 100%;
+  height: calc(100%-52px);
+}
+
+.memberDiscounTextView {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0px;
+  width: 100%;
+  height: 38px;
+}
+
+.memberDiscounTextValue {
+  margin-right: 10px;
+  font-size: 14px;
+  text-align: right;
+  color: #999;
+}
+
+.memberDiscounTextTitle {
+  margin: 0px;
+  font-size: 14px;
+}
+
+.storeInfoView {
+  display: flex;
+  margin-top: 5px;
+  width: 100%;
+  background-color: white;
+}
+
+.storeIconImage {
+  margin-left: 10px;
+  margin-top: 10px;
+  width: 23px;
+  height: 32px;
+}
+
+.storeContentView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 8px;
+  width: calc(100% - 35px);
+}
+
+.storeTitleView {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+}
+
+.storeInfoTitle {
+  width: 50%;
+  font-size: 16px;
+  color: #222;
+  font-weight: 500;
+}
+
+.storeNumText {
+  margin-right: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.storeLineImage {
+  margin: 0px;
+  width: 100%;
+  height: 1px;
+}
+
+.storeAddressInfoView {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px;
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.storeContactInfoView {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.storeContacterLine {
+  margin-left: 1px;
+  width: 1px;
+  height: 45px;
+}
+
+.callPhoneView {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1px;
+  width: calc(20% - 3px);
+}
+
+.callImage {
+  width: 32px;
+  height: 32px;
+}
+
+.storeNameView {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.storeAddressView {
+  margin-top: 5px;
+  width: 100%;
+  font-size: 13px;
+}
+
+.storeNameTextView {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+}
+
+.storeDistanceView {
+  align-items: center;
+  width: 30%;
+  font-size: 12px;
+  text-align: center;
+}
+
+.footView {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  bottom: 0px;
+  background-color: white;
+}
+
+.cancelButton{
+  margin-left: 40%;
+  width: 25%;
+  height: 36px;
+  line-height: 36px;
+  border: 1px solid #4D9FD8;
+  color: #4D9FD8;
+  font-size: 15px;
+  background-color: white;
+}
+
+.surePayButton{
+  width: 25%;
+  height: 36px;
+  line-height: 36px;
+  color: white;
+  background-color: #4D9FD8;
+  font-size: 15px;
+}
+
+.deliveryButton{
+  margin-left: 70%;
+  width: 25%;
+  height: 36px;
+  line-height: 36px;
+  color: white;
+  background-color: #4D9FD8;
+  font-size: 15px;
+}
+
+.offerOrderImage {
+  padding: 5px;
+  height: 40px;
+}
+

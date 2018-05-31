@@ -5,9 +5,7 @@ var app = getApp();
 
 Page({
   data: {
-    cartList: null,
-    canEdit: false,
-    totalPrice: null
+   
   },
   onShow: function () {
     var that = this;
@@ -149,10 +147,10 @@ Page({
           }
           that.setData({ cartList: data.result });
           that.updateCartTotalPrice();
-          // wx.hideLoading();
+          wx.hideLoading();
         }
       } else {
-        // wx.hideLoading();
+        wx.hideLoading();
         that.setData({ cartList: null });
       }
     });

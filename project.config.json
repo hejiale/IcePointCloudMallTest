@@ -46,6 +46,20 @@
 					"name": "微商城主页 ",
 					"pathName": "pages/home/home",
 					"query": ""
+				},
+				{
+					"id": 2,
+					"name": "专场详情页面",
+					"pathName": "pages/productList/productList",
+					"query": "id=273",
+					"scene": "1007"
+				},
+				{
+					"id": -1,
+					"name": "商品详情页面",
+					"pathName": "pages/productDetail/productDetail",
+					"query": "id=50",
+					"scene": "1007"
 				}
 			]
 		}

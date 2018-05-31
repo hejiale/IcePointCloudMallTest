@@ -1,4 +1,5 @@
 <view class="page">
+<web-view src="{{personLinkURL}}" bindmessage="bindGetMsg"></web-view>
   <!-- <view class="personView">
     <view class='topCoverView'></view>
     <view class="headView">

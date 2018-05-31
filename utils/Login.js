@@ -7,24 +7,19 @@ function userLogin(cb) {
 
   wx.login({
     success: function (res) {
-
       let options = {
         jsCode: res.code,
-        appid: ConfigData.wechatId,
-        webappId: ConfigData.miniProgramId,
-        webappSecret: ConfigData.miniProgramSecret
+        appid: ConfigData.wechatId
       };
 
       request.login(options, function (data) {
-
         //保存客户登录信息
-        Customer.customer = data.result.weChatUserInfo.customer;
-        Customer.weChatUser = data.result.weChatUserInfo.weChatUserKey;
-        Customer.weChatAccountObject = data.result.weChatAccountObject;
-
+        Customer.openId = data.result.weChatUserInfo.weChatUserKey.openId;
+        Customer.weChatAccount = data.result.weChatAccountObject.wechatAccount;
+        //登录sessionId
         request.setSessionId(data.result.sessionId);
 
-        typeof cb == "function" && cb(Customer.customer);
+        typeof cb == "function" && cb(data.result.weChatUserInfo.customer);
       });
     }
   });
@@ -49,17 +44,14 @@ var ConfigData = {
   wechatSecret: 'E1AF5770A1770C4C572415DA17306504',
   //公众号id 
   wechatId: 'wxb6c27db2d85fd508',
-  //小程序id
-  miniProgramId: 'wx6703326230ba4ecd',
-  //小程序密钥
-  miniProgramSecret: '3a6e2fa8d571ef86ceb626071ab83474',
+  //qq地图key
+  qqMapKey: '7KFBZ-DM533-AJE3Q-YOEM3-ZLKOS-EGBBL'
 }
 
 var Customer = {
   sessionId: null,
-  weChatAccountObject: null,
-  customer: null,
-  weChatUser: null,
+  weChatAccount: null,
+  openId: null,
   companyId: null
 }
 

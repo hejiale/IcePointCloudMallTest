@@ -1,36 +1,15 @@
-<!--pages/bookOrder/bookOrder.wxml-->
 <wxs module="filter" src="../../utils/ipcConfig.wxs"></wxs>
-<view class='memberRightsEditView {{isShowMemberRights}}'>
-  <view id="classViewCover"></view>
-  <view class='memberRightsBgView'>
-    <view class='memberBgTitleView'>
-      <text class='memberBgTitle'>会员权益</text>
-      <text class='memberCancleButton' bindtap='onCoverClicked'>取消</text>
-    </view>
-    <view class='memberRightsBgLine'></view>
-    <view class='offsetAmountView'>
-      <text class='offsetAmountTitle'>当前抵付金额</text>
-      <text class='offsetAmountValue'>￥ {{filter.numberToFix(inputDiscountValue)}}</text>
-    </view>
-    <view class='offsetUseAmountView'>
-      <text class='offsetUseAmountTitle'>{{isInputPoint ? "账户积分":"账户储值余额"}}</text>
-      <text class='offsetUseAmountValue'>{{isInputPoint ? memberInfo.mallCustomer.integral:memberInfo.mallCustomer.balance}}</text>
-    </view>
-    <view class='offsetAmountInputView'>
-      <input class='offsetAmountInput' placeholder='{{isInputPoint ? "请输入抵扣积分":"请输入储值抵扣金额"}}' placeholder-style='color:#999999;font-size: 15px;' bindinput='discountTextInput' type='{{isInputPoint ? "number":"text"}}' value='{{inputValue}}'></input>
-    </view>
-    <view class='memberRightsBgBottomLine'></view>
-    <view class='memberRightsSureButton' bindtap='onSureDiscount'>确定</view>
-  </view>
-</view>
-<view class="page {{isShowContent}}">
-  <view class="scrollView">
+<import src="template/InputMemberBalance.wxml" />
+<template is="inputBalance" data="{{payInfo:payInfo}}" wx:if="{{isShowMemberRights && !payInfo.isInputPoint}}"></template>
+<template is="inputPoint" data="{{payInfo:payInfo}}" wx:if="{{isShowMemberRights && payInfo.isInputPoint}}"></template>
+<view class="page" wx:if="{{isShowContent}}">
+  <OrderDetailComponent id="OrderDetailComponent" wx:if="{{isShowOrderDetail}}"></OrderDetailComponent>
+  <view class="scrollView" wx:if="{{!isShowOrderDetail}}">
     <view class="deliveryModeView">
       <text class="deliveryModeTitle">提货方式</text>
-      <text class='deliveryModeValue' wx:if="{{pickUpStyle.length == 1}}">{{pickUpStyle[0] == 'PICK_UP_IN_A_STORE' ? '自提':'门店'}}</text>
+      <text class='deliveryModeValue' wx:if="{{pickUpStyle.length == 1}}">{{pickUp == 'PICK_UP_IN_A_STORE' ? '自提':'邮寄'}}</text>
       <view class='pickUpStyleView' wx:elif="{{pickUpStyle.length == 2}}">
-        <image class='deliveryModeImage {{isExtractEmail}}' src='../images/extract_switch_left@2x.png' mode="aspectFit" bindtap='onExtractEmail'></image>
-        <image class='deliveryModeImage {{isExtractSelf}}' src='../images/extract_switch_right@2x.png' mode="aspectFit" bindtap='onExtractSelf'></image>
+        <image class='deliveryModeImage' src='{{pickUp == "MAIL" ?"../images/extract_switch_left@2x.png":"../images/extract_switch_right@2x.png"}}' mode="aspectFit" bindtap='onExtractStyle'></image>
       </view>
     </view>
     <view class="addressInfoView" bindtap='onSelectAddress' wx:if="{{currentAddress != null}}">
@@ -65,32 +44,32 @@
         </view>
       </block>
     </view>
-    <view class='memberRightsView' wx:if="{{memberInfo.mallCustomer.balance != null && memberInfo.mallCustomer.discount != null && memberInfo.mallCustomer.integral != null}}">
+    <view class='memberRightsView' wx:if="{{payInfo.memberInfo.mallCustomer.balance != null || payInfo.memberInfo.mallCustomer.discount != null ||payInfo.memberInfo.mallCustomer.integral != null}}">
       <image class="memberRightsIconImage" src='../images/icon_memberRights@2x.png' mode="aspectFit"></image>
       <view class="memberContentView">
         <view class="memberRightsTitleView">会员权益</view>
         <image class="memberLineImage" src='../images/icon_line@2x.png' mode="aspectFit"></image>
         <view class='memberDiscountView'>
-          <view class="memberDiscounTextView" wx:if="{{memberInfo.mallCustomer.discount != null}}">
+          <view class="memberDiscounTextView" wx:if="{{payInfo.memberInfo.mallCustomer.discount != null}}">
             <view class='memberDiscounTextTitleView'>
               <text class="memberDiscounTextTitle">会员折扣</text>
-              <text class="memberDiscounTextMemo">{{memberInfo.mallCustomer.discount*10}}%</text>
+              <text class="memberDiscounTextMemo">{{payInfo.memberInfo.mallCustomer.discount*10}}%</text>
             </view>
-            <text class='memberDiscounTextValue'>-￥{{filter.numberToFix(discountPrice)}}</text>
+            <text class='memberDiscounTextValue'>-￥{{filter.numberToFix(payInfo.discountPrice)}}</text>
           </view>
-          <view class="memberDiscounTextView" bindtap='onShowInputBalance' wx:if="{{memberInfo.mallCustomer.balance != null}}">
+          <view class="memberDiscounTextView" bindtap='onShowInputBalance' wx:if="{{payInfo.memberInfo.mallCustomer.balance != null}}">
             <view class='memberDiscounTextTitleView'>
               <text class="memberDiscounTextTitle">储值抵扣</text>
-              <text class="memberDiscounTextMemo">账户储值余额{{memberInfo.mallCustomer.balance}}</text>
+              <text class="memberDiscounTextMemo">账户储值余额 ￥{{payInfo.memberInfo.mallCustomer.balance}}</text>
             </view>
-            <text class='memberDiscounTextValue'>-￥{{filter.numberToFix(balancePrice)}}</text>
+            <text class='memberDiscounTextValue'>-￥{{filter.numberToFix(payInfo.balancePrice)}}</text>
           </view>
-          <view class="memberDiscounTextView" bindtap='onShowInputPoint' wx:if="{{memberInfo.mallCustomer.integral != null}}">
+          <view class="memberDiscounTextView" bindtap='onShowInputPoint' wx:if="{{payInfo.memberInfo.mallCustomer.integral != null}}">
             <view class='memberDiscounTextTitleView'>
               <text class="memberDiscounTextTitle">积分抵扣</text>
-              <text class="memberDiscounTextMemo">账户积分{{memberInfo.mallCustomer.integral}}</text>
+              <text class="memberDiscounTextMemo">账户积分{{payInfo.memberInfo.mallCustomer.integral}}</text>
             </view>
-            <text class='memberDiscounTextValue'>-￥{{filter.numberToFix(pointPrice)}}</text>
+            <text class='memberDiscounTextValue'>-￥{{filter.numberToFix(payInfo.pointPrice)}}</text>
           </view>
         </view>
       </view>
@@ -98,7 +77,7 @@
     <view class='shouldPayAmountView'>
       <image class="shouldPayIconImage" src='../images/icon_shouldPayAmount@2x.png' mode="aspectFit"></image>
       <text class="shouldPayAmountTitle">商品应付金额</text>
-      <text class="shouldPayAmountText">￥{{filter.numberToFix(shouldPayPrice)}}</text>
+      <text class="shouldPayAmountText">￥{{filter.numberToFix(payInfo.shouldPayPrice)}}</text>
     </view>
     <view class='storeInfoView' wx:if="{{totalStore > 0}}">
       <image class="storeIconImage" src='../images/address@2x.png'></image>
@@ -124,7 +103,7 @@
       </view>
     </view>
   </view>
-  <view class="footView" bindtap='offerOrder'>
+  <view class="footView" bindtap='onOfferOrder' wx:if="{{!isShowOrderDetail}}">
     <view class='offerOrderView'>
       <text class='offerOrderText'>提交订单</text>
     </view>

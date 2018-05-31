@@ -1,23 +1,31 @@
 // pages/person/order/order.js
 var app = getApp();
 var request = require('../../utils/Request.js')
-var MD5 = require('../../utils/md5.js')
+var Wechat = require('../../utils/Wechat.js')
 var Login = require('../../utils/Login.js')
+var Config = require('../../utils/Config.js')
 
 Page({
   data: {
     orderList: [],
     currentPage: 1,
-    orderType: null,
-    keyword: null,
     isLoad: true
+  },
+  onLoad: function () {
+    var that = this;
+
+    app.getSystemInfo(function (systemInfo) {
+      that.setData({
+        scrollHeight: (systemInfo.windowHeight - 100)
+      })
+    })
   },
   onShow: function () {
     var that = this;
 
     if (that.data.isLoad) {
+      that.setData({ isLoad: false, orderList: [] });
       that.queryOrderList();
-      that.setData({ isLoad: false });
     }
   },
   onAllOrder: function () {
@@ -47,6 +55,9 @@ Page({
     wx.navigateTo({
       url: '../orderDetail/orderDetail?id=' + value.order.orderId + '&backStatus=2'
     })
+    // wx.navigateTo({
+    //   url: '../orderDetail/orderDetail?id=' + value.order.orderSerialNumber + '&backStatus=2'
+    // })
   },
   onSearchInput: function (e) {
     var that = this;
@@ -63,7 +74,13 @@ Page({
   onPayOrder: function (e) {
     var that = this;
     var value = e.currentTarget.dataset.key;
-    that.wechatPayOrder(value);
+
+    Wechat.wechatPayOrder(value.orderId, value.amountPayable * 100, function (e) {
+      if (e) {
+        that.setData({ isLoad: false, orderList: [] });
+        that.queryOrderList();
+      }
+    })
   },
   onDeliveryOrder: function (e) {
     var that = this;
@@ -79,6 +96,8 @@ Page({
     })
     request.updateOrderStatus(parameter, function (data) {
       wx.hideLoading();
+
+      that.setData({ isLoad: false, orderList: [] });
       that.queryOrderList();
     });
   },
@@ -86,9 +105,9 @@ Page({
   queryOrderList: function () {
     var that = this;
 
-    wx.showLoading();
-
-    that.setData({ orderList: [] });
+    if (that.data.currentPage == 1) {
+      that.setData({ isEndLoad: false });
+    }
 
     let options = {
       pageNumber: that.data.currentPage,
@@ -99,7 +118,7 @@ Page({
     request.queryOrderList(options, function (data) {
       for (var i = 0; i < data.result.resultList.length; i++) {
         var order = data.result.resultList[i].order;
-        order.statusName = that.parseStatusName(order.orderStatus);
+        order.statusName = Config.parseStatusName(order.orderStatus);
 
         var products = data.result.resultList[i].snapshots;
         for (var j = 0; j < products.length; j++) {
@@ -118,81 +137,9 @@ Page({
 
       that.setData({ orderList: that.data.orderList.concat(data.result.resultList) })
 
-      wx.hideLoading();
-
-      if (data.resultList.length == 0) {
-        if (that.data.orderList.length == 0) {
-          wx.showToast({
-            title: '未查询到任何订单',
-            icon: 'none',
-            duration: 2000
-          })
-        } else {
-          wx.showToast({
-            title: '全部订单加载完',
-            icon: 'none',
-            duration: 2000
-          })
-        }
+      if (data.result.resultList.length == 0 && that.data.orderList.length > 0) {
+        that.setData({ isEndLoad: true });
       }
     });
-  },
-  parseStatusName: function (status) {
-    if (status == 'NOT_PAY') {
-      return '未支付';
-    } else if (status == 'PENDING_DELIVERY') {
-      return '待发货';
-    } else if (status == 'GOODS_TO_BE_RECEIVED') {
-      return '待收货';
-    } else if (status == 'COMPLETE_TRANSACTION') {
-      return '交易完成';
-    } else if (status == 'CLOSED') {
-      return '交易关闭';
-    }
-  },
-  //微信支付
-  wechatPayOrder: function (order) {
-    var that = this;
-
-    let options = {
-      price: order.amountPayable * 100,
-      mchId: '1499898872',
-      webAppId: Login.ConfigData.miniProgramId,
-      key: Login.ConfigData.wechatSecret,
-      openId: Login.Customer.weChatUser.openId,
-      orderId: order.orderId,
-      webappSecret: Login.ConfigData.miniProgramSecret,
-      body: '冰点云线上商城测试-'
-    }
-
-    request.wechatPayOrder(options, function (data) {
-      console.log(data);
-
-      var date = String(new Date().getTime()).substr(0, 10);
-
-      wx.requestPayment({
-        timeStamp: date,
-        'nonceStr': data.nonce_str,
-        'package': "prepay_id=" + data.prepay_id,
-        'signType': 'MD5',
-        'paySign': that.paySignData(data, date),
-        'success': function (res) {
-          that.queryOrderList();
-        },
-        'fail': function (res) {
-          request.wechatCancelPayOrder({ orderId: order.orderId }, function (data) {
-            console.log(data)
-          });
-        }
-      })
-    })
-  },
-  //微信支付重签名
-  paySignData: function (data, date) {
-    var stringA = "appId=" + data.appid + "&nonceStr=" + data.nonce_str + "&package=prepay_id=" + data.prepay_id + "&signType=MD5" + "&timeStamp=" + date;
-
-    var stringSignTemp = stringA + "&key=" + Login.ConfigData.wechatSecret;
-    var sign = MD5.hexMD5(stringSignTemp).toUpperCase();
-    return sign;
   }
 })

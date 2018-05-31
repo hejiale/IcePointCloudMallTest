@@ -20,6 +20,6 @@ App({
   },
 
   globalData: {
-    systemInfo: null,
-  }
+    systemInfo: null
+  }  
 })

@@ -8,29 +8,14 @@ Page({
   data: {
     historySearchWords: [],
     allProductList: [],
-    isShowProductList: 'hide',
-    isShowSearchView: '',
-    showOrHide: 'hide',
+    isShowSearchView: true,
     classList: [],
     parameterList: [],
     currentPage: 1,
-    keyWord: '',
-    startPrice: '',
-    endPrice: '',
-    lowPriceStr: '',
-    heighPriceStr: '',
     pageSize: 20,
-    isFilter: false,
-    scrollTop: 0,
-    //当前选中分类选项
-    currentTypeId: null,
     currentTypeIndex: -1,
     //选中分类参数集合
-    selectAllParameter: [],
-    doubleLayoutHeight: 0,
-    hasClassSelect: false,
-    isEndLoad: false,
-    scrollHeight: 0
+    selectAllParameter: []
   },
   //--------------页面初始化 加载分类商品参数----------------//
   onLoad: function () {
@@ -61,8 +46,8 @@ Page({
   onLastesItem: function (e) {
     var that = this;
     that.setData({
-      isShowProductList: '',
-      isShowSearchView: 'hide',
+      isShowProductList: true,
+      isShowSearchView: false,
       keyWord: e.currentTarget.dataset.key,
       isFilter: false
     });
@@ -82,16 +67,16 @@ Page({
   //--------------点击分类----------------//
   onClassClicked: function (e) {
     var that = this;
-    that.setData({ showOrHide: '' });
+    that.setData({ showOrHide: true });
     that.resetParameterSelectStatus();
     that.querySelectClassInfo(that.data.currentTypeIndex);
   },
   onBgClicked: function () {
     var that = this;
-    that.setData({ showOrHide: 'hide' });
+    that.setData({ showOrHide: false });
   },
   //--------------点击商品详情----------------//
-  onProductDetail: function (event) {
+  onGoodsDetail: function (event) {
     var value = event.currentTarget.dataset.key;
     wx.navigateTo({
       url: '../productDetail/productDetail?id=' + value.goodsId,
@@ -129,7 +114,7 @@ Page({
   onSureFilterProducts: function () {
     var that = this;
     that.addFilterParameter();
-    that.setData({ showOrHide: 'hide', keyWord: '', isFilter: true });
+    that.setData({ showOrHide: false, keyWord: '', isFilter: true });
     that.filterProductsRequest();
   },
   //--------------重置操作----------------//
@@ -165,8 +150,8 @@ Page({
     var that = this;
 
     that.setData({
-      isShowProductList: '',
-      isShowSearchView: 'hide',
+      isShowProductList: true,
+      isShowSearchView: false,
       currentPage: 1,
       scrollTop: 0,
       allProductList: []
@@ -187,9 +172,12 @@ Page({
     options.pageSize = that.data.pageSize;
 
     if (that.data.isFilter) {
-      options.minPrice = that.data.startPrice;
-      options.maxPrice = that.data.endPrice;
-
+      if (that.data.startPrice){
+        options.minPrice = that.data.startPrice;
+      }
+      if (that.data.endPrice){
+        options.maxPrice = that.data.endPrice;
+      }
       if (that.data.currentTypeId != null) {
         options.typeId = that.data.currentTypeId;
       }

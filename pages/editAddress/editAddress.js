@@ -6,21 +6,14 @@ var app = getApp();
 
 Page({
   data: {
-    contacter: '',
-    contactPhone: '',
-    areaInfo: '',
-    contactAddress: '',
-    isVisible: false,
     animationData: {},
     animationAddressMenu: {},
-    addressMenuIsShow: false,
     value: [0, 0, 0],
     provinces: [],
     citys: [],
-    areas: [],
-    pickviewHeight: 0,
-    addressId: null
+    areas: []
   },
+  
   onLoad: function (options) {
     var that = this;
     that.setData({ addressId: options.id });
@@ -70,31 +63,40 @@ Page({
   onSaveAddress: function () {
     var that = this;
 
-    var weChatUserAddress = {
-      name: that.data.contacter,
-      phone: that.data.contactPhone,
-      region: that.data.areaInfo,
-      address: that.data.contactAddress
-    };
+    if (that.data.contacter.length > 0 && that.data.contactPhone.length > 0 && that.data.areaInfo.length > 0 && that.data.contactAddress.length > 0) {
+      var weChatUserAddress = {
+        name: that.data.contacter,
+        phone: that.data.contactPhone,
+        region: that.data.areaInfo,
+        address: that.data.contactAddress
+      };
 
-    if (that.data.addressId) {
-      weChatUserAddress.id = that.data.addressId;
+      if (that.data.addressId) {
+        weChatUserAddress.id = that.data.addressId;
+      }
+
+      request.saveAddress(weChatUserAddress, function (data) {
+        if (data.retCode == 2) {
+          wx.showLoading({
+            title: '保存地址失败',
+            icon: 'none'
+          })
+        } else {
+          wx.showLoading({
+            title: '保存中...',
+          })
+          var pages = getCurrentPages()
+          var prevPage = pages[pages.length - 3]
+
+          prevPage.setData({
+            currentAddress: data.result
+          })
+          wx.navigateBack({
+            delta: 2
+          })
+        }
+      });
     }
-
-    request.saveAddress(weChatUserAddress, function (data) {
-      wx.showLoading({
-        title: '保存收货地址成功!',
-      })
-      var pages = getCurrentPages()
-      var prevPage = pages[pages.length - 3]
-
-      prevPage.setData({
-        selectAddressId: data.result.id
-      })
-      wx.navigateBack({
-        delta: 2
-      })
-    });
   },
   //输入框操作
   onInputFocus: function (e) {
@@ -105,15 +107,15 @@ Page({
   },
   bindContacterInput: function (e) {
     var that = this;
-    that.setData({ contacter: e.detail.value })
+    that.setData({ contacter: e.detail.value.replace(/\s+/g, '') })
   },
   bindContacterPhoneInput: function (e) {
     var that = this;
-    that.setData({ contactPhone: e.detail.value })
+    that.setData({ contactPhone: e.detail.value.replace(/\s+/g, '') })
   },
   bindContacterAddressInput: function (e) {
     var that = this;
-    that.setData({ contactAddress: e.detail.value })
+    that.setData({ contactAddress: e.detail.value.replace(/\s+/g, '') })
   },
   //执行省市区选择pickerView动画
   startAnimation: function (isShow, offset) {
@@ -151,7 +153,6 @@ Page({
   // 点击地区选择确定按钮
   citySure: function (e) {
     var that = this
-    // var city = that.data.city
     var value = that.data.value
     that.startAddressAnimation(false, -that.data.pickviewHeight);
     // 将选择的城市信息显示到输入框

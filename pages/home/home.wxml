@@ -1,15 +1,6 @@
-<wxc-loading class="J_loading" image="https://s10.mogucdn.com/mlcdn/c45406/170607_5241335cb37ka3ab7781ddh504ggh_200x200.png" slip="http://s10.mogucdn.com/p1/160715/upload_ifrgmmzwmyydknldhezdambqmeyde_200x200.png" _pid="{{_pid}}"></wxc-loading>
-<view class='classContentView {{isShowClassView}}'>
-  <view id="classViewCover" bindtap="onBgClicked"></view>
-  <view class='classMainView'>
-    <block wx:for-items="{{classList}}">
-      <view class='classItem' style='{{currentType == item.typeName ? "color: #222;border: 1px solid #222;":"color: #999;border: 1px solid #e6e6e6"}}' bindtap="onClassItemClicked2" data-key="{{item}}">{{item.typeName}}</view>
-    </block>
-    <view class='closeCoverView' bindtap='onCloseClassCover'>
-      <image class='closeCoverImage' src='../images/home_closeCover@2x.png' mode="aspectFit"></image>
-    </view>
-  </view>
-</view>
+<import src="template/ClassTemplate.wxml" />
+<import src="../../utils/Template/ProductListTemplate/ProductListTemplate.wxml" />
+<template is="ClassTemplate" data="{{classList,currentType}}" wx:if="{{isShowClassView}}"></template>
 <view class="page">
   <view class="contentView" style='{{classList.length > 1 ? "height: 95px;":"height: 45px;"}}'>
     <view class="search-input-view">
@@ -33,49 +24,29 @@
       </view>
     </view>
   </view>
-  <view class='templateContentView {{isShowTemplateView}}' style='{{classList.length > 1 ? "top: 95px;":"top: 45px;"}}' wx:if="{{templateList.length > 0}}">
+  <view class='emptyCartView' wx:if="{{noneWechatAccount}}" style='{{classList.length > 1 ? "top: 95px;":"top: 45px;"}}'>
+    <image src='../images/icon_emptyTemplate@2x.png' class='emptyImage' mode="aspectFit"></image>
+  </view>
+  <view class='templateContentView' style='{{classList.length > 1 ? "top: 95px;":"top: 45px;"}}' wx:if="{{templateList.length > 0 && isShowTemplateView}}">
     <block wx:for-items="{{templateList}}" wx:for-item="template">
-      <view class='templateSessionView'>
-        <image src='{{template.mainPic[0]}}' style='width: 100%;height:{{(deviceWidth*9)/16}}px;' bindtap='onTemplateDetail' data-key='{{template}}' wx:if="{{template.mainPic.length > 0}}"></image>
-        <view class='templateTitleView' bindtap='onTemplateDetail' data-key='{{template}}'>
+      <view class='templateSessionView' bindtap='onTemplateDetail' data-key='{{template}}'>
+        <image src='{{template.mainPic[0]}}' style='width: 100%;height:{{(deviceWidth*9)/16}}px;' wx:if="{{template.mainPic.length > 0}}"></image>
+        <view class='templateTitleView'>
           <text class='templateMainTitle'>{{template.mainTitle}}</text>
           <text class='templateSubTitle'>{{template.subTitle}}</text>
         </view>
-        <view wx:if="{{template.layout != '0'}}" style='{{template.layout == "2" ? "width: calc(100% - 5px);padding-bottom:5px;":"width: 100%;padding-bottom:0px;"}}'>
+        <view wx:if="{{template.layout != '0'}}" style='{{template.layout == "2" ? "width: calc(100% - 5px);margin-top:5px;":"width: 100%;margin-top:5px;"}}'>
           <block wx:for-items="{{template.productBeans}}">
-            <view class='productView' wx:if="{{item.shopWindow}}" bindtap='onGoodsDetail' data-key='{{item}}' wx:if="{{template.layout == '2' && item.shopWindow}}">
-              <image class="productImage" src='{{item.picture}}' data-key="{{item}}" style='height:{{doubleLayoutHeight}}px;' wx:if="{{template.layout == '2'}}"></image>
-              <image class="productImage" src='{{item.picture}}' data-key="{{item}}" style='height:{{singleLayoutHeight}}px;' wx:else></image>
-              <view class="productInfoView">
-                <text class="productText">{{item.goodsName}}</text>
-                <text class="priceText">￥{{item.price}}</text>
-              </view>
-            </view>
-            <view class='productLayoutView' bindtap='onGoodsDetail' data-key='{{item}}' wx:elif="{{template.layout == '1' && item.shopWindow}}">
-              <image class="productImage" src='{{item.picture}}' data-key="{{item}}" style='height:{{doubleLayoutHeight}}px;' wx:if="{{template.layout == '2'}}"></image>
-              <image class="productImage" src='{{item.picture}}' data-key="{{item}}" style='height:{{singleLayoutHeight}}px;' wx:else></image>
-              <view class="productInfoView">
-                <text class="productText">{{item.goodsName}}</text>
-                <text class="priceText">￥{{item.price}}</text>
-              </view>
-            </view>
+            <template is='SingleLayOut' data="{{item,singleLayoutHeight}}" wx:if="{{template.layout == '1' &&item.shopWindow}}"></template>
+            <template is='DoubleLayOut' data="{{item,doubleLayoutHeight}}" wx:elif="{{template.layout == '2' && item.shopWindow}}"></template>
           </block>
         </view>
       </view>
     </block>
   </view>
-  <view class='emptyCartView {{isShowEmpty}}' style='{{classList.length > 1 ? "top: 95px;":"top: 45px;"}}'>
-    <image src='../images/icon_emptyTemplate@2x.png' class='emptyImage' mode="aspectFit"></image>
-  </view>
-  <scroll-view scroll-y="true" class='productListView {{isShowProductListView}}' bindscrolltolower="onLoadMore" lower-threshold='200' style='{{classList.length > 1 ? "top: 95px;":"top: 45px;"}}'>
+  <scroll-view scroll-y="true" class='productListView' bindscrolltolower="onLoadMore" lower-threshold='200' style='{{classList.length > 1 ? "top: 95px;":"top: 45px;"}}' wx:if="{{isShowProductListView}}">
     <block wx:for-items="{{productList}}">
-      <view class='productSubView' bindtap='onGoodsDetail' data-key='{{item}}'>
-        <image class="productImage" src='{{item.photoUrl}}' style='height:{{doubleLayoutHeight}}px;'></image>
-        <view class="productInfoView">
-          <text class="productText">{{item.goodsName}}</text>
-          <text class="priceText">￥{{item.price}}</text>
-        </view>
-      </view>
+      <template is='normalLayOut' data="{{item,doubleLayoutHeight}}"></template>
     </block>
   </scroll-view>
   <view class='bottomCoverMenuView'>

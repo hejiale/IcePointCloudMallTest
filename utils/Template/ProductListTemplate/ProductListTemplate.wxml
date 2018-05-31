@@ -1,0 +1,36 @@
+<template name='SingleLayOut'>
+  <view class='productView' catchtap='onGoodsDetail' data-key='{{item}}'>
+    <image class="productImage" src='{{item.picture}}' style='height:{{singleLayoutHeight}}px;'></image>
+    <view class="productInfoView">
+      <text class="productText">{{item.goodsName}}</text>
+      <text class="priceText">￥{{item.price}}</text>
+    </view>
+  </view>
+</template>
+<template name='SingleLeftLayOut'>
+  <view class='productLeftSingleView' catchtap='onGoodsDetail' data-key='{{item}}'>
+    <image class="productLeftSingleImage" src='{{item.picture}}' style='height:{{doubleLayoutHeight}}px;'></image>
+    <view class="productLeftSingleInfoView">
+      <text class="productLeftSingleText">{{item.goodsName}}</text>
+      <text class="priceLeftSingleText">￥{{item.price}}</text>
+    </view>
+  </view>
+</template>
+<template name='DoubleLayOut'>
+  <view class='productSubView' catchtap='onGoodsDetail' data-key='{{item}}'>
+    <image class="productImage" src='{{item.picture}}' style='height:{{doubleLayoutHeight}}px;'></image>
+    <view class="productInfoView">
+      <text class="productText">{{item.goodsName}}</text>
+      <text class="priceText">￥{{item.price}}</text>
+    </view>
+  </view>
+</template>
+<template name='normalLayOut'>
+  <view class='productSubView' catchtap='onGoodsDetail' data-key='{{item}}'>
+    <image class="productImage" src='{{item.photoUrl}}' style='height:{{doubleLayoutHeight}}px;'></image>
+    <view class="productInfoView">
+      <text class="productText">{{item.goodsName}}</text>
+      <text class="priceText">￥{{item.price}}</text>
+    </view>
+  </view>
+</template>

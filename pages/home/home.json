@@ -1,7 +1,3 @@
 {
-    "navigationBarTitleText": "冰点云智慧零售Lab",
-    "usingComponents": {
-      "wxc-loading": "../../dist/packages/@minui/wxc-loading/dist/index"
-    },
-    "component": true
+    "navigationBarTitleText": "冰点云智慧零售Lab"
 }

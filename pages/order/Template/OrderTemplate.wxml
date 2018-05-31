@@ -1,0 +1,34 @@
+<template name="OrderTemplate">
+  <wxs module="filter" src="../../../utils/ipcConfig.wxs"></wxs>
+  <view class="contentView" bindtap="onOrderDetail" data-key="{{item}}">
+    <view class="codeView">
+      <text class="title">订单号：{{item.order.orderSerialNumber}}</text>
+      <text class="statusTitle">{{item.order.statusName}}</text>
+    </view>
+    <view class='line'></view>
+    <view class='productListView'>
+      <block wx:for-items="{{item.snapshots}}">
+        <view class='productContentView'>
+          <image mode="aspectFit" class="productImage" src='{{item.goodsOrder.photoUrl}}'></image>
+          <view class="productInfo">
+            <text class="productNameText">{{item.goodsOrder.name}}</text>
+            <text class='specificationsText'>{{item.specification}}</text>
+            <view class="priceView">
+              <text class="numText">x{{item.goodsOrder.count}}</text>
+              <text class="price">￥ {{filter.numberToFix(item.goodsOrder.price)}}</text>
+            </view>
+          </view>
+        </view>
+        <view class='line'></view>
+      </block>
+    </view>
+    <view class='orderPriceView'>
+      <view class='totalAmountView'>
+        <text class='totalAmountTitle'>总金额:</text>
+        <text class='totalAmountValue'>￥{{filter.numberToFix(item.order.amountPayable)}}</text>
+      </view>
+      <button class='payButton' wx:if="{{item.order.orderStatus == 'NOT_PAY'}}" catchtap='onPayOrder' data-key="{{item.order}}">去付款</button>
+      <button class='payButton' wx:if="{{item.order.orderStatus == 'GOODS_TO_BE_RECEIVED'}}" catchtap='onDeliveryOrder' data-key="{{item.order}}">确认收货</button>
+    </view>
+  </view>
+</template>

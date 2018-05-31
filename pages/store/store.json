@@ -1,1 +1,7 @@
-{"navigationBarTitleText":"选择店铺"}
+{
+  "navigationBarTitleText": "选择店铺",
+  "usingComponents": {
+    "wxc-loadmore": "../../dist/packages/@minui/wxc-loadmore/dist/index"
+  },
+  "component": true
+}

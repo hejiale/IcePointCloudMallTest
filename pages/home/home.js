@@ -6,19 +6,10 @@ var Config = require('../../utils/Config.js')
 Page({
   data: {
     classList: [],
-    isShowClassView: 'hide',
-    isShowProductListView: 'hide',
-    isShowTemplateView: 'show',
     productList: [],
-    templateList: null,
     currentType: "精选",
     currentPage: 1,
-    pageSize: 20,
-    singleLayoutHeight: 0,
-    doubleLayoutHeight: 0,
-    deviceWidth: 0,
-    scrollLeft: 0,
-    isShowEmpty: 'hide'
+    pageSize: 20
   },
   onLoad: function (options) {
     var that = this;
@@ -36,16 +27,7 @@ Page({
       })
     })
 
-    // let $loading = this.selectComponent('.J_loading');
-    // $loading && $loading.show();
-
     that.getCompanyInfo();
-
-    wx.authorize({
-      scope: 'scope.userLocation',
-      success() {
-      }
-    })
   },
   onSearchProduct: function () {
     wx.navigateTo({
@@ -53,10 +35,10 @@ Page({
     })
   },
   onShowClassView: function () {
-    this.setData({ isShowClassView: '' });
+    this.setData({ isShowClassView: true });
   },
   onCloseClassCover: function () {
-    this.setData({ isShowClassView: 'hide' });
+    this.setData({ isShowClassView: false });
   },
   //选择类目
   onClassItemClicked: function (e) {
@@ -95,12 +77,12 @@ Page({
   chooseClassItem: function (item) {
     var that = this;
 
-    that.setData({ currentType: item.typeName, isShowClassView: 'hide' });
+    that.setData({ currentType: item.typeName, isShowClassView: false });
 
     if (item.typeName == '精选') {
       that.getCompanyTemplate();
     } else {
-      that.setData({ isShowProductListView: '', isShowTemplateView: 'hide', productList: [] });
+      that.setData({ isShowProductListView: true, isShowTemplateView: false, productList: [] });
       that.queryProductsRequest(item.typeId);
     }
   },
@@ -108,10 +90,8 @@ Page({
     var that = this;
     var item = e.currentTarget.dataset.key;
 
-    Config.Config.templateObject = item;
-
     wx.navigateTo({
-      url: '../productList/productList',
+      url: '../productList/productList?id=' + item.tid,
     })
   },
   onGoodsDetail: function (e) {
@@ -192,14 +172,14 @@ Page({
   },
 
   onBgClicked: function () {
-    this.setData({ isShowClassView: 'hide' });
+    this.setData({ isShowClassView: false });
   },
   //获取公司信息
   getCompanyInfo: function () {
     var that = this;
 
     request.getCompanyInfo({ appid: Login.ConfigData.wechatId }, function (data) {
-      if (data.retCode == 202) {
+      if (data.retCode == 202 || data.retCode == 207 || data.retCode == 208) {
         wx.showToast({
           title: data.retMsg,
           icon: 'none'
@@ -213,7 +193,7 @@ Page({
   getCompanyTemplate: function () {
     var that = this;
 
-    that.setData({ isShowProductListView: 'hide', isShowTemplateView: '', templateList: [], classList: [{ typeName: '精选' }] });
+    that.setData({ isShowProductListView: false, isShowTemplateView: true, templateList: [], classList: [{ typeName: '精选' }] });
 
     let options = { companyId: Login.Customer.companyId };
 
@@ -223,7 +203,12 @@ Page({
           title: '请前去后台配置模板',
           icon: 'none'
         })
+        that.setData({ noneWechatAccount: true });
       } else {
+        if (data.result.previewData == null) {
+          that.setData({ noneWechatAccount: true });
+        }
+
         var viewList = [];
 
         for (var i = 0; i < data.result.previewData.length; i++) {
@@ -239,13 +224,6 @@ Page({
             }
           }
         }
-
-        if (viewList.length > 0) {
-          that.setData({ isShowEmpty: 'hide' })
-        } else {
-          that.setData({ isShowEmpty: '' })
-        }
-
         that.setData({ templateList: viewList, classList: that.data.classList });
       }
     })

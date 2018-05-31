@@ -33,7 +33,7 @@
     <view class="line"></view>
     <view class="contactTownView" bindtap='selectDistrict'>
       <text class="contacterText">省市区</text>
-      <text class="provinceText" bindtap="bindContacterAddressInput">{{areaInfo}}</text>
+      <text class="provinceText">{{areaInfo}}</text>
     </view>
     <view class="line"></view>
     <view class="contactTownView">

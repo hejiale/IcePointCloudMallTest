@@ -1,0 +1,140 @@
+.contentView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5px;
+  width: 100%;
+  background-color: white;
+}
+
+.codeView {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+}
+
+.title {
+  margin-left: 10px;
+  font-size: 16px;
+  color: #999999;
+  font-weight: 500;
+}
+
+.statusTitle {
+  margin-right: 10px;
+  font-size: 16px;
+  color: #4d9fd8;
+  font-weight: 500;
+}
+
+.line {
+  margin-left: 5px;
+  width: calc(100% - 10px);
+  height: 1px;
+  background-color: #e6e6e6;
+}
+
+.productListView {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.productContentView {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 84px;
+}
+
+.orderPriceView {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 50px;
+}
+
+.productImage {
+  margin-left: 10px;
+  width: 54px;
+  height: 54px;
+}
+
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  width: calc(100% - 84px);
+}
+
+.productNameText {
+  font-size: 16px;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-weight: 500;
+}
+
+.specificationsText {
+  font-size: 14px;
+  color: #999999;
+  height: 25px;
+  line-height: 25px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.priceView {
+  margin-right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.numText {
+  font-size: 14px;
+  text-align: right;
+  color: #666;
+}
+
+.price {
+  font-size: 14px;
+  color: #666;
+}
+
+.totalAmountView {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.totalAmountTitle {
+  width: 55px;
+  height: 20px;
+  font-size: 16px;
+  color: #999;
+  font-weight: 500;
+}
+
+.totalAmountValue {
+  width: calc(100% - 55px);
+  height: 20px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.payButton{
+  width: 90px;
+  height: 30px;
+  line-height: 30px;
+  background-color: #4D9FD8;
+  font-size: 15px;
+  color: white;
+  font-weight: 500;
+  margin-right: 10px;
+}

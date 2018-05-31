@@ -6,8 +6,6 @@
       <text class='editText' bindtap='onTapEdit' wx:if="{{!canEdit && cartList.length > 0}}">编辑</text>
       <text class='editText' bindtap='onTapEdit' wx:if="{{canEdit && cartList.length > 0}}">保存</text>
     </view>
-    <!-- <view class='topLine'>
-    </view> -->
   </view>
   <view class="contentView" wx:if="{{cartList.length > 0}}">
     <scroll-view>
