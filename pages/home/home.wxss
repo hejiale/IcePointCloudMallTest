@@ -114,14 +114,13 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 90px;
   background-color: white;
 }
 
 .templateMainTitle {
   font-size: 24px;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 18px;
   width: 100%;
   font-weight: 500;
 }
@@ -129,9 +128,10 @@
 .templateSubTitle {
   font-size: 14px;
   text-align: center;
-  margin-top: 5px;
+  margin-top: 8px;
   width: 100%;
   color: #999;
+  padding-bottom: 18px;
 }
 
 .productListView {
@@ -153,5 +153,36 @@
 .emptyImage {
   width: 182px;
   height: 218px;
+}
+
+.bottomCoverMenuView {
+  display: flex;
+  position: fixed;
+  align-items: center;
+  left: 10px;
+  bottom: 10px;
+  height: 42px;
+  z-index: 888;
+  background-color: #000;
+  opacity: 0.5;
+  border-radius: 3px;
+}
+
+.personMenu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 100%;
+}
+
+.personMenuImage {
+  width: 24px;
+  height: 26px;
+}
+
+.lineMenuImage {
+  width: 1px;
+  height: 29px;
 }
 

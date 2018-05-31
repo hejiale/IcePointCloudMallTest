@@ -35,6 +35,7 @@
           <text class='templateMainTitle'>{{template.mainTitle}}</text>
           <text class='templateSubTitle'>{{template.subTitle}}</text>
         </view>
+        
         <view wx:if="{{template.layout != '0'}}" style='{{template.layout == "2" ? "width: calc(100% - 5px);margin-top:5px;":"width: 100%;margin-top:5px;"}}'>
           <block wx:for-items="{{template.productBeans}}">
             <template is='SingleLayOut' data="{{item,singleLayoutHeight}}" wx:if="{{template.layout == '1' &&item.shopWindow}}"></template>

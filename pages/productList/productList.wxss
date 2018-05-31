@@ -2,6 +2,7 @@
 
 .productListView {
   width: calc(100% - 5px);
+  margin-top: 5px;   
 }
 
 .HomeMenu{
@@ -11,7 +12,7 @@
   position: fixed;
   bottom: 50px;
   right: 0px;
-  background-color: #222222;
+  background-color: #000;
   opacity: 0.5;
   width: 44px;
   height: 44px;

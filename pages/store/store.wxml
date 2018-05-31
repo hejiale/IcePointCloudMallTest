@@ -8,7 +8,7 @@
   </view>
   <scroll-view class="storeListView" style="height:{{storeListHeight}}px;" scroll-y="true" bindscrolltolower="onLoadMore" lower-threshold='100'>
     <block wx:for-items="{{storeList}}">
-      <template is="StoreTemplate" data="{{item}}"></template>
+      <template is="StoreTemplate" data="{{item,imageHeight}}"></template>
     </block>
     <wxc-loadmore wx:if="{{isEndLoad}}" is-end="{{true}}" text="到底啦" _pid="{{_pid}}">
     </wxc-loadmore>

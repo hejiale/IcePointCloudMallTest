@@ -9,7 +9,7 @@
       </view>
     </view>
     <image class='storeImage' style='height: {{imageHeight}}px;' src='{{item.pictures[0]}}' wx:if="{{item.pictures[0].length > 0}}"></image>
-    <view class='storeAddressView' style='{{item.pictures[0].length > 0 ? "margin-top: 10px;":"margin-top: 0px;"}}'>
+    <view class='storeAddressView' style='{{item.pictures[0].length > 0 ? "margin-top: 15px;":"margin-top: 5px;"}}'>
       <text class="addressText">{{item.region + item.address}}</text>
       <image class='storeContacterLine' src='../images/icon_columnLine@2x.png'></image>
       <view class='callPhoneView' catchtap="onCall" data-key="{{item}}">
