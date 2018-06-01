@@ -128,32 +128,16 @@
   background-color: #e6e6e6;
 }
 
-.memberRightsSureButton {
+.bottomButton{
   display: flex;
-  align-items: center;
   justify-content: center;
   margin-top: 20px;
   margin-bottom: 20px;
   width: 90%;
   height: 36px;
   line-height: 36px;
-  color: white;
-  background-color: #4d9fd8;
   font-size: 14px;
-  border-radius: 5px;
-} 
-
-.memberRightsUpBalanceButton{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  width: 90%;
-  height: 36px;
-  line-height: 36px;
   color: white;
-  background-color: #e6e6e6;
-  font-size: 14px;
   border-radius: 5px;
 }
+

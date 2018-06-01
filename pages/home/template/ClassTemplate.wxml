@@ -3,7 +3,7 @@
     <view class="classViewCover" bindtap="onBgClicked"></view>
     <view class='classMainView'>
       <block wx:for-items="{{classList}}">
-        <view class='classItem' style='{{currentType == item.typeName ? "color: #222;border: 1px solid #222;":"color: #999;border: 1px solid #e6e6e6"}}' bindtap="onClassItemClicked2" data-key="{{item}}">{{item.typeName}}</view>
+        <view class='classItem' style='{{currentType == item.typeName ? "color: #222;border: 1px solid #222;":"color: #999;border: 1px solid #e6e6e6"}};width:{{classItemWidth}}px;' bindtap="onClassItemClicked2" data-key="{{item}}">{{item.typeName}}</view>
       </block>
       <view class='closeCoverView' bindtap='onCloseClassCover'>
         <image class='closeCoverImage' src='../images/home_closeCover@2x.png' mode="aspectFit"></image>

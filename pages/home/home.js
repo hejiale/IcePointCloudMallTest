@@ -24,6 +24,7 @@ Page({
     app.getSystemInfo(function (systemInfo) {
       that.setData({
         deviceWidth: systemInfo.windowWidth,
+        classItemWidth: (systemInfo.windowWidth - 30 - 2*13)/3
       })
     })
 

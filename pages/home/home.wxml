@@ -1,6 +1,6 @@
 <import src="template/ClassTemplate.wxml" />
 <import src="../../utils/Template/ProductListTemplate/ProductListTemplate.wxml" />
-<template is="ClassTemplate" data="{{classList,currentType}}" wx:if="{{isShowClassView}}"></template>
+<template is="ClassTemplate" data="{{classList,currentType,classItemWidth}}" wx:if="{{isShowClassView}}"></template>
 <view class="page">
   <view class="contentView" style='{{classList.length > 1 ? "height: 95px;":"height: 45px;"}}'>
     <view class="search-input-view">

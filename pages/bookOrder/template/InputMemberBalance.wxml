@@ -17,12 +17,10 @@
         <text class='offsetUseAmountValue'>￥ {{payInfo.memberInfo.mallCustomer.balance}}</text>
       </view>
       <view class='offsetAmountInputView'>
-        <input class='offsetAmountInput' placeholder='请输入储值抵扣金额' placeholder-style='color:#999999;font-size: 15px;' bindinput='textFieldInput' type='digit' value='{{payInfo.inputValue}}'></input>
+        <input class='offsetAmountInput' placeholder='请输入储值抵扣金额' placeholder-style='color:#999999;font-size: 15px;' bindinput='textFieldInput' type='digit' value='{{payInfo.inputValue}}' cursor-spacing='100'></input>
       </view>
       <view class='memberRightsBgBottomLine'></view>
-      <view class='memberRightsSureButton' bindtap='onSure' wx:if="{{payInfo.canPayStaus}}">确定</view>
-      <view class='memberRightsUpBalanceButton' wx:elif="{{payInfo.upBalanceStatus}}">储值余额不足</view>
-      <view class='memberRightsUpBalanceButton' wx:elif="{{payInfo.overcapStatus}}">已超抵扣上限</view>
+      <button class='bottomButton' style='{{payInfo.canPayStaus ?"background-color: #4d9fd8;":"background-color: #e6e6e6;"}}' bindtap='{{payInfo.canPayStaus ? "onSure":""}}'>{{payInfo.canPayStaus ? '确定' : (payInfo.upBalanceStatus ? '储值余额不足':'已超抵扣上限' )}}</button>
     </view>
   </view>
 </template>
@@ -49,12 +47,10 @@
         <text class='offsetUseAmountValue'>￥ {{filter.numberToFix(payInfo.inputPointPrice)}}</text>
       </view>
       <view class='offsetAmountInputView'>
-        <input class='offsetAmountInput' placeholder='请输入抵扣积分' placeholder-style='color:#999999;font-size: 15px;' bindinput='textFieldInput' type='number' value='{{payInfo.inputValue}}'></input>
+        <input class='offsetAmountInput' placeholder='请输入抵扣积分' placeholder-style='color:#999999;font-size: 15px;' bindinput='textFieldInput' type='number' value='{{payInfo.inputValue}}' cursor-spacing='100'></input>
       </view>
       <view class='memberRightsBgBottomLine'></view>
-       <view class='memberRightsSureButton' bindtap='onSure' wx:if="{{payInfo.canPayStaus}}">确定</view> 
-      <view class='memberRightsUpBalanceButton' wx:elif="{{payInfo.overcapStatus}}">已超抵扣上限</view>
-      <view class='memberRightsUpBalanceButton' wx:elif="{{payInfo.upBalanceStatus}}">积分不足</view> 
+      <button class='bottomButton' style='{{payInfo.canPayStaus ?"background-color: #4d9fd8;":"background-color: #e6e6e6;"}}' bindtap='{{payInfo.canPayStaus ? "onSure":""}}'>{{payInfo.canPayStaus ? '确定' : (payInfo.upBalanceStatus ? '积分不足':'已超抵扣上限' )}}</button>
     </view>
   </view>
 </template>

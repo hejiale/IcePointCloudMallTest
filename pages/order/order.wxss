@@ -74,4 +74,5 @@
 .emptyImage{
   width: 182px;
   height: 218px;
+  margin-bottom: 56px;
 }

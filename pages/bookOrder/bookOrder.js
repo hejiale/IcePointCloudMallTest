@@ -172,6 +172,12 @@ Page({
     } else {
       that.setData({ 'payInfo.inputValue': '' });
     }
+
+    that.setData({
+      'payInfo.overcapStatus': false,
+      'payInfo.upBalanceStatus': false,
+      'payInfo.canPayStaus': true
+    })
   },
   onShowInputPoint: function () {
     var that = this;
@@ -189,6 +195,12 @@ Page({
     } else {
       that.setData({ 'payInfo.inputValue': '' });
     }
+
+    that.setData({
+      'payInfo.overcapStatus': false,
+      'payInfo.upBalanceStatus': false,
+      'payInfo.canPayStaus': true
+    })
   },
   onCoverClicked: function (e) {
     this.setData({ isShowMemberRights: false });
