@@ -83,7 +83,7 @@ Page({
         validCode: that.data.bindCode,
         phone: that.data.bindPhone,
         userAccount: Login.Customer.openId,
-        weChatAccount: Login.Customer.wechatAccount
+        weChatAccount: Login.Customer.weChatAccount
       };
 
       request.verityPhoneCode(options, function (data) {
@@ -115,7 +115,7 @@ Page({
       let options = {
         phone: that.data.bindPhone,
         userAccount: Login.Customer.openId,
-        weChatAccount: Login.Customer.wechatAccount
+        weChatAccount: Login.Customer.weChatAccount
       };
 
       request.sendVerityCode(options, function (data) {

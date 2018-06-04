@@ -2,7 +2,7 @@
 
 .scroll-container {
   width: 100%;
-  padding-bottom: 40px;
+  padding-bottom: 45px;
 }
 
 .emptyCartView{
@@ -24,18 +24,31 @@
 
 .footView {
   display: flex;
-  flex-direction: column;
   position: fixed;
   bottom: 0;
   width: 100%;
   height: 40px;
+  background-color: white;
 }
 
-.footText {
-  background-color: #63a0d4;
-  color: white;
-  font-size: 15px;
-  height: 40px;
-  line-height: 40px;
+.addAddressText {
+  flex: 1;
+  margin: 5px;
+  color: #63a0d4;
+  font-size: 13px;
+  line-height: 28px;
   text-align: center;
+  border: 1px solid #63a0d4;
+  border-radius: 3px;
+}
+
+.addWechatText{
+  flex: 1;
+  margin: 5px;
+  color: #44b549;
+  font-size: 13px;
+  line-height: 28px;
+  text-align: center;
+  border: 1px solid #44b549;
+  border-radius: 3px;
 }

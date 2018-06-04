@@ -1,15 +1,18 @@
 <import src="../../utils/Template/ProductListTemplate/ProductListTemplate.wxml" />
 <view class="page">
-  <view style='{{templateObject.layout == "2" ? "background-color: #F5F5F5;":"background-color: white;"}}'>
+  <view style='{{(templateObject.layout == "2" || templateObject.layout == "0") ? "background-color: #F5F5F5;":"background-color: white;"}}' wx:if="{{templateObject != null}}">
     <image src='{{templateObject.mainPic[0]}}' style='width: 100%;height:{{(deviceWidth*9)/16}}px;display:block;'></image>
-    <scroll-view scroll-y="true" class="productListView" wx:if="{{templateObject.layout != '0'}}">
+    <scroll-view scroll-y="true" class="productListView">
       <block wx:for-items="{{templateObject.productBeans}}">
         <template is='SingleLeftLayOut' data="{{item,doubleLayoutHeight}}" wx:if="{{templateObject.layout == '1'}}"></template>
-        <template is='DoubleLayOut' data="{{item,doubleLayoutHeight}}" wx:elif="{{templateObject.layout == '2'}}"></template>
+        <template is='DoubleLayOut' data="{{item,doubleLayoutHeight}}" wx:elif="{{templateObject.layout == '2' || templateObject.layout == '0'}}"></template>
       </block>
     </scroll-view>
-    <view class='HomeMenu' wx:if="{{isFromShare}}" bindtap='onToHomePage'>
-      <image class='HomeMenuImage' src='../images/backHomeMenu@2x.png'></image>
-    </view>
+  </view>
+  <view class='emptyView' wx:elif="{{isEmpty}}">
+    <image class='emptyImage' src='../images/SpecialFailure@2x.png'></image>
+  </view>
+  <view class='HomeMenu' wx:if="{{isFromShare}}" bindtap='onToHomePage'>
+    <image class='HomeMenuImage' src='../images/backHomeMenu@2x.png'></image>
   </view>
 </view>

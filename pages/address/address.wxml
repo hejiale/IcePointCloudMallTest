@@ -9,6 +9,7 @@
     <image src='../images/icon_emptyAddress@2x.png' class='emptyImage' mode="aspectFit"></image>
   </view>
 </view>
-<view class="footView" bindtap="onInsertNewAddress">
-  <text class="footText">新增收货地址</text>
+<view class="footView">
+  <text class="addAddressText" bindtap="onInsertNewAddress">新增地址</text>
+  <text class="addWechatText" bindtap="onChooseWechatAddress">微信添加</text>
 </view>

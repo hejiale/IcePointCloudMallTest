@@ -27,7 +27,11 @@ Page({
     wx.showLoading();
 
     request.getTemplateDetail({ tid: that.data.templateId}, function (data) {
-      that.setData({ templateObject: data.result });
+      if (data.retCode == 400){
+        that.setData({ isEmpty: true});
+      }else{
+        that.setData({ templateObject: data.result });
+      }
       wx.hideLoading();
     })
   },

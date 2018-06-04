@@ -68,6 +68,32 @@ Page({
       url: '../editAddress/editAddress'
     })
   },
+  onChooseWechatAddress: function(){
+    var that = this;
+
+    wx.chooseAddress({
+      success: function (res) {
+        //新增地址
+        var weChatUserAddress = {
+          name: res.userName,
+          phone: res.telNumber,
+          region: (res.provinceName + ' ' + res.cityName + ' ' + res.countyName),
+          address: res.detailInfo
+        };
+
+        request.saveAddress(weChatUserAddress, function (data) {
+          if (data.retCode == 2) {
+            wx.showLoading({
+              title: '保存地址失败',
+              icon: 'none'
+            })
+          } else {
+            that.queryAddressList();
+          }
+        });
+      }
+    })
+  },
   onChooseAddress: function (e) {
     var that = this;
     var item = e.currentTarget.dataset.key;

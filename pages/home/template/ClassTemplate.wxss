@@ -20,8 +20,29 @@
   top: 0;
   width: 100%;
   background-color: #fff;
-  padding-top: 15px;
   padding-left: 5px;
+  padding-bottom: 10px;
+}
+
+.closeCoverView {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 36px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.closeCoverImage {
+  margin-right: 20px;
+  width: 16px;
+  height: 9px;
+}
+
+.chooseTitle{
+  margin-left: 10px;
+  font-size: 13px;
+  color: #666666;
 }
 
 .classItem {
@@ -36,16 +57,6 @@
   font-weight: 500;
 }
 
-.closeCoverView {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 36px;
-}
 
-.closeCoverImage {
-  width: 44px;
-  height: 17px;
-}
 
 

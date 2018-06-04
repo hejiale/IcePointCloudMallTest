@@ -3,7 +3,12 @@ App({
   onLaunch: function (options) {
 
   },
-
+  onShow:function(){
+    this.globalData.isRequireLoad = true;
+  },
+  onHide:function(){
+    console.log('hide');
+  },
   getSystemInfo: function (cb) {
     var that = this;
 
@@ -18,7 +23,6 @@ App({
       })
     }
   },
-
   globalData: {
     systemInfo: null
   }  

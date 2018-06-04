@@ -24,11 +24,15 @@ Page({
     app.getSystemInfo(function (systemInfo) {
       that.setData({
         deviceWidth: systemInfo.windowWidth,
-        classItemWidth: (systemInfo.windowWidth - 30 - 2*13)/3
+        classItemWidth: (systemInfo.windowWidth - 30 - 2 * 13) / 3
       })
     })
-
-    that.getCompanyInfo();
+  },
+  onShow: function () {
+    var that = this;
+    if (that.data.currentType == "精选") {
+      that.getCompanyInfo();
+    }
   },
   onSearchProduct: function () {
     wx.navigateTo({
@@ -78,12 +82,19 @@ Page({
   chooseClassItem: function (item) {
     var that = this;
 
-    that.setData({ currentType: item.typeName, isShowClassView: false });
+    that.setData({
+      currentType: item.typeName,
+      isShowClassView: false
+    });
 
     if (item.typeName == '精选') {
       that.getCompanyTemplate();
     } else {
-      that.setData({ isShowProductListView: true, isShowTemplateView: false, productList: [] });
+      that.setData({
+        isShowProductListView: true,
+        isShowTemplateView: false,
+        productList: []
+      });
       that.queryProductsRequest(item.typeId);
     }
   },
@@ -179,6 +190,8 @@ Page({
   getCompanyInfo: function () {
     var that = this;
 
+    wx.showLoading();
+
     request.getCompanyInfo({ appid: Login.ConfigData.wechatId }, function (data) {
       if (data.retCode == 202 || data.retCode == 207 || data.retCode == 208) {
         wx.showToast({
@@ -194,7 +207,12 @@ Page({
   getCompanyTemplate: function () {
     var that = this;
 
-    that.setData({ isShowProductListView: false, isShowTemplateView: true, templateList: [], classList: [{ typeName: '精选' }] });
+    that.setData({
+      isShowProductListView: false,
+      isShowTemplateView: true,
+      templateList: [],
+      classList: [{ typeName: '精选' }]
+    });
 
     let options = { companyId: Login.Customer.companyId };
 
@@ -226,6 +244,7 @@ Page({
           }
         }
         that.setData({ templateList: viewList, classList: that.data.classList });
+        wx.hideLoading();
       }
     })
   },

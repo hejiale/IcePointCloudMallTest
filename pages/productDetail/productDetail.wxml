@@ -25,7 +25,7 @@
       </view>
       <image class="lineImage" src='../images/icon_line@2x.png' mode="aspectFit"></image>
       <view class="webView" wx:if="{{isSelectDetail}}">
-        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+         <template is="wxParse" data="{{wxParseData:article.nodes}}" /> 
       </view>
       <view class="specifications" wx:else>
         <view class="FrameView">
