@@ -1,0 +1,31 @@
+@import "../../../utils/Template/ProductListTemplate/ProductListTemplate.wxss";
+
+.templateSessionView {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.templateTitleView {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: white;
+}
+
+.templateMainTitle {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 18px;
+  width: 100%;
+  font-weight: 500;
+}
+
+.templateSubTitle {
+  font-size: 14px;
+  text-align: center;
+  margin-top: 8px;
+  width: 100%;
+  color: #999;
+  padding-bottom: 18px;
+}

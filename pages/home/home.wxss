@@ -1,3 +1,4 @@
+@import "template/CompanyTemplate.wxss";
 @import "template/ClassTemplate.wxss";
 @import "../../utils/Template/ProductListTemplate/ProductListTemplate.wxss";
 
@@ -37,7 +38,7 @@
   height: 30rpx;
 }
 
-.inputSearch {
+.showSearch {
   margin-left: 5px;
   height: 20px;
   font-size: 14px;
@@ -100,38 +101,7 @@
 
 .templateContentView {
   position: relative;
-  left: 0px;
   width: 100%;
-}
-
-.templateSessionView {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.templateTitleView {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background-color: white;
-}
-
-.templateMainTitle {
-  font-size: 24px;
-  text-align: center;
-  margin-top: 18px;
-  width: 100%;
-  font-weight: 500;
-}
-
-.templateSubTitle {
-  font-size: 14px;
-  text-align: center;
-  margin-top: 8px;
-  width: 100%;
-  color: #999;
-  padding-bottom: 18px;
 }
 
 .productListView {

@@ -24,11 +24,14 @@
       </block>
     </view>
   </view>
-  <scroll-view scroll-y="true" class="productListView {{isShowProductList}}" bindscrolltolower="onLoadMore" lower-threshold='100' scroll-top="{{scrollTop}}" style='height:{{scrollHeight}}px;'>
+  <scroll-view scroll-y="true" class="productListView {{isShowProductList}}" bindscrolltolower="onLoadMore" lower-threshold='100' scroll-top="{{scrollTop}}" style='height:{{scrollHeight}}px;' wx:if="{{allProductList.length > 0}}">
     <block wx:for-items="{{allProductList}}">
       <template is='normalLayOut' data="{{item,doubleLayoutHeight}}"></template>
     </block>
     <wxc-loadmore wx:if="{{isEndLoad}}" is-end="{{true}}" text="到底啦" _pid="{{_pid}}">
     </wxc-loadmore>
   </scroll-view>
+  <view class='emptyView' wx:elif="{{isEmpty}}">
+    <image class='emptyImage' src='../images/noneProduct@2x.png'></image>
+  </view>
 </view>

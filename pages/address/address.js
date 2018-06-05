@@ -5,7 +5,7 @@ var app = getApp();
 
 Page({
   data: {
-    
+
   },
 
   onLoad: function (options) {
@@ -68,7 +68,7 @@ Page({
       url: '../editAddress/editAddress'
     })
   },
-  onChooseWechatAddress: function(){
+  onChooseWechatAddress: function () {
     var that = this;
 
     wx.chooseAddress({
@@ -91,6 +91,24 @@ Page({
             that.queryAddressList();
           }
         });
+      }, fail(res) {
+        console.log(res);
+        if (res.errMsg == "chooseAddress:fail auth deny") {
+          wx.showModal({
+            content: '检测到您未打开微信地址授权，开启后即可进行导入',
+            confirmText: '去开启',
+            cancelColor: '#333',
+            confirmColor: '#333',
+            success: function (res) {
+              if (res.confirm) {
+                wx.openSetting({
+                  success: (res) => {
+                  }
+                })
+              }
+            }
+          })
+        }
       }
     })
   },

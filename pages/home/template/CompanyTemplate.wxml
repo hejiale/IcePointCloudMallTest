@@ -1,0 +1,16 @@
+<import src="../../../utils/Template/ProductListTemplate/ProductListTemplate.wxml" />
+<template name="CompanyTemplate">
+  <view class='templateSessionView' bindtap='onTemplateDetail' data-key='{{template}}'>
+    <image src='{{template.mainPic[0]}}' style='width: 100%;height:{{(deviceWidth*9)/16}}px;' wx:if="{{template.mainPic.length > 0}}"></image>
+    <view class='templateTitleView'>
+      <text class='templateMainTitle'>{{template.mainTitle}}</text>
+      <text class='templateSubTitle'>{{template.subTitle}}</text>
+    </view>
+    <view wx:if="{{template.layout != '0'}}" style='{{template.layout == "2" ? "width: calc(100% - 5px);margin-top:5px;":"width: 100%;margin-top:5px;"}}'>
+      <block wx:for-items="{{template.productBeans}}">
+        <template is='SingleLayOut' data="{{item,singleLayoutHeight}}" wx:if="{{template.layout == '1' &&item.shopWindow}}"></template>
+        <template is='DoubleLayOut' data="{{item,doubleLayoutHeight}}" wx:elif="{{template.layout == '2' && item.shopWindow}}"></template>
+      </block>
+    </view>
+  </view>
+</template>

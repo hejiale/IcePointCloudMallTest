@@ -163,7 +163,7 @@ Page({
     var that = this;
 
     if (that.data.currentPage == 1) {
-      that.setData({ isEndLoad: false });
+      that.setData({ isEndLoad: false, isEmpty: false });
     }
 
     var options = new Object();
@@ -192,10 +192,13 @@ Page({
     request.queryProductList(options, function (data) {
       that.setData({ allProductList: that.data.allProductList.concat(data.resultList) });
 
-      if (that.data.allProductList.length > 0 && data.resultList.length == 0) {
-        that.setData({ isEndLoad: true });
+      if (data.resultList.length == 0) {
+        if (that.data.allProductList.length > 0){
+          that.setData({ isEndLoad: true });
+        }else{
+          that.setData({ isEmpty: true });
+        }
       }
-
       wx.hideLoading();
     })
   },
@@ -311,8 +314,8 @@ Page({
       }
     }
     that.setData({
-      startPrice: that.data.lowPriceStr,
-      endPrice: that.data.heighPriceStr
+      startPrice: ((that.data.lowPriceStr != null) ? that.data.lowPriceStr : ""),
+      endPrice: ((that.data.heighPriceStr != null) ? that.data.heighPriceStr: "")
     });
   },
   //清除筛选数据//

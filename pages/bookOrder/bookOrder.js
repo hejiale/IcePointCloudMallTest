@@ -42,10 +42,17 @@ Page({
 
     //获取客户默认地址
     request.getDefaultAddress(function (data) {
-      that.setData({ currentAddress: data.result, preAddress: data.result.region + data.result.address });
+      if (data.result != null) {
+        that.setData({
+          currentAddress: data.result,
+          preAddress: data.result.region + data.result.address
+        });
+      }
       //获取提货方式
       request.queryPickupStatus(function (data) {
-        that.setData({ pickUpStyle: data.result, pickUp: data.result[0] });
+        if (data.result.length > 0) {
+          that.setData({ pickUpStyle: data.result, pickUp: data.result[0] });
+        }
         that.queryStoreList();
       });
     });
