@@ -1,10 +1,12 @@
 @import "../../utils/Template/ProductListTemplate/ProductListTemplate.wxss";
 @import "Template/PropertyTemplate.wxss";
+@import "../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxss";
 
 .searchContentView {
   display: flex;
   flex-direction: column;
   width: 100%;
+  position: absolute;
 }
 
 .inputSearch {

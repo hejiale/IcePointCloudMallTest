@@ -1,5 +1,7 @@
 <import src="Template/AddressTemplate.wxml" />
+<import src="../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxml" />
 <view class="page">
+  <template is="bgTemplate"></template>
   <scroll-view class="scroll-container" scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" style="height:calc(100% - 1px)" wx:if="{{addressList.length > 0}}">
     <block wx:for-items="{{addressList}}">
       <template is="AddressTemplate" data="{{item}}"></template>

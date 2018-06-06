@@ -1,4 +1,5 @@
 @import "Template/StoreTemplate.wxss";
+@import "../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxss";
 
 .topView {
   display: flex;

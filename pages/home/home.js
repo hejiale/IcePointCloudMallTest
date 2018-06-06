@@ -5,11 +5,12 @@ var Config = require('../../utils/Config.js')
 
 Page({
   data: {
-    classList: [],
+    classList: [{ typeName: '精选' }],
     productList: [],
     currentType: "精选",
     currentPage: 1,
-    pageSize: 20
+    pageSize: 20,
+    currentPageIndex: 0
   },
   onLoad: function (options) {
     var that = this;
@@ -28,10 +29,10 @@ Page({
       })
     })
   },
-  onShow: function () {
-    var that = this;
-    if (that.data.currentType == "精选") {
-      that.getCompanyInfo();
+  onShow:function(){
+    if (app.globalData.isRequireLoad){
+      this.getCompanyInfo();
+      app.globalData.isRequireLoad = false;
     }
   },
   onSearchProduct: function () {
@@ -39,6 +40,7 @@ Page({
       url: '../searchPage/searchPage',
     })
   },
+  //显示与隐藏类目页面
   onShowClassView: function () {
     this.setData({ isShowClassView: true });
   },
@@ -122,17 +124,9 @@ Page({
   onBottomMenuToPerson: function () {
     Login.valityLogigStatus(function (e) {
       if (e == false) {
-        Login.userLogin(function (customer) {
-          if (customer != null) {
-            wx.navigateTo({
-              url: '../person/person',
-            })
-          } else {
-            wx.navigateTo({
-              url: '../bindPhone/bindPhone',
-            })
-          }
-        });
+        wx.navigateTo({
+          url: '../bindPhone/bindPhone',
+        })
       } else {
         wx.navigateTo({
           url: '../person/person',
@@ -143,17 +137,9 @@ Page({
   onBottomMenuToOrder: function () {
     Login.valityLogigStatus(function (e) {
       if (e == false) {
-        Login.userLogin(function (customer) {
-          if (customer != null) {
-            wx.navigateTo({
-              url: '../order/order',
-            })
-          } else {
-            wx.navigateTo({
-              url: '../bindPhone/bindPhone',
-            })
-          }
-        });
+        wx.navigateTo({
+          url: '../bindPhone/bindPhone',
+        })
       } else {
         wx.navigateTo({
           url: '../order/order',
@@ -164,17 +150,9 @@ Page({
   onBottomMenuToCart: function () {
     Login.valityLogigStatus(function (e) {
       if (e == false) {
-        Login.userLogin(function (customer) {
-          if (customer != null) {
-            wx.navigateTo({
-              url: '../cart/cart',
-            })
-          } else {
-            wx.navigateTo({
-              url: '../bindPhone/bindPhone',
-            })
-          }
-        });
+        wx.navigateTo({
+          url: '../bindPhone/bindPhone',
+        })
       } else {
         wx.navigateTo({
           url: '../cart/cart',
@@ -182,16 +160,34 @@ Page({
       }
     })
   },
-
   onBgClicked: function () {
     this.setData({ isShowClassView: false });
   },
-  //获取公司信息
-  getCompanyInfo: function () {
+  //转发分享
+  onShareAppMessage: function (res) {
+    console.log(res)
+    return {
+      title: '冰点云智慧零售Lab',
+      path: '/pages/home/home'
+    }
+  },
+  //首页滚动
+  pagechange: function (e) {
     var that = this;
 
-    wx.showLoading();
-
+    if ("touch" === e.detail.source) {
+      that.setData({
+        currentPageIndex: e.detail.current
+      })
+    }
+  },
+  //下拉刷新
+  // onPullDownRefresh: function () {
+  //   wx.stopPullDownRefresh()
+  // },
+  //获取公司信息请求
+  getCompanyInfo: function () {
+    var that = this;
     request.getCompanyInfo({ appid: Login.ConfigData.wechatId }, function (data) {
       if (data.retCode == 202 || data.retCode == 207 || data.retCode == 208) {
         wx.showToast({
@@ -200,55 +196,59 @@ Page({
         })
       }
       Login.Customer.companyId = data.result.id;
+      that.getCompanyClass();
       that.getCompanyTemplate();
     });
   },
-  //获取商店展示模板
+  //获取首页类目请求
+  getCompanyClass: function () {
+    var that = this;
+
+    that.setData({ classList: [{ typeName: '精选' }]});
+
+    request.getCompanyClass({ companyId: Login.Customer.companyId }
+      , function (data) {
+        if (data.retCode == 401) {
+          that.setData({ noneWechatAccount: true });
+        } else {
+          that.setData({ classList: that.data.classList.concat(data.result) })
+        }
+      })
+  },
+  //获取商店展示模板请求
   getCompanyTemplate: function () {
     var that = this;
 
     that.setData({
       isShowProductListView: false,
       isShowTemplateView: true,
-      templateList: [],
-      classList: [{ typeName: '精选' }]
+      templateList: []
     });
 
-    let options = { companyId: Login.Customer.companyId };
-
-    request.getCompanyTemplate(options, function (data) {
-      if (data.retCode == 401) {
-        wx.showToast({
-          title: '请前去后台配置模板',
-          icon: 'none'
-        })
-        that.setData({ noneWechatAccount: true });
-      } else {
-        if (data.result.previewData == null) {
+    request.getCompanyTemplate({ companyId: Login.Customer.companyId },
+      function (data) {
+        if (data.retCode == 401) {
+          wx.showToast({
+            title: '请前去后台配置模板',
+            icon: 'none'
+          })
           that.setData({ noneWechatAccount: true });
-        }
+        } else {
+          if (data.result.previewData == null) {
+            that.setData({ noneWechatAccount: true });
+          }
 
-        var viewList = [];
-
-        for (var i = 0; i < data.result.previewData.length; i++) {
-          var value = data.result.previewData[i];
-          if (value.type == "SESSION") {
-            viewList.push(value);
-          } else if (value.type == "NAVIGATION") {
-            for (var j = 0; j < value.navDataBeans.length; j++) {
-              var bean = value.navDataBeans[j];
-              if (!bean.hide) {
-                that.data.classList.push(bean);
-              }
+          for (var i = 0; i < data.result.previewData.length; i++) {
+            var value = data.result.previewData[i];
+            if (value.type == "SESSION") {
+              that.data.templateList.push(value);
             }
           }
+          that.setData({ templateList: that.data.templateList });
         }
-        that.setData({ templateList: viewList, classList: that.data.classList });
-        wx.hideLoading();
-      }
-    })
+      })
   },
-  //--------------查询商品----------------//
+  //查询商品请求
   queryProductsRequest: function (typeId) {
     var that = this;
 
@@ -262,12 +262,5 @@ Page({
     request.queryProductList(options, function (data) {
       that.setData({ productList: that.data.productList.concat(data.resultList) });
     })
-  },
-  onShareAppMessage: function (res) {
-    console.log(res)
-    return {
-      title: '冰点云智慧零售Lab',
-      path: '/pages/home/home'
-    }
   }
 })

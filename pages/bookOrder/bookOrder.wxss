@@ -1,6 +1,8 @@
 @import "template/InputMemberBalance.wxss";
+@import "../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxss";
 
 .scrollView {
+  position: absolute;
   margin: 0px;
   width: 100%;
   padding-bottom: 55px;

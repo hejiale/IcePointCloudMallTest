@@ -1,5 +1,7 @@
 <wxs module="filter" src="../../utils/ipcConfig.wxs"></wxs>
+<import src="../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxml" />
 <view class="page">
+  <template is="bgTemplate"></template>
   <view class='topView'>
     <view class='titleView'>
       <text class='topText'>商品列表</text>

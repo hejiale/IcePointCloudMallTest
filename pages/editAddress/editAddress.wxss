@@ -1,41 +1,16 @@
+@import "../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxss";
+
+.contentView{
+  position: absolute;
+  width: 100%;
+  background-color: white;
+}
 
 .contacterView {
   display: flex;
   align-items: center;
   width: 100%;
   height: 60px;
-  background-color: white;
-}
-
-.contactPhoneView {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 60px;
-  background-color: white;
-}
-
-.contactCityView {
-  display: flex;
-  align-content: center;
-  width: 100%;
-  height: 60px;
-  background-color: white;
-}
-
-.contactTownView {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 60px;
-  background-color: white;
-}
-
-.contactAddressView {
-  display: flex;
-  width: 100%;
-  height: 60px;
-  background-color: white;
 }
 
 .contacterText {

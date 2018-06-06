@@ -1,6 +1,8 @@
 @import "template/CompanyTemplate.wxss";
 @import "template/ClassTemplate.wxss";
 @import "../../utils/Template/ProductListTemplate/ProductListTemplate.wxss";
+@import "../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxss";
+
 
 .contentView {
   position: fixed;
@@ -156,3 +158,11 @@
   height: 29px;
 }
 
+.swiper {
+  width: 100%;
+  overflow: scroll;
+}
+
+.swiper-item {
+  width: 100%;
+}

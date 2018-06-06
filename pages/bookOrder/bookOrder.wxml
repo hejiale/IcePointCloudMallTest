@@ -1,8 +1,10 @@
 <wxs module="filter" src="../../utils/ipcConfig.wxs"></wxs>
 <import src="template/InputMemberBalance.wxml" />
+<import src="../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxml" />
 <template is="inputBalance" data="{{payInfo:payInfo}}" wx:if="{{isShowMemberRights && !payInfo.isInputPoint}}"></template>
 <template is="inputPoint" data="{{payInfo:payInfo}}" wx:if="{{isShowMemberRights && payInfo.isInputPoint}}"></template>
 <view class="page" wx:if="{{isShowContent}}">
+  <template is="bgTemplate"></template>
   <OrderDetailComponent id="OrderDetailComponent" wx:if="{{isShowOrderDetail}}"></OrderDetailComponent>
   <view class="scrollView" wx:if="{{!isShowOrderDetail}}">
     <view class="deliveryModeView">

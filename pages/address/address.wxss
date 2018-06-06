@@ -1,4 +1,5 @@
 @import "Template/AddressTemplate.wxss";
+@import "../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxss";
 
 .scroll-container {
   width: 100%;

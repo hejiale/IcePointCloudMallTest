@@ -1,3 +1,5 @@
+<import src="../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxml" />
 <view class='page'>
+  <template is="bgTemplate"></template>
   <OrderDetailComponent id="OrderDetailComponent"></OrderDetailComponent>
 </view>

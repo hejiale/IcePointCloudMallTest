@@ -24,6 +24,7 @@ App({
     }
   },
   globalData: {
-    systemInfo: null
+    systemInfo: null,
+    isRequireLoad:false
   }  
 })

@@ -65,6 +65,24 @@ function getCompanyInfo(options, callBack) {
     })
 }
 
+//获取公司首页类目
+function getCompanyClass(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '/getWechatAccountDefaultNavigation',
+    method: 'GET'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
 //获取公司首页模板
 function getCompanyTemplate(options, callBack) {
   var that = this;
@@ -731,6 +749,7 @@ module.exports = {
   valityLoginStatus: valityLoginStatus,
   getCompanyInfo: getCompanyInfo,
   getMemberInfo: getMemberInfo,
+  getCompanyClass: getCompanyClass,
   getCompanyTemplate: getCompanyTemplate,
   getTemplateDetail: getTemplateDetail,
   payOrder: payOrder,

@@ -154,13 +154,7 @@ Page({
     orderParameter.cartIds = carts;
 
     Login.valityLogigStatus(function (e) {
-      if (e == false) {
-        Login.userLogin(function (customer) {
-          if (customer) {
-            that.offerOrderRequest(orderParameter);
-          }
-        });
-      } else {
+      if (e) {
         that.offerOrderRequest(orderParameter);
       }
     })
@@ -394,7 +388,7 @@ Page({
   queryStoreList: function () {
     var that = this;
 
-    if (that.data.pickUp == 'MAIL') {
+    if (that.data.pickUp == 'MAIL' && that.data.currentAddress != null) {
       MapLocation.queryMapLocation(that.data.currentAddress.region + that.data.currentAddress.address, function (location) {
         that.queryStoreRequest(location);
       });

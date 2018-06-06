@@ -1,3 +1,4 @@
+<import src="../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxml" />
 <view class="picker-view" animation="{{animationAddressMenu}}" style="visibility:{{addressMenuIsShow ? 'visible':'hidden'}}">
   <view style="height:10% ;width:95%;margin-top:10rpx">
     <text catchtap="cityCancel">取消</text>
@@ -19,29 +20,30 @@
     </picker-view-column>
   </picker-view>
 </view>
-<form>
-  <view class="page">
+<view class="page">
+  <template is="bgTemplate"></template>
+  <view class='contentView'>
     <view class="contacterView">
       <text class="contacterText">收货人</text>
       <input class="inputText" bindfocus='onInputFocus' bindinput="bindContacterInput" value="{{contacter}}" />
     </view>
     <view class="line"></view>
-    <view class="contactPhoneView">
+    <view class="contacterView">
       <text class="contacterText">联系电话</text>
-      <input class="inputText" bindfocus='onInputFocus' bindinput="bindContacterPhoneInput" type="number" value="{{contactPhone}}" maxlength="11"/>
+      <input class="inputText" bindfocus='onInputFocus' bindinput="bindContacterPhoneInput" type="number" value="{{contactPhone}}" maxlength="11" />
     </view>
     <view class="line"></view>
-    <view class="contactTownView" bindtap='selectDistrict'>
+    <view class="contacterView" bindtap='selectDistrict'>
       <text class="contacterText">省市区</text>
       <text class="provinceText">{{areaInfo}}</text>
     </view>
     <view class="line"></view>
-    <view class="contactTownView">
+    <view class="contacterView">
       <text class="contacterText">详细地址</text>
-      <input class="inputText" bindfocus='onInputFocus' bindinput="bindContacterAddressInput" value="{{contactAddress}}"/>
+      <input class="inputText" bindfocus='onInputFocus' bindinput="bindContacterAddressInput" value="{{contactAddress}}" />
     </view>
     <view class="footView">
       <text class="sureText" bindtap="onSaveAddress">保存</text>
     </view>
   </view>
-</form>
+</view>

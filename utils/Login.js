@@ -30,7 +30,13 @@ function valityLogigStatus(cb) {
 
   request.valityLoginStatus(function (data) {
     if (data.retCode == 201 || data.retCode == 203) {
-      typeof cb == "function" && cb(false);
+      userLogin(function (customer) {
+        if (customer != null) {
+          typeof cb == "function" && cb(true);
+        } else {
+          typeof cb == "function" && cb(false);
+        }
+      })
     } else {
       typeof cb == "function" && cb(true);
     }

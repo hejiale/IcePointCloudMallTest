@@ -1,5 +1,7 @@
 <import src="Template/StoreTemplate.wxml" />
+<import src="../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxml" />
 <view class="page">
+  <template is="bgTemplate"></template>
   <view class='topView'>
     <view class='searchView'>
       <image class='seachImage' src='../images/icon_seach@2x.png' mode="aspectFit"></image>

@@ -1,6 +1,8 @@
+<import src="../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxml" />
 <import src="../../utils/Template/ProductListTemplate/ProductListTemplate.wxml" />
 <view class="page">
-  <view style='{{(templateObject.layout == "2" || templateObject.layout == "0") ? "background-color: #F5F5F5;":"background-color: white;"}}' wx:if="{{templateObject != null}}">
+  <template is="bgTemplate"></template>
+  <view style='{{(templateObject.layout == "2" || templateObject.layout == "0") ? "background-color: #F5F5F5;":"background-color: white;"}}' wx:if="{{templateObject != null}}" class='contentView'>
     <image src='{{templateObject.mainPic[0]}}' style='width: 100%;height:{{(deviceWidth*9)/16}}px;display:block;'></image>
     <scroll-view scroll-y="true" class="productListView">
       <block wx:for-items="{{templateObject.productBeans}}">

@@ -1,4 +1,10 @@
+@import "../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxss";
 @import "../../utils/Template/ProductListTemplate/ProductListTemplate.wxss";
+
+.contentView{
+  position: absolute;
+  width: 100%;
+}
 
 .productListView {
   width: calc(100% - 5px);

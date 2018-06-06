@@ -1,29 +1,33 @@
 <import src="Template/OrderTemplate.wxml" />
+<import src="../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxml" />
 <view class="page">
-  <view class='topView'>
-    <view class='searchView'>
-      <image class='seachImage' src='../images/icon_seach@2x.png'></image>
-      <input class='searchInput' placeholder='请输入您要搜索的订单号' placeholder-style='color: #999999;' bindconfirm="onSearchInput" value="{{keyword}}" confirm-type='search'></input>
+  <template is="bgTemplate"></template>
+  <view class='mainView'>
+    <view class='topView'>
+      <view class='searchView'>
+        <image class='seachImage' src='../images/icon_seach@2x.png'></image>
+        <input class='searchInput' placeholder='请输入您要搜索的订单号' placeholder-style='color: #999999;' bindconfirm="onSearchInput" value="{{keyword}}" confirm-type='search'></input>
+      </view>
+      <view class='searchMenuView'>
+        <view class='orderMenuView' wx:if="{{orderType == null}}" style='color:#4D9FD8;' bindtap='onAllOrder'>全部订单</view>
+        <view class='orderMenuView' wx:else style='color:#999;' bindtap='onAllOrder'>全部订单</view>
+        <view class='orderMenuView' bindtap='onUnPay' wx:if="{{orderType == 'NOT_PAY'}}" style='color: #4d9fd8;'>待付款</view>
+        <view class='orderMenuView' bindtap='onUnPay' wx:else style='color: #999;'>待付款</view>
+        <view class='orderMenuView' bindtap='onUndelivery' wx:if="{{orderType == 'PENDING_DELIVERY'}}" style='color: #4d9fd8;'>待发货</view>
+        <view class='orderMenuView' bindtap='onUndelivery' wx:else style='color: #999;'>待发货</view>
+        <view class='orderMenuView' bindtap='onUnGoods' wx:if="{{orderType == 'GOODS_TO_BE_RECEIVED'}}" style='color: #4d9fd8;'>待收货</view>
+        <view class='orderMenuView' bindtap='onUnGoods' wx:else style='color: #999;'>待收货</view>
+      </view>
     </view>
-    <view class='searchMenuView'>
-      <view class='orderMenuView' wx:if="{{orderType == null}}" style='color:#4D9FD8;' bindtap='onAllOrder'>全部订单</view>
-      <view class='orderMenuView' wx:else style='color:#999;' bindtap='onAllOrder'>全部订单</view>
-      <view class='orderMenuView' bindtap='onUnPay' wx:if="{{orderType == 'NOT_PAY'}}" style='color: #4d9fd8;'>待付款</view>
-      <view class='orderMenuView' bindtap='onUnPay' wx:else style='color: #999;'>待付款</view>
-      <view class='orderMenuView' bindtap='onUndelivery' wx:if="{{orderType == 'PENDING_DELIVERY'}}" style='color: #4d9fd8;'>待发货</view>
-      <view class='orderMenuView' bindtap='onUndelivery' wx:else style='color: #999;'>待发货</view>
-      <view class='orderMenuView' bindtap='onUnGoods' wx:if="{{orderType == 'GOODS_TO_BE_RECEIVED'}}" style='color: #4d9fd8;'>待收货</view>
-      <view class='orderMenuView' bindtap='onUnGoods' wx:else style='color: #999;'>待收货</view>
+    <scroll-view scroll-y="true" class="scrollView" bindscrolltolower="onLoadMore" style='height:{{scrollHeight}}px;' wx:if="{{orderList.length > 0}}">
+      <block wx:for-items="{{orderList}}">
+        <template is="OrderTemplate" data="{{item}}"></template>
+      </block>
+      <wxc-loadmore wx:if="{{isEndLoad}}" is-end="{{true}}" text="到底啦" _pid="{{_pid}}">
+      </wxc-loadmore>
+    </scroll-view>
+    <view class='emptyCartView' wx:else>
+      <image src='../images/icon_emptyOrder@2x.png' class='emptyImage' mode="aspectFit"></image>
     </view>
-  </view>
-  <scroll-view scroll-y="true" class="scrollView" bindscrolltolower="onLoadMore" style='height:{{scrollHeight}}px;' wx:if="{{orderList.length > 0}}">
-    <block wx:for-items="{{orderList}}">
-      <template is="OrderTemplate" data="{{item}}"></template>
-    </block>
-    <wxc-loadmore wx:if="{{isEndLoad}}" is-end="{{true}}" text="到底啦" _pid="{{_pid}}">
-    </wxc-loadmore>
-  </scroll-view>
-  <view class='emptyCartView' wx:else>
-    <image src='../images/icon_emptyOrder@2x.png' class='emptyImage' mode="aspectFit"></image>
   </view>
 </view>

@@ -1,7 +1,7 @@
 /* Component/OrderDetailComponent.wxss */
 
 .scrollView {
-  margin: 0px;
+  position: relative;
   width: 100%;
 }
 

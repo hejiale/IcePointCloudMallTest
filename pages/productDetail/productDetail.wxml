@@ -1,11 +1,12 @@
 <import src="../../wxParse/wxParse.wxml" />
 <import src="Template/ParameterTemplate.wxml" />
-<template is="ParameterTemplate" data="{{DetailObject,parameterPrice,parameterObject,cartNum}}" wx:if="{{showParameterView}}"></template>
+<import src="../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxml" />
 <view class="page">
   <view class='tryGlassView' bindtap='onTryGlass' wx:if="{{DetailObject.goods.proTry}}">
     <image class="tryGlassImage" src='../images/detail_tryGlass@2x.png' mode="aspectFit"></image>
   </view>
-  <scroll-view class="contentView" scroll-y="true">
+  <template is="bgTemplate"></template>
+  <scroll-view class="contentView" scroll-y="true" wx:if="{{isEndLoad}}">
     <swiper class="swiper_box" indicator-dots="true" indicator-color="#F0F0F0" indicator-active-color="#222222" style='height: {{(deviceWidth * 9) / 16}}px;'>
       <block wx:for-items="{{DetailObject.photos}}">
         <swiper-item>
@@ -15,8 +16,9 @@
     </swiper>
     <view class="productInfo">
       <text class="productName">{{DetailObject.goods.goodsName}}</text>
-      <text class="priceText">￥{{DetailObject.goods.goodsRetailPrice}}</text>
+      <text class="priceText">￥{{parameterPrice}}</text>
     </view>
+    <template is="ParameterTemplate" data="{{DetailObject,parameterPrice,parameterObject,cartNum}}"></template>
     <view class="specificationView">
       <view class='specificationTitleView'>
         <text class='specificationDetailText' style='{{isSelectDetail ? "color:#222;font-weight: 500;" : "color:#999;font-weight: 400;"}}' bindtap='onDetail'>图文详情</text>
@@ -25,7 +27,7 @@
       </view>
       <image class="lineImage" src='../images/icon_line@2x.png' mode="aspectFit"></image>
       <view class="webView" wx:if="{{isSelectDetail}}">
-         <template is="wxParse" data="{{wxParseData:article.nodes}}" /> 
+        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
       </view>
       <view class="specifications" wx:else>
         <view class="FrameView">

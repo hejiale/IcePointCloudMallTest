@@ -1,6 +1,8 @@
 <import src="../../utils/Template/ProductListTemplate/ProductListTemplate.wxml" />
 <import src="Template/PropertyTemplate.wxml" />
+<import src="../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxml" />
 <template is="PropertyTemplate" data="{{classList,parameterList,lowPriceStr,heighPriceStr,hasClassSelect}}" wx:if="{{showOrHide}}"></template>
+<template  is="bgTemplate"></template>
 <view class="searchContentView">
   <view class="topMenuView">
     <view class="search-input">

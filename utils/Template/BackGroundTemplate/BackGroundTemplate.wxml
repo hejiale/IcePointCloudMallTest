@@ -1,0 +1,3 @@
+<template name="bgTemplate">
+  <view class='bgView'></view>
+</template>

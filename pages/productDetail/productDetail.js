@@ -11,17 +11,20 @@ Page({
     selectParameters: [],
     cartNum: 1,
     isFirstShowParameter: true,
+    isEndLoad: false
   },
   onLoad: function (options) {
     var that = this;
     that.setData({ goodsId: options.id });
 
-    let parameter = { goodsId: options.id };
+    wx.showLoading();
 
-    request.queryProductDetail(parameter, function (data) {
-      WxParse.wxParse('article', 'html', data.goods.goodsTextDetails, that, 0);
-      that.setData({ DetailObject: data });
-    })
+    request.queryProductDetail({ goodsId: options.id },
+      function (data) {
+        WxParse.wxParse('article', 'html', data.goods.goodsTextDetails, that, 0);
+        that.setData({ DetailObject: data });
+        that.queryParameterRequest();
+      })
 
     app.getSystemInfo(function (systemInfo) {
       that.setData({
@@ -48,24 +51,18 @@ Page({
   onBook: function (event) {
     var that = this;
 
-    wx.showLoading({});
-    Login.valityLogigStatus(function (e) {
-      if (e == false) {
-        Login.userLogin(function (customer) {
-          if (customer != null) {
-            that.setData({ isToOrder: true });
-            that.queryParameterRequest();
-          } else {
-            wx.hideLoading();
+    wx.showLoading();
 
-            wx.navigateTo({
-              url: '../bindPhone/bindPhone',
-            })
-          }
-        });
+    Login.valityLogigStatus(function (e) {
+      wx.hideLoading();
+
+      if (e == false) {
+        wx.navigateTo({
+          url: '../bindPhone/bindPhone',
+        })
       } else {
         that.setData({ isToOrder: true });
-        that.queryParameterRequest();
+        that.selectParameterToCart();
       }
     })
   },
@@ -85,43 +82,31 @@ Page({
   onCart: function () {
     var that = this;
 
-    wx.showLoading({});
-    Login.valityLogigStatus(function (e) {
-      if (e == false) {
-        Login.userLogin(function (customer) {
-          if (customer != null) {
-            that.setData({ isToOrder: false });
-            that.queryParameterRequest();
-          } else {
-            wx.hideLoading();
+    wx.showLoading();
 
-            wx.navigateTo({
-              url: '../bindPhone/bindPhone',
-            })
-          }
-        });
+    Login.valityLogigStatus(function (e) {
+      wx.hideLoading();
+
+      if (e == false) {
+        wx.navigateTo({
+          url: '../bindPhone/bindPhone',
+        })
       } else {
         that.setData({ isToOrder: false });
-        that.queryParameterRequest();
+        that.selectParameterToCart();
       }
     })
   },
   onToCart: function () {
-    Login.valityLogigStatus(function (e) {
-      if (e == false) {
-        Login.userLogin(function (customer) {
-          if (customer != null) {
-            wx.navigateTo({
-              url: '../cart/cart',
-            })
-          } else {
-            wx.hideLoading();
+    wx.showLoading();
 
-            wx.navigateTo({
-              url: '../bindPhone/bindPhone',
-            })
-          }
-        });
+    Login.valityLogigStatus(function (e) {
+      wx.hideLoading();
+
+      if (e == false) {
+        wx.navigateTo({
+          url: '../bindPhone/bindPhone',
+        })
       } else {
         wx.navigateTo({
           url: '../cart/cart',
@@ -129,10 +114,10 @@ Page({
       }
     })
   },
-  onSelectParameterToCart: function () {
+  selectParameterToCart: function () {
     var that = this;
 
-    if (that.data.DetailObject.goods.isSpecifications) {
+    if (that.data.DetailObject.goods.isSpecifications && that.data.parameterObject.specifications != null) {
       if (that.data.parameterObject.specifications.length > 0 && that.data.selectParameters.length != that.data.parameterObject.specifications.length) {
         wx.showToast({
           title: '请先选择商品规格',
@@ -154,7 +139,7 @@ Page({
       count: that.data.cartNum
     };
 
-    if (that.data.parameterObject.specificationsId) {
+    if (that.data.parameterObject != null) {
       cart.specificationsId = that.data.parameterObject.specificationsId;
     } else {
       cart.goodsId = that.data.goodsId;
@@ -167,7 +152,6 @@ Page({
           icon: "none"
         })
       } else {
-        that.setData({ showParameterView: false, parameterObject: null, cartNum: 1, selectParameters: [], isFirstShowParameter: true });
         that.queryCartCountRequest();
 
         wx.showToast({
@@ -180,8 +164,6 @@ Page({
     var that = this;
 
     Config.Config.orderProducts = that.bindOrderProduct();
-
-    that.setData({ showParameterView: false, parameterObject: null, cartNum: 1, selectParameters: [], isFirstShowParameter: true });
 
     wx.navigateTo({
       url: '../bookOrder/bookOrder?isFromCart=0',
@@ -197,7 +179,7 @@ Page({
       photos: that.data.DetailObject.photos
     }
 
-    if (that.data.parameterObject.specificationsId) {
+    if (that.data.parameterObject != null) {
       product.shoppingCart = {
         count: that.data.cartNum,
         specificationsId: that.data.parameterObject.specificationsId
@@ -219,6 +201,7 @@ Page({
 
     return productList;
   },
+  //商品数量加减
   onReduceCart: function () {
     var that = this;
     that.data.cartNum -= 1;
@@ -232,15 +215,12 @@ Page({
     that.data.cartNum += 1;
     that.setData({ cartNum: that.data.cartNum });
   },
+  //图文详情  商品参数
   onDetail: function () {
     this.setData({ isSelectDetail: true });
   },
   onParameter: function () {
     this.setData({ isSelectDetail: false });
-  },
-  onCoverClick: function () {
-    var that = this;
-    that.setData({ showParameterView: false, parameterObject: null, cartNum: 1, selectParameters: [], isFirstShowParameter: true });
   },
   //点击商品规格参数method
   onSelectParameter: function (e) {
@@ -267,7 +247,7 @@ Page({
           }
         }
       }
-      wx.showLoading({});
+      wx.showLoading();
       that.queryParameterRequest();
     }
   },
@@ -297,7 +277,6 @@ Page({
     }
 
     request.queryProductDetailParameter(JSON.stringify(options), function (data) {
-
       if (data.price) {
         that.setData({ parameterPrice: data.price });
       } else {
@@ -339,7 +318,7 @@ Page({
           }
         }
       }
-      that.setData({ parameterObject: data, showParameterView: true });
+      that.setData({ parameterObject: data, isEndLoad: true });
       wx.hideLoading();
     })
   },
@@ -352,12 +331,6 @@ Page({
         Login.userLogin(function (customer) {
           if (customer != null) {
             that.queryCartCountRequest();
-          } else {
-            wx.hideLoading();
-
-            wx.navigateTo({
-              url: '../bindPhone/bindPhone',
-            })
           }
         });
       } else {
