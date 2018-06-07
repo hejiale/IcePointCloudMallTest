@@ -21,8 +21,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
-  position: absolute;
   padding-bottom: 50px;
 }
 
@@ -163,7 +161,6 @@
   justify-content: center;
   align-items: center;
   flex: 1;
-  width: 32px;
   height: 100%;
 }
 
@@ -172,11 +169,23 @@
   height: 22px;
 }
 
-.phoneImage {
+.cs_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex: 1;
+  background-color: #fff;
+  /* width: 50px; */
+  height: 100%;
+}
+
+.cs_button:after {
+  border: 0px;
+}
+
+.cs_image {
   width: 32px;
   height: 22px;
-  border-right: 1px solid #dcdcdc;
 }
 
 .addCartButton {

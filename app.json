@@ -13,7 +13,8 @@
     "pages/tryGlass/tryGlass",
     "pages/searchPage/searchPage",
     "pages/person/person",
-    "pages/orderDetail/orderDetail"
+    "pages/orderDetail/orderDetail",
+    "pages/memberCard/memberCard"
   ],
   "window": {
     "backgroundTextStyle": "light",

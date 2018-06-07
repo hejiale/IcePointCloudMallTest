@@ -30,6 +30,7 @@ Page({
     })
   },
   onShow:function(){
+    //从后台返回前台刷新首页
     if (app.globalData.isRequireLoad){
       this.getCompanyInfo();
       app.globalData.isRequireLoad = false;
@@ -211,7 +212,9 @@ Page({
         if (data.retCode == 401) {
           that.setData({ noneWechatAccount: true });
         } else {
-          that.setData({ classList: that.data.classList.concat(data.result) })
+          if (data.result != null){
+            that.setData({ classList: that.data.classList.concat(data.result) })
+          } 
         }
       })
   },

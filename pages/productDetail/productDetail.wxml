@@ -43,7 +43,9 @@
   </scroll-view>
   <view class="footView">
     <view class="leftBottomView">
-      <image class='phoneImage' src='../images/productDetail_phone@2x.png' mode="aspectFit" bindtap='onCall'></image>
+      <button class="cs_button" open-type="contact" session-from="weapp">
+        <image class="cs_image" src="../images/productDetail_phone@2x.png" mode="aspectFit"></image>
+      </button>
       <view class='cartBottomView' bindtap='onToCart'>
         <image class="cartImage" src="../images/productDetail_cart@2x.png" mode="aspectFit"></image>
         <view class='cornerMarkView' wx:if="{{cartCount > 0}}">{{cartCount}}</view>

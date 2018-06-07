@@ -21,7 +21,10 @@ Page({
 
     request.queryProductDetail({ goodsId: options.id },
       function (data) {
-        WxParse.wxParse('article', 'html', data.goods.goodsTextDetails, that, 0);
+        WxParse.wxParse('article', 'html',
+          data.goods.goodsTextDetails,
+          that,
+          0);
         that.setData({ DetailObject: data });
         that.queryParameterRequest();
       })
@@ -67,10 +70,10 @@ Page({
     })
   },
   onCall: function () {
-    var that = this;
-    wx.makePhoneCall({
-      phoneNumber: that.data.DetailObject.goods.belongedCompany.contactMobilePhone,
-    })
+    // var that = this;
+    // wx.makePhoneCall({
+    //   phoneNumber: that.data.DetailObject.goods.belongedCompany.contactMobilePhone,
+    // })
   },
   onTryGlass: function () {
     var that = this;
@@ -117,7 +120,7 @@ Page({
   selectParameterToCart: function () {
     var that = this;
 
-    if (that.data.DetailObject.goods.isSpecifications && that.data.parameterObject.specifications != null) {
+    if (that.data.DetailObject.goods.isSpecifications && that.data.parameterObject != null) {
       if (that.data.parameterObject.specifications.length > 0 && that.data.selectParameters.length != that.data.parameterObject.specifications.length) {
         wx.showToast({
           title: '请先选择商品规格',
@@ -139,7 +142,7 @@ Page({
       count: that.data.cartNum
     };
 
-    if (that.data.parameterObject != null) {
+    if (that.data.parameterObject != null && that.data.DetailObject.goods.isSpecifications) {
       cart.specificationsId = that.data.parameterObject.specificationsId;
     } else {
       cart.goodsId = that.data.goodsId;
@@ -179,7 +182,7 @@ Page({
       photos: that.data.DetailObject.photos
     }
 
-    if (that.data.parameterObject != null) {
+    if (that.data.parameterObject != null && that.data.DetailObject.goods.isSpecifications) {
       product.shoppingCart = {
         count: that.data.cartNum,
         specificationsId: that.data.parameterObject.specificationsId
@@ -271,7 +274,10 @@ Page({
 
       for (var i = 0; i < that.data.selectParameters.length; i++) {
         var parameter = that.data.selectParameters[i];
-        array.push({ specificationName: parameter.name, specificationValue: parameter.value });
+        array.push({
+          specificationName: parameter.name,
+          specificationValue: parameter.value
+        });
       }
       options.specificationsModels = array;
     }
@@ -318,6 +324,7 @@ Page({
           }
         }
       }
+    
       that.setData({ parameterObject: data, isEndLoad: true });
       wx.hideLoading();
     })

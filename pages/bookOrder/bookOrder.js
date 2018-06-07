@@ -38,6 +38,7 @@ Page({
       //处理商品数据
       that.setData({ productList: Config.Config.orderProducts });
       that.getCartTotalPrice();
+      that.queryMemberCardRequest();
     });
 
     //获取客户默认地址
@@ -321,6 +322,14 @@ Page({
 
     that.setData({ isShowMemberRights: false });
   },
+  //选取卡券
+  onSelectMemberCard:function(){
+    var that = this;
+    
+    wx.navigateTo({
+      url: '../memberCard/memberCard?price=' + that.data.payInfo.shouldPayPrice,
+    })
+  },
   //提交订单
   offerOrderRequest: function (orderParameter) {
     var that = this;
@@ -420,6 +429,19 @@ Page({
     wx.setNavigationBarTitle({
       title: '订单详情'
     })
+  },
+  //查询卡券
+  queryMemberCardRequest: function () {
+    var that = this;
+
+    request.queryMemberCard({
+      totalPrice: that.data.payInfo.shouldPayPrice,
+      cashCouponSceneType: 'ONLINE_MALL'
+    },
+      function (data) {
+
+      });
+
   }
 })
 

@@ -1,0 +1,39 @@
+<import src="../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxml" />
+<wxs module="filter" src="../../utils/ipcConfig.wxs"></wxs>
+<view class="page">
+  <template is="bgTemplate"></template>
+  <view class='contentView'>
+    <view class="tabBarView">
+      <view class='tabItemView'>
+        <text class='tabItemText'>可用优惠券({{memberCardObject.matchConditionCashCouponCount}})</text>
+      </view>
+      <view class='tabItemView'>
+        <text class='tabItemText' style='border-bottom: 6rpx solid #3da8f5;'>全部优惠券({{memberCardObject.allCashCouponCount}})</text>
+      </view>
+    </view>
+    <view class='cardContentView'>
+      <block wx:for-items="{{memberCardObject.allCashCoupon}}">
+        <view class='couponView' style='background: linear-gradient(to right, {{item.startColor}}, {{item.endColor}});'>
+          <image class='leftCornerImage' src='../images/leftCorner@2x.png'></image>
+          <view class='priceView'>
+            <text class='priceTextTitle'>￥</text>
+            <text class="priceText">{{item.denomination}}</text>
+          </view>
+          <view class='middleCornerView'>
+            <image class='topCornerImage' src='../images/topCorner@2x.png'></image>
+            <image class='middleCornerImage' src='../images/middleCorner@2x.png' mode="aspectFit"></image>
+            <image class='bottomCornerImage' src='../images/bottomCorner@2x.png'></image>
+          </view>
+          <view class='couponTitleView'>
+            <text class='couponTitle'>{{item.title}}</text>
+            <text class='couponMemo'>{{item.remark}}</text>
+            <text class='couponDate'>活动时间: {{filter.formatDateTime(item.effectiveStartTime)}}-{{filter.formatDateTime(item.effectiveEndTime)}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class='footView'>
+      <view class='footButton'>确定</view>
+    </view>
+  </view>
+</view>

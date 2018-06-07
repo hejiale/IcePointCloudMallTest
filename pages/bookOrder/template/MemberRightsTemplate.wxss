@@ -1,0 +1,70 @@
+.memberRightsView {
+  display: flex;
+  margin-top: 5px;
+  width: 100%;
+  background-color: white;
+}
+
+.memberRightsIconImage {
+  margin-left: 10px;
+  margin-top: 18px;
+  width: 20px;
+  height: 16px;
+}
+
+.memberContentView {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 15px;
+  width: calc(100% - 35px);
+}
+
+.memberRightsTitleView {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.memberLineImage {
+  width: 100%;
+  height: 1px;
+}
+
+.memberDiscountView {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.memberDiscounTextView {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 38px;
+}
+
+.memberDiscounTextTitleView{
+  display: flex;
+  align-items: center;
+}
+
+.memberDiscounTextTitle {
+  font-size: 14px;
+}
+
+.memberDiscounTextMemo{
+  margin-left: 10px;
+  color: #999999;
+  font-size: 12px;
+}
+
+.memberDiscounTextValue {
+  margin-right: 10px;
+  font-size: 14px;
+  text-align: right;
+  color: #999;
+}

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "我的优惠券",
+  "usingComponents": {
+    "wxc-price": "../../dist/packages/@minui/wxc-price/dist/index"
+  },
+  "component": true
+}

@@ -674,6 +674,25 @@ function queryPickupStatus(callBack) {
     })
 }
 
+//查询卡券
+function queryMemberCard(options, callBack) {
+  var that = this;
+
+  let msg = {
+    url: port + '/coupon/getCashCouponForCustomerMember',
+    data: options,
+    method: 'POST',
+    sessionId: 'JSESSIONID=' + that.sessionId
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
 
 //后台请求
 function http(msg) {
@@ -782,7 +801,8 @@ module.exports = {
   verityPhoneCode: verityPhoneCode,
   sendVerityCode: sendVerityCode,
   queryPickupStatus: queryPickupStatus,
-  queryCartCount: queryCartCount
+  queryCartCount: queryCartCount,
+  queryMemberCard: queryMemberCard
 }
 
 

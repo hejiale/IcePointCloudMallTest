@@ -2,7 +2,7 @@
   <view class='parameterContentView'>
     <view class='specificationContentView' wx:if="{{parameterObject.specifications.length > 0}}">
       <view class='topTitleView'>商品规格</view>
-      <image class="parameterLineImage" src='../images/icon_line@2x.png' mode="aspectFit"></image>
+      <image class="parameterLineImage" src='../images/icon_line@2x.png'></image>
       <scroll-view class='specificationsView' scroll-y="true" wx:if="{{parameterObject.specifications.length > 0}}">
         <block wx:for-items="{{parameterObject.specifications}}">
           <view class="popPropertyView">
@@ -25,7 +25,7 @@
           </view>
         </block>
       </scroll-view>
-      <image class="parameterLineImage" src='../images/icon_line@2x.png' mode="aspectFit"></image>
+      <image class="parameterLineImage" src='../images/icon_line@2x.png'></image>
     </view>
     <view class='parameterNumView'>
       <text class='parameterNumTitle'>数量</text>
