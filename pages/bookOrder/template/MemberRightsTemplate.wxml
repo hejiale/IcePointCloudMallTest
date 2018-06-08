@@ -13,21 +13,23 @@
           </view>
           <text class='memberDiscounTextValue'>-￥{{filter.numberToFix(payInfo.discountPrice)}}</text>
         </view>
-        <view class="memberDiscounTextView" catchtap='onSelectMemberCard'>
+        <view class="memberDiscounTextView" catchtap='onSelectMemberCard' wx:if="{{payInfo.memberInfo.mallCustomer.useCashCoupon}}">
           <view class='memberDiscounTextTitleView'>
-            <text class="memberDiscounTextTitle">选取卡券</text>
-            <text class="memberDiscounTextMemo"></text>
+            <text class="memberDiscounTextTitle">优惠券</text>
+            <text class="memberDiscounTextMemo" wx:if="{{payInfo.couponCount > 0 && !payInfo.coupon}}">{{payInfo.couponCount}}张可用</text>
+            <text class="memberDiscounTextMemo" wx:elif="{{payInfo.coupon}}">已使用1张</text>
           </view>
-          <text class='memberDiscounTextValue'>去选择</text>
+          <text class='memberDiscounTextValue' wx:if="{{payInfo.coupon}}">-￥{{filter.numberToFix(payInfo.couponPrice)}}</text>
+          <text class='memberDiscounTextValue' wx:else>{{payInfo.couponCount > 0 ? '去使用':'无可用'}}</text>
         </view>
-        <view class="memberDiscounTextView" bindtap='onShowInputBalance' wx:if="{{payInfo.memberInfo.mallCustomer.balance != null}}">
+        <view class="memberDiscounTextView" catchtap='onShowInputBalance' wx:if="{{payInfo.memberInfo.mallCustomer.balance != null}}">
           <view class='memberDiscounTextTitleView'>
             <text class="memberDiscounTextTitle">储值抵扣</text>
             <text class="memberDiscounTextMemo">账户储值余额 ￥{{payInfo.memberInfo.mallCustomer.balance}}</text>
           </view>
           <text class='memberDiscounTextValue'>-￥{{filter.numberToFix(payInfo.balancePrice)}}</text>
         </view>
-        <view class="memberDiscounTextView" bindtap='onShowInputPoint' wx:if="{{payInfo.memberInfo.mallCustomer.integral != null}}">
+        <view class="memberDiscounTextView" catchtap='onShowInputPoint' wx:if="{{payInfo.memberInfo.mallCustomer.integral != null}}">
           <view class='memberDiscounTextTitleView'>
             <text class="memberDiscounTextTitle">积分抵扣</text>
             <text class="memberDiscounTextMemo">账户积分{{payInfo.memberInfo.mallCustomer.integral}}</text>

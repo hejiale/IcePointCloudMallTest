@@ -6,10 +6,10 @@
       <text class='templateMainTitle' wx:if="{{template.mainTitle.length}}">{{template.mainTitle}}</text>
       <text class='templateSubTitle' wx:if="{{template.subTitle.length}}">{{template.subTitle}}</text>
     </view>
-    <view wx:if="{{template.layout != '0'}}" style='{{template.layout == "2" ? "width: calc(100% - 5px);margin-top:5px;":"width: 100%;margin-top:5px;"}}'>
+    <view wx:if="{{template.productBeans.length > 0}}" style='{{template.layout == "2" ? "width: calc(100% - 5px);":"width: 100%;"}}margin-top:5px;'>
       <block wx:for-items="{{template.productBeans}}">
-        <template is='SingleLayOut' data="{{item,singleLayoutHeight}}" wx:if="{{template.layout == '1' &&item.shopWindow}}"></template>
-        <template is='DoubleLayOut' data="{{item,doubleLayoutHeight}}" wx:elif="{{template.layout == '2' && item.shopWindow}}"></template>
+        <template is='SingleLayOut' data="{{item,singleLayoutHeight}}" wx:if="{{template.layout == '1'}}"></template>
+        <template is='DoubleLayOut' data="{{item,doubleLayoutHeight}}" wx:elif="{{template.layout == '2'}}"></template>
       </block>
     </view>
   </view>

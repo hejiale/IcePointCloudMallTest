@@ -48,6 +48,10 @@
           <text class='memberDiscounTextValue'>- ￥{{filter.numberToFix(orderDetail.order.discountPrice)}}</text>
         </view>
         <view class="memberDiscounTextView">
+          <text class="memberDiscounTextTitle">优惠券折扣</text>
+          <text class='memberDiscounTextValue'>- ￥{{filter.numberToFix(orderDetail.order.cashCouponPrice)}}</text>
+        </view>
+        <view class="memberDiscounTextView">
           <text class="memberDiscounTextTitle">储值抵扣</text>
           <text class='memberDiscounTextValue'>- ￥{{filter.numberToFix(orderDetail.order.balancePrice)}}</text>
         </view>

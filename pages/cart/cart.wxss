@@ -63,8 +63,8 @@
 }
 
 .contentView {
-  margin-top: 50px;
-  height: calc(100% - 100px);
+  margin-top: 51px;
+  height: calc(100% - 101px);
   padding-bottom: 50px;
 }
 

@@ -9,16 +9,20 @@
       </view>
       <view class='memberRightsBgLine'></view>
       <view class='offsetAmountView'>
-        <text class='offsetAmountTitle'>剩余应付金额</text>
-        <text class='offsetAmountValue'>￥ {{filter.numberToFix(payInfo.inputShouldPrice)}}</text>
+        <text class='offsetAmountTitle'>订单应付金额</text>
+        <text class='offsetAmountValue'>￥ {{filter.numberToFix(payInfo.shouldPayPrice)}}</text>
       </view>
-      <view class='offsetUseAmountView'>
+       <view class='offsetUseAmountView'>
         <text class='offsetUseAmountTitle'>客户储值余额</text>
         <text class='offsetUseAmountValue'>￥ {{payInfo.memberInfo.mallCustomer.balance}}</text>
-      </view>
+      </view> 
       <view class='offsetAmountInputView'>
         <input class='offsetAmountInput' placeholder='请输入储值抵扣金额' placeholder-style='color:#999999;font-size: 15px;' bindinput='textFieldInput' type='digit' value='{{payInfo.inputValue}}' cursor-spacing='100'></input>
       </view>
+      <!-- <view class='canUseAmountView'>
+        <text class='canUseAmountTitle'>可使用储值余额</text>
+        <text class='canUseAmountValue'>￥{{payInfo.memberInfo.mallCustomer.maxBalance}}</text>
+      </view> -->
       <view class='memberRightsBgBottomLine'></view>
       <button class='bottomButton' style='{{payInfo.canPayStaus ?"background-color: #4d9fd8;":"background-color: #e6e6e6;"}}' bindtap='{{payInfo.canPayStaus ? "onSure":""}}'>{{payInfo.canPayStaus ? '确定' : (payInfo.upBalanceStatus ? '储值余额不足':'已超抵扣上限' )}}</button>
     </view>
@@ -35,13 +39,13 @@
       </view>
       <view class='memberRightsBgLine'></view>
       <view class='offsetAmountView'>
-        <text class='offsetAmountTitle'>剩余应付金额</text>
-        <text class='offsetAmountValue'>￥ {{filter.numberToFix(payInfo.inputShouldPrice)}}</text>
+        <text class='offsetAmountTitle'>订单应付金额</text>
+        <text class='offsetAmountValue'>￥ {{filter.numberToFix(payInfo.shouldPayPrice)}}</text>
       </view>
-      <view class='offsetUseAmountView'>
+       <view class='offsetUseAmountView'>
         <text class='offsetUseAmountTitle'>账户积分</text>
         <text class='offsetUseAmountValue'>{{payInfo.memberInfo.mallCustomer.integral}}</text>
-      </view>
+      </view> 
       <view class='offsetUseAmountView'>
         <text class='offsetUseAmountTitle'>抵扣金额</text>
         <text class='offsetUseAmountValue'>￥ {{filter.numberToFix(payInfo.inputPointPrice)}}</text>
@@ -49,6 +53,10 @@
       <view class='offsetAmountInputView'>
         <input class='offsetAmountInput' placeholder='请输入抵扣积分' placeholder-style='color:#999999;font-size: 15px;' bindinput='textFieldInput' type='number' value='{{payInfo.inputValue}}' cursor-spacing='100'></input>
       </view>
+      <!-- <view class='canUseAmountView'>
+        <text class='canUseAmountTitle'>可使用积分</text>
+        <text class='canUseAmountValue'> {{payInfo.memberInfo.mallCustomer.maxIntegral}}</text>
+      </view> -->
       <view class='memberRightsBgBottomLine'></view>
       <button class='bottomButton' style='{{payInfo.canPayStaus ?"background-color: #4d9fd8;":"background-color: #e6e6e6;"}}' bindtap='{{payInfo.canPayStaus ? "onSure":""}}'>{{payInfo.canPayStaus ? '确定' : (payInfo.upBalanceStatus ? '积分不足':'已超抵扣上限' )}}</button>
     </view>

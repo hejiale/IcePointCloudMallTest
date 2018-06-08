@@ -26,6 +26,19 @@ function parseStatusName(status) {
   }
 }
 
+function js_date_time(unixtime) {
+  var dateTime = new Date(parseInt(unixtime));  
+  var year = dateTime.getFullYear();
+  var month = dateTime.getMonth() + 1;
+  var day = dateTime.getDate();
+
+  var now = new Date();
+  var now_new = Date.parse(now.toDateString()); 
+  var milliseconds = now_new - dateTime;
+  var timeSpanStr = year + '/' + month + '/' + day;
+  return timeSpanStr;
+}
+
 var Config = {
   //本地保存商品搜索记录key
   historySearchWords: 'historySearchWordsKey',
@@ -36,5 +49,6 @@ var Config = {
 module.exports = {
   getImageAutoHeight: getImageAutoHeight,
   parseStatusName: parseStatusName,
+  js_date_time: js_date_time,
   Config
 }

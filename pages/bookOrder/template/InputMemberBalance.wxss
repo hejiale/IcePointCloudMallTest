@@ -83,14 +83,14 @@
 .offsetUseAmountTitle {
   margin-left: 20px;
   width: 50%;
-  font-size: 12px;
+  font-size: 13px;
   color: #999;
 }
 
 .offsetUseAmountValue {
   margin-right: 15px;
   width: 150px;
-  font-size: 12px;
+  font-size: 13px;
   text-align: right;
   color: #999;
 }
@@ -120,6 +120,27 @@
   margin-left: 5px;
   font-size: 14px;
 }
+
+.canUseAmountView{
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  width: 100%;
+  height: 30px;
+}
+
+.canUseAmountTitle{
+  margin-left: 20px;
+  font-size: 13px;
+  color: #4d9fd8;
+}
+
+.canUseAmountValue{
+  margin-left: 10px;
+  font-size: 13px;
+  color: #4d9fd8;
+}
+
 
 .memberRightsBgBottomLine {
   margin-top: 20px;

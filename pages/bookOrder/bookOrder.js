@@ -13,6 +13,8 @@ Page({
     //下单信息
     payInfo: {
       totalPrice: 0,
+      //折后价
+      afterPrice: 0,
       shouldPayPrice: 0,
       discountPrice: 0,
       balancePrice: 0,
@@ -23,6 +25,7 @@ Page({
       inputPointPrice: 0,
       useBalance: 0,
       usePoint: 0,
+      couponPrice:0,
       //按钮status
       canPayStaus: true
     }
@@ -34,6 +37,16 @@ Page({
     wx.showLoading();
     //获取会员信息
     request.getMemberInfo(function (data) {
+      // data.result.mallCustomer.maxBalance =  data.result.mallCustomer.balance * (parseFloat(data.result.mallCustomer.balanceValue)/100);
+      // data.result.mallCustomer.maxIntegral = data.result.mallCustomer.integral * (parseFloat(data.result.mallCustomer.integralValue) / 100);
+      // //最大积分数量向下取整
+      // var integralStr = data.result.mallCustomer.maxIntegral.toString();
+      // if (integralStr.indexOf('.') != -1){
+      //   data.result.mallCustomer.maxIntegral = integralStr.substring(0, integralStr.indexOf('.'));
+      // }else{
+      //   data.result.mallCustomer.maxIntegral = integralStr;
+      // }
+    
       that.setData({ 'payInfo.memberInfo': data.result });
       //处理商品数据
       that.setData({ productList: Config.Config.orderProducts });
@@ -60,9 +73,14 @@ Page({
   },
   onShow: function () {
     var that = this;
+
     if (that.data.isShowContent && that.data.preAddress != (that.data.currentAddress.region + that.data.currentAddress.address)) {
       that.setData({ preAddress: (that.data.currentAddress.region + that.data.currentAddress.address) });
       that.queryStoreList();
+    }
+
+    if (that.data.payInfo.coupon) {
+      that.getShouldPayAmount();
     }
   },
   onSelectAddress: function () {
@@ -112,6 +130,7 @@ Page({
     }
 
     var order = {
+      totalPrice: that.data.payInfo.afterPrice,
       pickUpGoodsType: that.data.pickUp,
       addressId: that.data.currentAddress.id,
       amountPayable: parseFloat(that.data.payInfo.shouldPayPrice).toFixed(2),
@@ -125,6 +144,11 @@ Page({
 
     if (that.data.currentStore != null) {
       order.netPointId = that.data.currentStore.id
+    }
+
+    if (that.data.payInfo.coupon){
+      order.cashCouponPrice = that.data.payInfo.couponPrice;
+      order.cashCouponId = that.data.payInfo.coupon.id;
     }
 
     var orderParameter = {
@@ -238,9 +262,9 @@ Page({
       var pointMoney = (parseInt(str) * that.data.payInfo.memberInfo.integralTrade.money) / that.data.payInfo.memberInfo.integralTrade.integral_sum;
 
       //最大应付金额
-      var shouldMoney = parseFloat(that.data.payInfo.totalPrice) - parseFloat(that.data.payInfo.discountPrice) - parseFloat(that.data.payInfo.balancePrice);
+      var shouldMoney = parseFloat(that.data.payInfo.totalPrice) - parseFloat(that.data.payInfo.discountPrice) - parseFloat(that.data.payInfo.balancePrice) - parseFloat(that.data.payInfo.couponPrice);
 
-      if (parseInt(str) > parseInt(that.data.payInfo.memberInfo.mallCustomer.integral)) {
+      if (parseInt(str) > parseInt(that.data.payInfo.memberInfo.mallCustomer.maxIntegral)) {
         that.setData({ 'payInfo.upBalanceStatus': true })
       } else if (pointMoney > shouldMoney) {
         that.setData({ 'payInfo.overcapStatus': true })
@@ -253,7 +277,7 @@ Page({
       }
     } else {
       //输入储值金额操作
-      var shouldPay = parseFloat(that.data.payInfo.totalPrice) - parseFloat(that.data.payInfo.discountPrice) - parseFloat(that.data.payInfo.pointPrice);
+      var shouldPay = parseFloat(that.data.payInfo.totalPrice) - parseFloat(that.data.payInfo.discountPrice) - parseFloat(that.data.payInfo.pointPrice) - parseFloat(that.data.payInfo.couponPrice);
 
       if (parseFloat(str) > parseFloat(that.data.payInfo.memberInfo.mallCustomer.balance)) {
         that.setData({ 'payInfo.upBalanceStatus': true })
@@ -273,13 +297,14 @@ Page({
         //积分兑换金额
         var exchangePrice = (parseFloat(that.data.payInfo.inputValue.length > 0 ? that.data.payInfo.inputValue : 0) * that.data.payInfo.memberInfo.integralTrade.money) / that.data.payInfo.memberInfo.integralTrade.integral_sum;
         //剩余支付金额
-        var shouldMoney = parseFloat(that.data.payInfo.totalPrice) - parseFloat(that.data.payInfo.discountPrice) - parseFloat(that.data.payInfo.balancePrice) - exchangePrice;
+        var shouldMoney = parseFloat(that.data.payInfo.totalPrice) - parseFloat(that.data.payInfo.discountPrice) - parseFloat(that.data.payInfo.balancePrice) - exchangePrice - parseFloat(that.data.payInfo.couponPrice);
 
         that.setData({ 'payInfo.inputShouldPrice': shouldMoney.toFixed(2), 'payInfo.inputPointPrice': exchangePrice.toFixed(2) });
 
       } else {
         //剩余支付金额
-        var shouldPay = parseFloat(that.data.payInfo.totalPrice) - parseFloat(that.data.payInfo.discountPrice) - parseFloat(that.data.payInfo.pointPrice) - parseFloat(str.length > 0 ? str : 0);
+        var shouldPay = parseFloat(that.data.payInfo.totalPrice) - parseFloat(that.data.payInfo.discountPrice) - parseFloat(that.data.payInfo.pointPrice) - parseFloat(str.length > 0 ? str : 0) - parseFloat(that.data.payInfo.couponPrice);
+
         that.setData({ 'payInfo.inputShouldPrice': shouldPay.toFixed(2) });
       }
     } else {
@@ -323,12 +348,18 @@ Page({
     that.setData({ isShowMemberRights: false });
   },
   //选取卡券
-  onSelectMemberCard:function(){
+  onSelectMemberCard: function () {
     var that = this;
-    
-    wx.navigateTo({
-      url: '../memberCard/memberCard?price=' + that.data.payInfo.shouldPayPrice,
-    })
+
+    if (that.data.payInfo.coupon) {
+      wx.navigateTo({
+        url: '../memberCard/memberCard?price=' + that.data.payInfo.shouldPayPrice + "&id=" + that.data.payInfo.coupon.id
+      })
+    } else {
+      wx.navigateTo({
+        url: '../memberCard/memberCard?price=' + that.data.payInfo.shouldPayPrice
+      })
+    }
   },
   //提交订单
   offerOrderRequest: function (orderParameter) {
@@ -384,13 +415,20 @@ Page({
     if (that.data.payInfo.memberInfo.mallCustomer.discount != null) {
       discountPrice = price * (1 - (that.data.payInfo.memberInfo.mallCustomer.discount / 10));
     }
-    that.setData({ 'payInfo.totalPrice': price, 'payInfo.discountPrice': discountPrice.toFixed(2) });
+    that.setData({
+      'payInfo.totalPrice': price,
+      'payInfo.discountPrice': discountPrice.toFixed(2)
+    });
     that.getShouldPayAmount();
+    that.setData({ 'payInfo.afterPrice': that.data.payInfo.shouldPayPrice})
   },
   //计算剩余应付金额
   getShouldPayAmount: function () {
     var that = this;
     var shouldPay = parseFloat(that.data.payInfo.totalPrice) - parseFloat(that.data.payInfo.discountPrice) - parseFloat(that.data.payInfo.balancePrice) - parseFloat(that.data.payInfo.pointPrice);
+    if (that.data.payInfo.coupon) {
+      shouldPay -= parseFloat(that.data.payInfo.couponPrice);
+    }
     that.setData({ 'payInfo.shouldPayPrice': shouldPay });
   },
   //查询默认门店
@@ -439,9 +477,8 @@ Page({
       cashCouponSceneType: 'ONLINE_MALL'
     },
       function (data) {
-
+        that.setData({ "payInfo.couponCount": data.result.matchConditionCashCouponCount })
       });
-
   }
 })
 

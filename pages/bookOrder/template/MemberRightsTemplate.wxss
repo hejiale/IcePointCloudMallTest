@@ -54,6 +54,7 @@
 
 .memberDiscounTextTitle {
   font-size: 14px;
+  width: 60px;
 }
 
 .memberDiscounTextMemo{
