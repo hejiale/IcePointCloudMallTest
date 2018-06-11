@@ -42,12 +42,14 @@ Page({
     if (this.data.selectCoupon){
       prevPage.setData({
         'payInfo.coupon': this.data.selectCoupon,
-        'payInfo.couponPrice': this.data.selectCoupon.denomination
+        'payInfo.couponPrice': this.data.selectCoupon.denomination,
+        'payInfo.isSelectCoupon': true
       })
     }else{
       prevPage.setData({
         'payInfo.coupon': null,
-        'payInfo.couponPrice': null
+        'payInfo.couponPrice': null,
+        'payInfo.isSelectCoupon':true
       })
     }
 

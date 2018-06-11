@@ -19,7 +19,7 @@
             <text class="memberDiscounTextMemo" wx:if="{{payInfo.couponCount > 0 && !payInfo.coupon}}">{{payInfo.couponCount}}张可用</text>
             <text class="memberDiscounTextMemo" wx:elif="{{payInfo.coupon}}">已使用1张</text>
           </view>
-          <text class='memberDiscounTextValue' wx:if="{{payInfo.coupon}}">-￥{{filter.numberToFix(payInfo.couponPrice)}}</text>
+          <text class='memberDiscounTextValue' wx:if="{{payInfo.coupon}}">-￥{{filter.numberToFix(payInfo.realCouponPrice)}}</text>
           <text class='memberDiscounTextValue' wx:else>{{payInfo.couponCount > 0 ? '去使用':'无可用'}}</text>
         </view>
         <view class="memberDiscounTextView" catchtap='onShowInputBalance' wx:if="{{payInfo.memberInfo.mallCustomer.balance != null}}">

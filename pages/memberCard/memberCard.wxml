@@ -34,8 +34,8 @@
       </block>
     </view>
     <view class='footView' bindtap='onSure'>
-      <view class='footButton' wx:if="{{selectCoupon != null}}">确定  (抵扣金额{{selectCoupon.denomination}}元)</view>
-      <view class='footButton' wx:else>确定</view>
+      <!-- <view class='footButton' wx:if="{{selectCoupon != null}}">确定  (抵扣金额{{selectCoupon.denomination}}元)</view> -->
+      <view class='footButton'>确定</view>
     </view>
   </view>
 </view>
