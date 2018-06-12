@@ -1,4 +1,6 @@
 <import src="../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxml" />
+<import src="memberCardTemplate/memberCardTemplate.wxml" />
+
 <view class="page">
   <template is="bgTemplate"></template>
   <view class='contentView'>
@@ -12,25 +14,7 @@
     </view>
     <view class='cardContentView'>
       <block wx:for-items="{{isCanUse ? memberCardObject.matchConditionCashCoupon : memberCardObject.allCashCoupon}}">
-        <view class='couponView' style='background: linear-gradient(to right, {{item.startColor}}, {{item.endColor}});{{item.isUsable ? "opacity: 1;":"opacity: 0.35;"}}' bindtap='onSelectCoupon' data-key="{{item}}">
-          <image class='leftCornerImage' src='../images/leftCorner@2x.png'></image>
-          <view class='priceView'>
-            <text class='priceTextTitle'>￥</text>
-            <text class="priceText">{{item.denomination}}</text>
-          </view>
-          <view class='middleCornerView'>
-            <image class='topCornerImage' src='../images/topCorner@2x.png'></image>
-            <image class='middleCornerImage' src='../images/middleCorner@2x.png' mode="aspectFit"></image>
-            <image class='bottomCornerImage' src='../images/bottomCorner@2x.png'></image>
-          </view>
-          <view class='couponTitleView'>
-            <text class='couponTitle'>{{item.title}}</text>
-            <text class='couponMemo'>{{item.remark}}</text>
-            <text class='couponDate' wx:if="{{item.effectiveEndTime != null}}">活动时间: {{item.effectiveStartTime}}-{{item.effectiveEndTime}}</text>
-            <text class='couponDate' wx:else>永久有效</text>
-          </view>
-          <image class='chooseImage' wx:if="{{selectCoupon.id == item.id && isCanUse}}" src='../images/sure_coupon@2x.png'></image>
-        </view>
+        <template is="MemberCardTemplate" data="{{item,selectCoupon,isCanUse}}"></template>
       </block>
     </view>
     <view class='footView' bindtap='onSure'>

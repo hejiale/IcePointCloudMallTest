@@ -29,9 +29,15 @@ Page({
       })
     })
   },
-  onShow:function(){
+  onShow: function () {
     //从后台返回前台刷新首页
-    if (app.globalData.isRequireLoad){
+    if (app.globalData.isRequireLoad) {
+      this.setData({
+        classList: [{ typeName: '精选' }],
+        currentType: "精选",
+        currentPageIndex: 0,
+        scrollLeft:0
+      })
       this.getCompanyInfo();
       app.globalData.isRequireLoad = false;
     }
@@ -205,16 +211,16 @@ Page({
   getCompanyClass: function () {
     var that = this;
 
-    that.setData({ classList: [{ typeName: '精选' }]});
+    that.setData({ classList: [{ typeName: '精选' }] });
 
     request.getCompanyClass({ companyId: Login.Customer.companyId }
       , function (data) {
         if (data.retCode == 401) {
           that.setData({ noneWechatAccount: true });
         } else {
-          if (data.result != null){
+          if (data.result != null) {
             that.setData({ classList: that.data.classList.concat(data.result) })
-          } 
+          }
         }
       })
   },

@@ -10,7 +10,7 @@
       <view class='memberRightsBgLine'></view>
       <view class='offsetAmountView'>
         <text class='offsetAmountTitle'>可抵扣金额</text>
-        <text class='offsetAmountValue'>￥ {{filter.numberToFix(payInfo.inputShouldPrice)}}</text>
+        <text class='offsetAmountValue'>￥{{filter.numberToFix(payInfo.inputShouldPrice)}}</text>
       </view>
       <view class='offsetAmountInputView'>
         <input class='offsetAmountInput' placeholder='请输入储值抵扣金额' placeholder-style='color:#999999;font-size: 15px;' bindinput='textFieldInput' type='digit' value='{{payInfo.inputValue}}' cursor-spacing='100'></input>
@@ -32,11 +32,15 @@
       <view class='memberRightsBgLine'></view>
       <view class='offsetAmountView'>
         <text class='offsetAmountTitle'>可抵扣金额</text>
-        <text class='offsetAmountValue'>￥ {{filter.numberToFix(payInfo.inputShouldPrice)}}</text>
+        <text class='offsetAmountValue'>￥{{filter.numberToFix(payInfo.inputShouldPrice)}}</text>
       </view>
       <view class='offsetUseAmountView'>
-        <text class='offsetUseAmountTitle'>抵扣金额</text>
-        <text class='offsetUseAmountValue'>￥ {{filter.numberToFix(payInfo.inputPointPrice)}}</text>
+        <text class='offsetUseAmountTitle'>可抵扣积分</text>
+        <text class='offsetUseAmountValue'>{{payInfo.inputPoint}}</text>
+      </view>
+      <view class='offsetUseAmountView'>
+        <text class='offsetUseAmountTitle'>已抵扣金额</text>
+        <text class='offsetUseAmountValue'>-￥{{filter.numberToFix(payInfo.inputPointPrice)}}</text>
       </view>
       <view class='offsetAmountInputView'>
         <input class='offsetAmountInput' placeholder='请输入抵扣积分' placeholder-style='color:#999999;font-size: 15px;' bindinput='textFieldInput' type='number' value='{{payInfo.inputValue}}' cursor-spacing='100'></input>

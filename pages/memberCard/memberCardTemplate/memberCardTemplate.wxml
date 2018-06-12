@@ -1,0 +1,22 @@
+<template name="MemberCardTemplate">
+  <view class='couponView' style='background: linear-gradient(to right, {{item.startColor}}, {{item.endColor}});{{item.isUsable ? "opacity: 1;":"opacity: 0.35;"}}' bindtap='onSelectCoupon' data-key="{{item}}">
+    <image class='leftCornerImage' src='../images/leftCorner@2x.png'></image>
+    <view class='priceView'>
+      <text class='priceTextTitle'>￥</text>
+      <text class="priceText">{{item.denomination}}</text>
+    </view>
+    <view class='middleCornerView'>
+      <image class='topCornerImage' src='../images/topCorner@2x.png'></image>
+      <image class='middleCornerImage' src='../images/middleCorner@2x.png' mode="aspectFit"></image>
+      <image class='bottomCornerImage' src='../images/bottomCorner@2x.png'></image>
+    </view>
+    <view class='couponTitleView'>
+      <text class='couponTitle'>{{item.title}}</text>
+      <text class='couponMemo' wx:if="{{item.sillPrice > 0}}">满{{item.sillPrice}}元可用,限{{item.cashCouponSceneType == "OFFLINE_RETAIL" ? "门店":"线上"}}使用</text>
+      <text class='couponMemo' wx:else>无门槛,限{{item.cashCouponSceneType == "OFFLINE_RETAIL" ? "门店":"线上"}}使用</text>
+      <text class='couponDate' wx:if="{{item.effectiveEndTime != null}}">活动时间: {{item.effectiveStartTime}}-{{item.effectiveEndTime}}</text>
+      <text class='couponDate' wx:else>永久有效</text>
+    </view>
+    <image class='chooseImage' wx:if="{{selectCoupon.id == item.id && isCanUse}}" src='../images/sure_coupon@2x.png'></image>
+  </view>
+</template>

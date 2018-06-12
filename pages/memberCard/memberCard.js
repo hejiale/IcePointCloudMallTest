@@ -72,11 +72,7 @@ Page({
           if(id == coupon.id && id != null){
             that.setData({ selectCoupon: coupon});
           }
-
-          var remark = coupon.remark.replace("<p>", "");
-          remark = remark.replace("</p>", "");
-          coupon.remark = remark;
-
+          
           if (coupon.effectiveStartTime != null) {
             coupon.effectiveStartTime = Config.js_date_time(coupon.effectiveStartTime);
           }
