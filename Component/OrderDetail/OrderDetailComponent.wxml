@@ -28,7 +28,7 @@
         <image mode="aspectFit" class="productImage" src='{{item.goodsOrder.photoUrl}}'></image>
         <view class="productInfo">
           <text class="productNameText">{{item.goodsOrder.name}}</text>
-          <text class='specificationsText'>{{item.specification}}</text>
+          <text class='specificationsText' wx:if="{{item.specification.length > 0}}">{{item.specification}}</text>
           <view class="priceView">
             <text class="numText">x{{item.goodsOrder.count}}</text>
             <text class="price">￥ {{filter.numberToFix(item.goodsOrder.price)}}</text>

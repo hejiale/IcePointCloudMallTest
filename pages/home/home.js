@@ -33,7 +33,7 @@ Page({
     //初始化动画
     that.animation = wx.createAnimation({
       duration: 400,
-      timingFunction: 'linear',
+      timingFunction: 'ease',
       transformOrigin: "50% 50%",
     })
   },

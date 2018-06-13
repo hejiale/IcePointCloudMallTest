@@ -112,7 +112,7 @@
   display: flex;
   margin-top: 1px;
   width: 100%;
-  height: 94px;
+  height: 85px;
   align-items: center;
   background-color: white;
 }
@@ -142,12 +142,11 @@
 }
 
 .priceView {
-  margin-top: 5px;
   margin-right: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 30px;
+  height: 25px;
 }
 
 .specificationView{
@@ -169,6 +168,9 @@
 .specificationsText {
   font-size: 13px;
   color: #999;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .shouldPayAmountView {
