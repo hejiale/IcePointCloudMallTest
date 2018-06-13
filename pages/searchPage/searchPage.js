@@ -42,6 +42,9 @@ Page({
       })
     })
   },
+  onShow:function(){
+    app.globalData.isRequireLoad = false;
+  },
   //--------------点击搜索记录查询商品----------------//
   onLastesItem: function (e) {
     var that = this;

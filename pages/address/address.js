@@ -51,13 +51,13 @@ Page({
     var that = this;
     var item = e.currentTarget.dataset.key;
 
-    if (that.data.orderSelectAddressId == item.id && that.data.orderSelectAddressId != null) {
-      wx.showToast({
-        title: '当前选中的地址不可删除',
-        icon: 'none'
-      })
-      return;
-    }
+    // if (that.data.orderSelectAddressId == item.id && that.data.orderSelectAddressId != null) {
+    //   wx.showToast({
+    //     title: '当前选中的地址不可删除',
+    //     icon: 'none'
+    //   })
+    //   return;
+    // }
 
     request.deleteAddress({ userAddressId: item.id }, function (data) {
       that.queryAddressList();

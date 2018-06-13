@@ -10,7 +10,9 @@ Page({
     currentType: "精选",
     currentPage: 1,
     pageSize: 20,
-    currentPageIndex: 0
+    currentPageIndex: 0,
+    animationTranslate: {},
+    animationRotate: {}
   },
   onLoad: function (options) {
     var that = this;
@@ -28,6 +30,12 @@ Page({
         classItemWidth: (systemInfo.windowWidth - 30 - 2 * 13) / 3
       })
     })
+    //初始化动画
+    that.animation = wx.createAnimation({
+      duration: 400,
+      timingFunction: 'linear',
+      transformOrigin: "50% 50%",
+    })
   },
   onShow: function () {
     //从后台返回前台刷新首页
@@ -36,7 +44,7 @@ Page({
         classList: [{ typeName: '精选' }],
         currentType: "精选",
         currentPageIndex: 0,
-        scrollLeft:0
+        scrollLeft: 0
       })
       this.getCompanyInfo();
       app.globalData.isRequireLoad = false;
@@ -48,11 +56,10 @@ Page({
     })
   },
   //显示与隐藏类目页面
-  onShowClassView: function () {
-    this.setData({ isShowClassView: true });
-  },
-  onCloseClassCover: function () {
-    this.setData({ isShowClassView: false });
+  onShowOrHideClassView: function () {
+    var that = this;
+    that.setData({ isShowClassView: !that.data.isShowClassView });
+    that.classViewAnimation();
   },
   //选择类目
   onClassItemClicked: function (e) {
@@ -70,7 +77,7 @@ Page({
     var that = this;
     var item = e.currentTarget.dataset.key;
     that.chooseClassItem(item);
-
+    that.classViewAnimation();
     //创建节点查询器 query
     var query = wx.createSelectorQuery()
     query.select('#classOutItem-' + item.typeId).boundingClientRect(function (rect) {
@@ -169,6 +176,7 @@ Page({
   },
   onBgClicked: function () {
     this.setData({ isShowClassView: false });
+    this.classViewAnimation();
   },
   //转发分享
   onShareAppMessage: function (res) {
@@ -178,20 +186,20 @@ Page({
       path: '/pages/home/home'
     }
   },
-  //首页滚动
-  pagechange: function (e) {
+  //类目导航动画
+  classViewAnimation: function () {
     var that = this;
 
-    if ("touch" === e.detail.source) {
-      that.setData({
-        currentPageIndex: e.detail.current
-      })
+    if (that.data.isShowClassView) {
+      that.animation.rotate(180).step()
+    } else {
+      that.animation.rotate(-180).step()
     }
+
+    that.setData({
+      animationRotate: that.animation.export()
+    })
   },
-  //下拉刷新
-  // onPullDownRefresh: function () {
-  //   wx.stopPullDownRefresh()
-  // },
   //获取公司信息请求
   getCompanyInfo: function () {
     var that = this;

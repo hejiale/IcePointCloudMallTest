@@ -2,6 +2,7 @@
 <import src="../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxml" />
 <view class="page">
   <template is="bgTemplate"></template>
+  <template is="topSpaceTemplate"></template>
   <view class='topView'>
     <view class='titleView'>
       <text class='topText'>商品列表</text>

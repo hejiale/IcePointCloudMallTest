@@ -1,3 +1,6 @@
 <template name="bgTemplate">
   <view class='bgView'></view>
 </template>
+<template name="topSpaceTemplate">
+  <view class='spaceView'></view>
+</template>

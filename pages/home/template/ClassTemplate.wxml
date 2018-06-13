@@ -1,11 +1,7 @@
 <template name="ClassTemplate">
   <view class='classContentView'>
     <view class="classViewCover" bindtap="onBgClicked"></view>
-    <view class='classMainView'>
-      <view class='closeCoverView' bindtap='onCloseClassCover'>
-        <text class='chooseTitle'>请选择</text>
-        <image class='closeCoverImage' src='../images/home_closeCover@2x.png' mode="aspectFit"></image>
-      </view>
+    <view class='classMainView' animation="{{animationTranslate}}">
       <block wx:for-items="{{classList}}">
         <view class='classItem' style='{{currentType == item.typeName ? "color: #222;border: 1px solid #222;":"color: #999;border: 1px solid #e6e6e6"}};width:{{classItemWidth}}px;' bindtap="onClassItemClicked2" data-key="{{item}}">{{item.typeName}}</view>
       </block>

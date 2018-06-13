@@ -290,7 +290,7 @@ Page({
 
         if (exchangePrice > that.data.payInfo.inputShouldPrice) {
           exchangePrice = that.data.payInfo.inputShouldPrice;
-          that.setData({'payInfo.isLowPoint': true})
+          that.setData({ 'payInfo.isLowPoint': true })
         }
 
         that.setData({
@@ -343,7 +343,7 @@ Page({
           'payInfo.useBalance': 0
         });
       }
-      if (that.data.payInfo.isLowPoint){
+      if (that.data.payInfo.isLowPoint) {
         wx.showToast({
           title: '积分已归零',
         })

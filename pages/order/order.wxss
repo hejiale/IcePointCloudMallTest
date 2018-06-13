@@ -75,7 +75,6 @@
   top: 105px;
   width: 100%;
   height: calc(100% - 105px);
-  background-color: white;
 }
 
 .emptyImage {

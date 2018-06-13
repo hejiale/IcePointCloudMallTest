@@ -24,7 +24,7 @@
   display: flex;
   align-items: center;
   height: 100%;
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 .deliveryModeTitle {
@@ -97,8 +97,8 @@
 }
 
 .rightIconImage {
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
 }
 
 .productContentView {
@@ -330,7 +330,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 90%;
+  width: calc(100% - 18px);
   height: 36px;
   background-color: #4d9fd8;
   border-radius: 3px;

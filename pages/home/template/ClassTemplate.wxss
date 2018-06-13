@@ -2,8 +2,8 @@
   position: fixed;
   width: 100%;
   height: 100%;
-  top: 45px;
-  z-index: 1000;
+  top: 0px;
+  z-index: 800;
 }
 
 .classViewCover {
@@ -13,36 +13,23 @@
   bottom: 0;
   background-color: #333;
   opacity: 0.7;
-}      
+}
 
 .classMainView {
   position: absolute;
-  top: 0;
+  top: 95px;
+  left: 0px;
   width: 100%;
   background-color: #fff;
   padding-left: 5px;
+  padding-top: 5px;
   padding-bottom: 10px;
 }
 
-.closeCoverView {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 36px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.closeCoverImage {
-  margin-right: 20px;
-  width: 16px;
-  height: 9px;
-}
-
-.chooseTitle{
+.chooseTitle {
   margin-left: 10px;
   font-size: 13px;
-  color: #666666;
+  color: #666;
 }
 
 .classItem {
@@ -56,7 +43,3 @@
   border-radius: 3px;
   font-weight: 500;
 }
-
-
-
-

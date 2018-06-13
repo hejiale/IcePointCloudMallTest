@@ -14,7 +14,7 @@
       <text class='couponTitle'>{{item.title}}</text>
       <text class='couponMemo' wx:if="{{item.sillPrice > 0}}">满{{item.sillPrice}}元可用,限{{item.cashCouponSceneType == "OFFLINE_RETAIL" ? "门店":"线上"}}使用</text>
       <text class='couponMemo' wx:else>无门槛,限{{item.cashCouponSceneType == "OFFLINE_RETAIL" ? "门店":"线上"}}使用</text>
-      <text class='couponDate' wx:if="{{item.effectiveEndTime != null}}">活动时间: {{item.effectiveStartTime}}-{{item.effectiveEndTime}}</text>
+      <text class='couponDate' wx:if="{{item.effectiveEndTime != null}}">{{item.effectiveStartTime}}-{{item.effectiveEndTime}}</text>
       <text class='couponDate' wx:else>永久有效</text>
     </view>
     <image class='chooseImage' wx:if="{{selectCoupon.id == item.id && isCanUse}}" src='../images/sure_coupon@2x.png'></image>

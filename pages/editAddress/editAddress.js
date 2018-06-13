@@ -1,12 +1,11 @@
 // pages/editAddress/editAddress.js
 var request = require('../../utils/Request.js')
 var address = require('../../utils/city.js')
-var animation
 var app = getApp();
+var animation;
 
 Page({
   data: {
-    animationData: {},
     animationAddressMenu: {},
     value: [0, 0, 0],
     provinces: [],
@@ -38,7 +37,7 @@ Page({
 
     //初始化省市区pickerView选择数据
     var animation = wx.createAnimation({
-      duration: 500,
+      duration: 400,
       transformOrigin: "50% 50%",
       timingFunction: 'ease',
     })
@@ -118,21 +117,6 @@ Page({
     that.setData({ contactAddress: e.detail.value.replace(/\s+/g, '') })
   },
   //执行省市区选择pickerView动画
-  startAnimation: function (isShow, offset) {
-    var that = this
-    var offsetTem
-    if (offset == 0) {
-      offsetTem = offset
-    } else {
-      offsetTem = offset + 'rpx'
-    }
-    this.animation.translateY(offset).step()
-    this.setData({
-      animationData: this.animation.export(),
-      isVisible: isShow
-    })
-  },
-  // 执行动画
   startAddressAnimation: function (isShow) {
     var that = this
     if (isShow) {

@@ -10,6 +10,7 @@ Page({
   onShow: function () {
     var that = this;
     that.queryCartList();
+    app.globalData.isRequireLoad = false;
   },
   onTapEdit: function () {
     this.setData({

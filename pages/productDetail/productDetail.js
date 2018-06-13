@@ -70,10 +70,10 @@ Page({
     })
   },
   onCall: function () {
-    // var that = this;
-    // wx.makePhoneCall({
-    //   phoneNumber: that.data.DetailObject.goods.belongedCompany.contactMobilePhone,
-    // })
+    var that = this;
+    wx.makePhoneCall({
+      phoneNumber: that.data.DetailObject.goods.belongedCompany.contactMobilePhone,
+    })
   },
   onTryGlass: function () {
     var that = this;

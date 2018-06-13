@@ -4,7 +4,7 @@
 <import src="../../utils/Template/ProductListTemplate/ProductListTemplate.wxml" />
 <template is="ClassTemplate" data="{{classList,currentType,classItemWidth}}" wx:if="{{isShowClassView}}"></template>
 <view class="page">
-  <template  is="bgTemplate"></template>
+  <template is="bgTemplate"></template>
   <view class="contentView" style='{{classList.length > 1 ? "height: 95px;":"height: 45px;"}}'>
     <view class="search-input-view">
       <view class="search-input">
@@ -13,7 +13,7 @@
       </view>
     </view>
     <view class='classMenuView' wx:if="{{classList.length > 1}}">
-      <scroll-view class="scroll-view-x" scroll-x="true" scroll-left="{{scrollLeft}}">
+      <scroll-view class="scroll-view-x" scroll-x="true" scroll-left="{{scrollLeft}}" wx:if="{{!isShowClassView}}">
         <ul class="hengxiangul">
           <li wx:for="{{classList}}" bindtap="onClassItemClicked" data-key="{{item}}" id="classOutItem-{{item.typeId}}">
             <text class='liText' style='color: #222222;' wx:if="{{currentType == item.typeName}}">{{item.typeName}}</text>
@@ -22,7 +22,10 @@
           </li>
         </ul>
       </scroll-view>
-      <view class='openView' catchtap='onShowClassView'>
+      <view class='closeCoverView' wx:else>
+        <text class='chooseTitle'>请选择</text>
+      </view>
+      <view class='openView' catchtap='onShowOrHideClassView' animation="{{animationRotate}}">
         <image class='openMenuImage' src='../images/icon_downArrow@2x.png' mode="aspectFit"></image>
       </view>
     </view>
@@ -30,22 +33,6 @@
   <view class='emptyCartView' wx:if="{{noneWechatAccount}}" style='{{classList.length > 1 ? "top: 95px;":"top: 45px;"}}'>
     <image src='../images/icon_emptyTemplate@2x.png' class='emptyImage' mode="aspectFit"></image>
   </view>
-  <!-- <swiper class='swiper' bindchange='pagechange' current='{{currentPageIndex}}'>
-    <block wx:for-items="{{classList}}">
-      <swiper-item class='swiper-item'>
-        <view class='templateContentView' wx:if="{{currentPageIndex == 0}}">
-          <block wx:for-items="{{templateList}}" wx:for-item="template">
-            <template is="CompanyTemplate" data="{{template,deviceWidth,singleLayoutHeight,doubleLayoutHeight}}"></template>
-          </block>
-        </view>
-        <scroll-view scroll-y="true" class='productListView' bindscrolltolower="onLoadMore" lower-threshold='200' wx:else>
-          <block wx:for-items="{{productList}}">
-            <template is='normalLayOut' data="{{item,doubleLayoutHeight}}"></template>
-          </block>
-        </scroll-view>
-      </swiper-item>
-    </block>
-  </swiper> -->
   <view class='templateContentView' wx:if="{{templateList.length > 0 && isShowTemplateView}}" style='{{classList.length > 1 ? "top: 95px;":"top: 45px;"}}'>
     <block wx:for-items="{{templateList}}" wx:for-item="template">
       <template is="CompanyTemplate" data="{{template,deviceWidth,singleLayoutHeight,doubleLayoutHeight}}"></template>

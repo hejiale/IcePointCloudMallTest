@@ -11,7 +11,7 @@
   align-items: center;
   top: 0px;
   width: 100%;
-  z-index: 800;
+  z-index: 1000;
 }
 
 .search-input-view {
@@ -52,6 +52,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   height: 50px;
   background-color: white;
@@ -60,6 +61,16 @@
 .scroll-view-x {
   width: calc(100% - 50px);
   height: 40px;
+}
+
+.closeCoverView {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+  width: calc(100% - 50px);
+  height: 36px;
+  padding-top: 5px;
+  padding-bottom: 10px;
 }
 
 .hengxiangul {
@@ -119,7 +130,6 @@
   justify-content: center;
   width: 100%;
   height: calc(100% - 45px);
-  background-color: white;
 }
 
 .emptyImage {
@@ -156,13 +166,4 @@
 .lineMenuImage {
   width: 1px;
   height: 29px;
-}
-
-.swiper {
-  width: 100%;
-  overflow: scroll;
-}
-
-.swiper-item {
-  width: 100%;
 }
