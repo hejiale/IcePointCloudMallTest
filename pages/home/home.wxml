@@ -2,7 +2,7 @@
 <import src="template/ClassTemplate.wxml" />
 <import src="../../utils/Template/BackGroundTemplate/BackGroundTemplate.wxml" />
 <import src="../../utils/Template/ProductListTemplate/ProductListTemplate.wxml" />
-<template is="ClassTemplate" data="{{classList,currentType,classItemWidth}}" wx:if="{{isShowClassView}}"></template>
+<template is="ClassTemplate" data="{{classList,currentType,classItemWidth,isHiden}}" wx:if="{{isShowClassView}}"></template>
 <view class="page">
   <template is="bgTemplate"></template>
   <view class="contentView" style='{{classList.length > 1 ? "height: 95px;":"height: 45px;"}}'>
@@ -25,8 +25,8 @@
       <view class='closeCoverView' wx:else>
         <text class='chooseTitle'>请选择</text>
       </view>
-      <view class='openView' catchtap='onShowOrHideClassView' animation="{{animationRotate}}">
-        <image class='openMenuImage' src='../images/icon_downArrow@2x.png' mode="aspectFit"></image>
+      <view class='openView' catchtap='onShowOrHideClassView'>
+        <image class='openMenuImage' src='../images/icon_downArrow@2x.png' mode="aspectFit" animation="{{animationRotate}}"></image>
       </view>
     </view>
   </view>

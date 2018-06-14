@@ -1,15 +1,13 @@
 <template name="ParameterTemplate">
   <view class='parameterContentView'>
     <view class='specificationContentView' wx:if="{{parameterObject.specifications.length > 0}}">
-      <view class='topTitleView'>商品规格</view>
-      <image class="parameterLineImage" src='../images/icon_line@2x.png'></image>
       <scroll-view class='specificationsView' scroll-y="true" wx:if="{{parameterObject.specifications.length > 0}}">
         <block wx:for-items="{{parameterObject.specifications}}">
           <view class="popPropertyView">
             <view class="popPropertyTitleView">
               <text class="TitleText">{{item.name}}</text>
             </view>
-            <view style='margin-top: 10px;'>
+            <view style='margin-top: 5px;'>
               <block wx:for-items="{{item.values}}">
                 <view class="classItem" data-key="{{item}}" style="background-color: #FFFFFF;border: 1px solid #dcdcdc;" wx:if="{{item.enableSelect && !item.selected}}" bindtap="onSelectParameter">
                   <text class="classItemText" style="color:#222222">{{item.value}}</text>
@@ -30,9 +28,12 @@
     <view class='parameterNumView'>
       <text class='parameterNumTitle'>数量</text>
       <view class='editCartNumView'>
-        <image class='reduceCartImage' src='../images/icon_reduceCart@2x.png' mode="aspectFit" bindtap='onReduceCart'></image>
-        <text class='cartNumText'>{{cartNum}}</text>
-        <image class='reduceCartImage' src='../images/icon_plusCart@2x.png' mode="aspectFit" bindtap='onAddCart'></image>
+        <image class='editCartButton' src='../images/stepper_decrease@2x.png' catchtap='onReduceCart'></image>
+        <view class='cartNumInputView'>
+          <image class='cartNumInputImage' src='../images/stepper_middle@2x.png'></image>
+          <text class='cartNumText'>{{cartNum}}</text>
+        </view>
+        <image class='editCartButton' src='../images/stepper_increase@2x.png' catchtap='onAddCart'></image>
       </view>
     </view>
   </view>

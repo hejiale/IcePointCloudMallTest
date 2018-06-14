@@ -70,6 +70,7 @@ Page({
   //--------------点击分类----------------//
   onClassClicked: function (e) {
     var that = this;
+    
     that.setData({ showOrHide: true });
     that.resetParameterSelectStatus();
     that.querySelectClassInfo(that.data.currentTypeIndex);

@@ -243,7 +243,7 @@
 .chooseAllView {
   display: flex;
   align-items: center;
-  width: 90%;
+  width: calc(100% - 20px);
   height: 36px;
   background-color: #63a0d4;
   border-radius: 5px;

@@ -11,7 +11,6 @@ Page({
     currentPage: 1,
     pageSize: 20,
     currentPageIndex: 0,
-    animationTranslate: {},
     animationRotate: {}
   },
   onLoad: function (options) {
@@ -57,9 +56,7 @@ Page({
   },
   //显示与隐藏类目页面
   onShowOrHideClassView: function () {
-    var that = this;
-    that.setData({ isShowClassView: !that.data.isShowClassView });
-    that.classViewAnimation();
+    this.classAnimation();
   },
   //选择类目
   onClassItemClicked: function (e) {
@@ -76,13 +73,11 @@ Page({
 
     var that = this;
     var item = e.currentTarget.dataset.key;
+
     that.chooseClassItem(item);
-    that.classViewAnimation();
     //创建节点查询器 query
     var query = wx.createSelectorQuery()
     query.select('#classOutItem-' + item.typeId).boundingClientRect(function (rect) {
-      console.log(rect)
-
       if (rect != null) {
         if (rect.left < 0) {
           that.setData({ scrollLeft: 0 });
@@ -93,6 +88,8 @@ Page({
         that.setData({ scrollLeft: 0 });
       }
     }).exec()
+    //动画
+    that.classAnimation();
   },
   //选择类目
   chooseClassItem: function (item) {
@@ -100,7 +97,6 @@ Page({
 
     that.setData({
       currentType: item.typeName,
-      isShowClassView: false
     });
 
     if (item.typeName == '精选') {
@@ -175,8 +171,7 @@ Page({
     })
   },
   onBgClicked: function () {
-    this.setData({ isShowClassView: false });
-    this.classViewAnimation();
+    this.classAnimation();
   },
   //转发分享
   onShareAppMessage: function (res) {
@@ -187,14 +182,34 @@ Page({
     }
   },
   //类目导航动画
-  classViewAnimation: function () {
+  classAnimation: function () {
     var that = this;
 
     if (that.data.isShowClassView) {
-      that.animation.rotate(180).step()
+      that.setData({ isHiden: true });
+      that.closeRotateAnimation();
+
+      setTimeout(function () {
+        that.setData({ isShowClassView: !that.data.isShowClassView, isHiden: false });
+      }, 400);
     } else {
-      that.animation.rotate(-180).step()
+      that.setData({ isShowClassView: !that.data.isShowClassView });
+      that.rotateAnimation();
     }
+  },
+  rotateAnimation: function () {
+    var that = this;
+
+    that.animation.rotate(180).step()
+
+    that.setData({
+      animationRotate: that.animation.export()
+    })
+  },
+  closeRotateAnimation:function(){
+    var that = this;
+
+    that.animation.rotate(0).step()
 
     that.setData({
       animationRotate: that.animation.export()

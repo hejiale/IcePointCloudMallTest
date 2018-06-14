@@ -7,7 +7,6 @@ Page({
   data: {
 
   },
-
   onLoad: function (options) {
     var that = this;
     that.setData({ orderSelectAddressId: options.id });
@@ -50,14 +49,6 @@ Page({
   onDeleteAddress: function (e) {
     var that = this;
     var item = e.currentTarget.dataset.key;
-
-    // if (that.data.orderSelectAddressId == item.id && that.data.orderSelectAddressId != null) {
-    //   wx.showToast({
-    //     title: '当前选中的地址不可删除',
-    //     icon: 'none'
-    //   })
-    //   return;
-    // }
 
     request.deleteAddress({ userAddressId: item.id }, function (data) {
       that.queryAddressList();
@@ -135,6 +126,14 @@ Page({
     wx.showLoading({});
 
     request.queryAddressList(options, function (data) {
+      if (data.result.resultList == null && that.data.orderSelectAddressId && that.data.orderSelectAddressId != null) {
+        var pages = getCurrentPages()
+        var prevPage = pages[pages.length - 2]  //上一个页面
+
+        prevPage.setData({
+          currentAddress: null
+        })
+      }
       that.setData({ addressList: data.result.resultList });
       wx.hideLoading();
     });

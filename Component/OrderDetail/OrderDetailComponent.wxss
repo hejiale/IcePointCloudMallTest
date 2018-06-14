@@ -55,7 +55,7 @@
 }
 
 .pickUpGoodsImage {
-  width: 20px;
+  width: 23px;
   height: 20px;
 }
 
@@ -220,7 +220,7 @@
 
 .shouldPayIconImage {
   margin-left: 10px;
-  width: 21px;
+  width: 23px;
   height: 20px;
 }
 
@@ -235,7 +235,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 8px;
+  margin-left: 10px;
   width: calc(100% - 35px);
   height: 100%;
 }
@@ -303,7 +303,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 8px;
+  margin-left: 10px;
   width: calc(100% - 35px);
 }
 
