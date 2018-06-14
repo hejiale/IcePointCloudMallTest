@@ -28,12 +28,11 @@
     <view class='parameterNumView'>
       <text class='parameterNumTitle'>数量</text>
       <view class='editCartNumView'>
-        <image class='editCartButton' src='../images/stepper_decrease@2x.png' catchtap='onReduceCart'></image>
-        <view class='cartNumInputView'>
-          <image class='cartNumInputImage' src='../images/stepper_middle@2x.png'></image>
-          <text class='cartNumText'>{{cartNum}}</text>
-        </view>
-        <image class='editCartButton' src='../images/stepper_increase@2x.png' catchtap='onAddCart'></image>
+         <image class='editCartButton' src='../images/stepper_decrease@2x.png' catchtap='onReduceCart' mode="aspectFit"></image>
+         <view class='cartNumInputView'>
+           <text class='cartNumText'>{{cartNum}}</text> 
+        </view> 
+        <image class='editCartButton' src='../images/stepper_increase@2x.png' catchtap='onAddCart' mode="aspectFit"></image> 
       </view>
     </view>
   </view>

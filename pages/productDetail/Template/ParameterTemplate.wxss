@@ -113,6 +113,8 @@
   display: flex;
   align-items: center;
   margin-left: 15px;
+  border: 1rpx solid #e6e6e6;
+  border-radius: 3px;
 }
 
 .editCartButton {
@@ -125,6 +127,8 @@
   justify-content: center;
   width: 100rpx;
   height: 49rpx;
+  border-left: 1rpx solid #e6e6e6;
+  border-right: 1rpx solid #e6e6e6;
 }
 
 .cartNumInputImage {
@@ -133,7 +137,6 @@
 }
 
 .cartNumText {
-  position: absolute;
   text-align: center;
   font-size: 15px;
   font-weight: 500;
