@@ -20,7 +20,7 @@
                 <view class="classItem" style="background-color: #F0F0F0;" wx:if="{{!item.selected}}" data-key="{{item}}" bindtap='onChooseClass' id='{{idx}}'>
                   <text class="classItemText" style="color:#222">{{item.type.typeName}}</text>
                 </view>
-                <view class="classItem" style="background-color: #4D9FD8;" wx:else data-key="{{item}}" bindtap='onChooseClass' id='{{idx}}'>
+                <view class="classItem" style="background-color: #3DA8F5;" wx:else data-key="{{item}}" bindtap='onChooseClass' id='{{idx}}'>
                   <text class="classItemText" style="color: #FFFFFF;">{{item.type.typeName}}</text>
                 </view>
               </block>
@@ -36,7 +36,7 @@
                   <view class="classItem" data-key="{{item}}" bindtap="onSelectProperty" style="background-color: #F0F0F0;" wx:if="{{!item.selected}}">
                     <text class="classItemText" style="color:#222">{{item.parameterValue}}</text>
                   </view>
-                  <view class="classItem" data-key="{{item}}" bindtap="onSelectProperty" style="background-color: #4D9FD8;" wx:else>
+                  <view class="classItem" data-key="{{item}}" bindtap="onSelectProperty" style="background-color: #3DA8F5;" wx:else>
                     <text class="classItemText" style="color:#FFFFFF">{{item.parameterValue}}</text>
                   </view>
                 </block>

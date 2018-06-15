@@ -38,7 +38,7 @@
         </view>
         <view class="unOpenView" wx:else data-key="{{item}}">
           <view class="onSelectView" bindtap='onSelectCart' data-key='{{item}}'>
-            <icon class='iconSelectedImage' type="{{item.selected ? 'success' : 'circle'}}" color='#63a0d4'></icon>
+            <icon class='iconSelectedImage' type="{{item.selected ? 'success' : 'circle'}}" color='#3DA8F5'></icon>
           </view>
           <view class='cartView'>
             <view class='productImageView'>

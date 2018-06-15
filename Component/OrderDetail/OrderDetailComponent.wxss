@@ -404,6 +404,7 @@
   height: 50px;
   bottom: 0px;
   background-color: white;
+  border-top: 1rpx solid #e6e6e6;
 }
 
 .cancelButton{
@@ -412,7 +413,7 @@
   height: 36px;
   line-height: 36px;
   border: 1px solid #4D9FD8;
-  color: #4D9FD8;
+  color: #3DA8F5;
   font-size: 15px;
   background-color: white;
 }
@@ -422,7 +423,7 @@
   height: 36px;
   line-height: 36px;
   color: white;
-  background-color: #4D9FD8;
+  background-color: #3DA8F5;
   font-size: 15px;
 }
 
@@ -432,7 +433,7 @@
   height: 36px;
   line-height: 36px;
   color: white;
-  background-color: #4D9FD8;
+  background-color: #3DA8F5;
   font-size: 15px;
 }
 

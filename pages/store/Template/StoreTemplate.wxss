@@ -61,7 +61,7 @@
 .navigationText {
   font-size: 14px;
   line-height: 25px;
-  color: #4d9fd8;
+  color: #3DA8F5;
   margin-right: 10px;
 }
 

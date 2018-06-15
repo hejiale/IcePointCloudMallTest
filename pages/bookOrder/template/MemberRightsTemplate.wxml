@@ -4,7 +4,7 @@
     <image class="memberRightsIconImage" src='../images/icon_memberRights@2x.png' mode="aspectFit"></image>
     <view class="memberContentView">
       <view class="memberRightsTitleView">会员权益</view>
-      <image class="memberLineImage" src='../images/icon_line@2x.png' mode="aspectFit"></image>
+      <image class="memberLineImage" src='../images/icon_line@2x.png' ></image>
       <view class='memberDiscountView'>
         <view class="memberDiscounTextView" wx:if="{{payInfo.memberInfo.mallCustomer.discount != null}}">
           <view class='memberDiscounTextTitleView'>

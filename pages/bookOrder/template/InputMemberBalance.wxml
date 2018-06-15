@@ -16,7 +16,7 @@
         <input class='offsetAmountInput' placeholder='请输入储值抵扣金额' placeholder-style='color:#999999;font-size: 15px;' bindinput='textFieldInput' type='digit' value='{{payInfo.inputValue}}' cursor-spacing='100'></input>
       </view>
       <view class='memberRightsBgBottomLine'></view>
-      <button class='bottomButton' style='{{payInfo.canPayStaus ?"background-color: #4d9fd8;":"background-color: #e6e6e6;"}}' bindtap='{{payInfo.canPayStaus ? "onSure":""}}'>{{payInfo.canPayStaus ? '确定' : '已超抵扣上限'}}</button>
+      <button class='bottomButton' style='{{payInfo.canPayStaus ?"background-color: #3DA8F5;":"background-color: #e6e6e6;"}}' bindtap='{{payInfo.canPayStaus ? "onSure":""}}'>{{payInfo.canPayStaus ? '确定' : '已超抵扣上限'}}</button>
     </view>
   </view>
 </template>
@@ -46,7 +46,7 @@
         <input class='offsetAmountInput' placeholder='请输入抵扣积分' placeholder-style='color:#999999;font-size: 15px;' bindinput='textFieldInput' type='number' value='{{payInfo.inputValue}}' cursor-spacing='100'></input>
       </view>
       <view class='memberRightsBgBottomLine'></view>
-      <button class='bottomButton' style='{{payInfo.canPayStaus ?"background-color: #4d9fd8;":"background-color: #e6e6e6;"}}' bindtap='{{payInfo.canPayStaus ? "onSure":""}}'>{{payInfo.canPayStaus ? '确定' : '已超抵扣上限'}}</button>
+      <button class='bottomButton' style='{{payInfo.canPayStaus ?"background-color: #3DA8F5;":"background-color: #e6e6e6;"}}' bindtap='{{payInfo.canPayStaus ? "onSure":""}}'>{{payInfo.canPayStaus ? '确定' : '已超抵扣上限'}}</button>
     </view>
   </view>
 </template>

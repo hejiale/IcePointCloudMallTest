@@ -58,6 +58,13 @@
   background-color: white;
 }
 
+.chooseTitle {
+  margin-left: 10px;
+  font-size: 13px;
+  color: #333;
+  font-weight: 500;
+}
+
 .scroll-view-x {
   width: calc(100% - 50px);
   height: 40px;

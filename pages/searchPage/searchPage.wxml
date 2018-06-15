@@ -7,7 +7,7 @@
   <view class="topMenuView">
     <view class="search-input">
       <image class="search-icon" src="../images/icon_seach@2x.png" mode="aspectFit" />
-      <input class="inputSearch" placeholder="请输入您要搜索的商品" placeholder-style="font-size: 14px;color:#999999;" bindconfirm="onSearchInput" value="{{keyWord}}" confirm-type='search' focus='true'/>
+      <input class="inputSearch" placeholder="请输入您要搜索的商品" placeholder-style="font-size: 14px;color:#999999;" bindconfirm="onSearchInput" value="{{keyWord}}" confirm-type='search'/>
     </view>
     <view class="searchRightView" bindtap='onClassClicked'>
       <image class='filter-icon' src='../images/icon_filterClass@2x.png' mode="aspectFit"></image>

@@ -56,12 +56,6 @@
   }
 }
 
-.chooseTitle {
-  margin-left: 10px;
-  font-size: 13px;
-  color: #666;
-}
-
 .classItem {
   display: inline-block;
   margin-left: 10px;

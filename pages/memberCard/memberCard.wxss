@@ -62,11 +62,26 @@
   display: flex;
   width: calc(100% - 20px);
   height: 36px;
-  background-color: #63a0d4;
+  background-color: #3DA8F5;
   border-radius: 5px;
   font-size: 16px;
   color: white;
   font-weight: 500;
   justify-content: center;
   align-items: center;
+}
+
+.emptyCouponView{
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50px;
+  width: 100%;
+  height: calc(100% - 50px);
+}
+
+.emptyCouponImage{
+  width: 240rpx;
+  height: 234rpx;
 }

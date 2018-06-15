@@ -60,7 +60,7 @@
           <text class='storeInfoTitle'>线下服务点</text>
           <text class='storeNumText'>共{{totalStore}}家门店</text>
         </view>
-        <image class="storeLineImage" src='../images/icon_line@2x.png' mode="aspectFit"></image>
+        <image class="storeLineImage" src='../images/icon_line@2x.png'></image>
         <view class='storeAddressInfoView'>
           <view class='storeContactInfoView' bindtap='onSelectStore'>
             <view class='storeNameView'>

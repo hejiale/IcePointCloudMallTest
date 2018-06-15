@@ -49,18 +49,18 @@
 .specificationsView {
   display: flex;
   flex-direction: column;
-  width: calc(100% - 16px);
-  margin-top: 5px;
-  margin-left: 16px;
+  width: calc(100% - 20px);
+  margin-top: 10px;
+  margin-left: 20px;
   padding-bottom: 10px;
 }
 
 .classItem {
   display: inline-block;
   margin: 5px;
-  width: calc((100% - 20px)/4);
-  height: 30px;
-  border-radius: 5px;
+  width: calc((100% - 50px)/3);
+  height: 28px;
+  border-radius: 2px;
 }
 
 .classItemText {
@@ -76,24 +76,21 @@
 
 .popPropertyView {
   display: flex;
-  flex-direction: column;
-  margin-top: 10px;
+  flex-direction: row;
   width: 100%;
 }
 
 .popPropertyTitleView {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 50px;
+  height: 38px;
 }
 
 .TitleText {
-  margin-left: 5px;
   line-height: 20px;
   font-size: 14px;
-  color: #111;
-  font-weight: 500;
+  color: #afafaf;
 }
 
 .parameterNumView {
@@ -106,13 +103,14 @@
 .parameterNumTitle {
   margin-left: 20px;
   font-size: 14px;
-  font-weight: 500;
+  color: #afafaf;
+  width: 50px;
 }
 
 .editCartNumView {
   display: flex;
   align-items: center;
-  margin-left: 15px;
+  margin-left: 5px;
   border: 1rpx solid #e6e6e6;
   border-radius: 3px;
 }
@@ -138,8 +136,7 @@
 
 .cartNumText {
   text-align: center;
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 14px;
   height: 100%;
   line-height: 49rpx;
 }

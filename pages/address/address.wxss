@@ -34,11 +34,11 @@
 .addAddressText {
   flex: 1;
   margin: 5px;
-  color: #63a0d4;
+  color: #3DA8F5;
   font-size: 13px;
   line-height: 28px;
   text-align: center;
-  border: 1px solid #63a0d4;
+  border: 1px solid #3DA8F5;
   border-radius: 3px;
 }
 

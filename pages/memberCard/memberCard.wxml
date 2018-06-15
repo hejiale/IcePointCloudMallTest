@@ -17,9 +17,12 @@
         <template is="MemberCardTemplate" data="{{item,selectCoupon,isCanUse}}"></template>
       </block>
     </view>
-    <view class='footView' bindtap='onSure'>
+    <view class='footView' bindtap='onSure' wx:if="{{(isCanUse ? memberCardObject.matchConditionCashCoupon.length : memberCardObject.allCashCoupon.length) > 0 }}">
       <!-- <view class='footButton' wx:if="{{selectCoupon != null}}">确定  (抵扣金额{{selectCoupon.denomination}}元)</view> -->
       <view class='footButton'>确定</view>
+    </view>
+    <view class='emptyCouponView' wx:else>
+      <image src='../images/noneCoupon@2x.png' class='emptyCouponImage' mode="aspectFit"></image>
     </view>
   </view>
 </view>

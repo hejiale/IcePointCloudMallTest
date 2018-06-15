@@ -83,7 +83,7 @@
 }
 
 .sureText {
-  background-color: #63a0d4;
+  background-color: #3DA8F5;
   color: white;
   font-size: 15px;
   height: 40px;

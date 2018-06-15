@@ -16,18 +16,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     that.setData({ goodsId: options.id });
-
-    wx.showLoading();
-
-    request.queryProductDetail({ goodsId: options.id },
-      function (data) {
-        WxParse.wxParse('article', 'html',
-          data.goods.goodsTextDetails,
-          that,
-          0);
-        that.setData({ DetailObject: data });
-        that.queryParameterRequest();
-      })
+    that.queryProductDetail();
 
     app.getSystemInfo(function (systemInfo) {
       that.setData({
@@ -324,7 +313,7 @@ Page({
           }
         }
       }
-    
+
       that.setData({ parameterObject: data, isEndLoad: true });
       wx.hideLoading();
     })
@@ -361,5 +350,23 @@ Page({
       title: that.data.DetailObject.goods.goodsName,
       path: '/pages/productDetail/productDetail?id=' + that.data.goodsId
     }
+  },
+  queryProductDetail: function () {
+    var that = this;
+    wx.showLoading();
+
+    request.queryProductDetail({ goodsId: that.data.goodsId },
+      function (data) {
+        that.setData({ DetailObject: data });
+        that.queryParameterRequest();
+        //获取图文详情
+        request.queryProductDetailRemark({ goodsId: that.data.goodsId },
+          function (data) {
+            WxParse.wxParse('article', 'html',
+              data.result,
+              that,
+              0);
+          })
+      })
   }
 })

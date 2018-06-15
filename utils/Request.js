@@ -304,6 +304,24 @@ function queryProductDetail(options, callBack) {
     })
 }
 
+//查询商品
+function queryProductDetailRemark(options, callBack) {
+  var that = this;
+
+  let msg = {
+    data: options,
+    url: port + '/goods/textDetail',
+    method: 'GET'
+  }
+
+  http(msg).then(
+    data => {
+      typeof callBack == "function" && callBack(data)
+    }).catch(e => {
+
+    })
+}
+
 //查询商品详情规格
 function queryProductDetailParameter(parameterJson, callBack) {
   var that = this;
@@ -780,6 +798,7 @@ module.exports = {
   queryProductCategory: queryProductCategory,
   queryCategoryParameter: queryCategoryParameter,
   queryProductDetail: queryProductDetail,
+  queryProductDetailRemark: queryProductDetailRemark,
   queryProductDetailParameter: queryProductDetailParameter,
   addShoppingCart: addShoppingCart,
   queryCartList: queryCartList,

@@ -133,13 +133,13 @@
 .canUseAmountTitle{
   margin-left: 20px;
   font-size: 13px;
-  color: #4d9fd8;
+  color: #3DA8F5;
 }
 
 .canUseAmountValue{
   margin-left: 10px;
   font-size: 13px;
-  color: #4d9fd8;
+  color: #3DA8F5;
 }
 
 

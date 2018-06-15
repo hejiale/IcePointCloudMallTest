@@ -334,7 +334,7 @@
   justify-content: center;
   width: calc(100% - 18px);
   height: 36px;
-  background-color: #4d9fd8;
+  background-color: #3DA8F5;
   border-radius: 3px;
 }
 

@@ -25,7 +25,7 @@
 .statusTitle {
   margin-right: 10px;
   font-size: 16px;
-  color: #4d9fd8;
+  color: #3DA8F5;
   font-weight: 500;
 }
 
@@ -132,7 +132,7 @@
   width: 90px;
   height: 30px;
   line-height: 30px;
-  background-color: #4D9FD8;
+  background-color: #3DA8F5;
   font-size: 15px;
   color: white;
   font-weight: 500;

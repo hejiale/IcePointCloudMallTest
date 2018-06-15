@@ -97,7 +97,7 @@
 .defaultText{
   margin-left: 10px;
   font-size: 14px;
-  color: #63a0d4;
+  color: #3DA8F5;
 }
 
 .editAddressView {

@@ -17,7 +17,7 @@
       <image class="cellLine" src='../images/icon_line@2x.png'></image>
       <view class='addressBottomView'>
         <view class='defaultAddressView' bindtap='onSetDefault' data-key='{{item}}'>
-          <icon class='defaultAddressImage' type="{{item.default ? 'success' : 'circle'}}" color='#63a0d4'></icon>
+          <icon class='defaultAddressImage' type="{{item.default ? 'success' : 'circle'}}" color='#3DA8F5'></icon>
           <text class='defaultText'>{{item.default ? '默认' : '设为默认'}}</text>
         </view>
         <view class='editAddressView' bindtap='editAddress' data-key='{{item}}'>
