@@ -30,10 +30,9 @@
 }
 
 .line {
-  margin-left: 5px;
-  width: calc(100% - 10px);
-  height: 1px;
-  background-color: #e6e6e6;
+  width: 100%;
+  height: 1rpx;
+  background-color: #F0F0F0;
 }
 
 .productListView {
@@ -47,6 +46,7 @@
   align-items: center;
   width: 100%;
   height: 84px;
+  background-color: #fafafa;
 }
 
 .orderPriceView {
@@ -137,4 +137,8 @@
   color: white;
   font-weight: 500;
   margin-right: 10px;
+}
+
+.payButton::after{
+  border: none;
 }

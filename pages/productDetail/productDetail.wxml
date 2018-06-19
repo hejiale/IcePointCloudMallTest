@@ -25,7 +25,7 @@
         <image class='columnLine' src='../images/icon_columnLine@2x.png'></image>
         <text class='specificationParameterText' style='{{isSelectDetail ? "color:#999;font-weight: 400;" : "color:#222;font-weight: 500;"}}' bindtap='onParameter'>商品参数</text>
       </view>
-      <image class="lineImage" src='../images/icon_line@2x.png' mode="aspectFit"></image>
+      <image class="lineImage" src='../images/icon_line@2x.png' mode="aspectFit" wx:if="{{!isSelectDetail && DetailObject.details.length > 0}}"></image>
       <view class="webView" wx:if="{{isSelectDetail && DetailObject != null}}">
            <template is="wxParse" data="{{wxParseData:article.nodes}}" />   
       </view>

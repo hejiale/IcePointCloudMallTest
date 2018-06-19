@@ -63,14 +63,6 @@ function compare(a, b, c) {
   }
 }
 
-function min(a, b) {
-  if (a < b) {
-    return a;
-  }
-  return b;
-}
-
-
 var Config = {
   //本地保存商品搜索记录key
   historySearchWords: 'historySearchWordsKey',
@@ -84,6 +76,5 @@ module.exports = {
   js_date_time: js_date_time,
   indexOfFloat: indexOfFloat,
   compare: compare,
-  min: min,
   Config
 }

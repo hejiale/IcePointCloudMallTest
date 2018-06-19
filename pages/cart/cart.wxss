@@ -53,6 +53,7 @@
   top: 55px;
   width: 100%;
   height: calc(100% - 55px);
+  padding-bottom: 5px;
 }
 
 .emptyImage{
@@ -73,6 +74,7 @@
   width: 100%;
   height: 120px;
   background-color: white;
+  border-bottom: 1px solid #f5f5f5;
 }
 
 .openView {
@@ -81,6 +83,7 @@
   width: 100%;
   height: 120px;
   background-color: white;
+  border-bottom: 1px solid #f5f5f5;
 }
 
 .onSelectView {
@@ -100,8 +103,7 @@
   display: flex;
   align-items: center;
   width: calc(100% - 60px);
-  height: 100%;
-  border-bottom: 1px solid #E6E6E6;
+  padding-bottom: 5px;
 }
 
 .productInfo {
