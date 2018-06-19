@@ -29,9 +29,11 @@
                 <view class='shelvesImage' wx:elif="{{item.code == 305}}" style='color: #FF4848;border: 1px solid #FF4848;'>库存不足</view>
               </view>
               <view class='editCartNumView'>
-                <image class='reduceCartImage' src='../images/icon_reduceCart@2x.png' mode="aspectFit" bindtap='onReduce' data-key="{{item}}"></image>
-                <text class='cartNumText'>{{item.shoppingCart.count}}</text>
-                <image class='reduceCartImage' src='../images/icon_plusCart@2x.png' mode="aspectFit" bindtap='onCrease' data-key="{{item}}"></image>
+                <image class='editCartButton' src='../images/stepper_decrease@2x.png' catchtap='onReduce' mode="aspectFit" data-key="{{item}}"></image>
+                <view class='cartNumInputView'>
+                  <text class='cartNumText'>{{item.shoppingCart.count}}</text>
+                </view>
+                <image class='editCartButton' src='../images/stepper_increase@2x.png' catchtap='onCrease' data-key="{{item}}" mode="aspectFit"></image>
               </view>
             </view>
           </view>

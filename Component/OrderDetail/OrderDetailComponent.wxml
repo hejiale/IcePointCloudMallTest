@@ -38,10 +38,10 @@
     </block>
   </view>
   <view class='memberRightsView'>
-    <image class="memberRightsIconImage" src='../Images/icon_memberRights@2x.png' mode="aspectFit"></image>
+    <image class="memberRightsIconImage" src='../Images/icon_memberRights@2x.png'></image>
     <view class="memberContentView">
       <view class="memberRightsTitleView" bindtap='onShowMemberRightsView'>会员权益</view>
-      <image class="memberLineImage" src='../Images/icon_line@2x.png' mode="aspectFit"></image>
+      <image class="memberLineImage" src='../Images/icon_line@2x.png'></image>
       <view class='memberDiscountView'>
         <view class="memberDiscounTextView">
           <text class="memberDiscounTextTitle">会员折扣</text>
@@ -73,7 +73,7 @@
       <view class="storeTitleView">
         <text class='storeInfoTitle'>线下服务点</text>
       </view>
-      <image class="storeLineImage" src='../Images/icon_line@2x.png' mode="aspectFit"></image>
+      <image class="storeLineImage" src='../Images/icon_line@2x.png'></image>
       <view class='storeAddressInfoView'>
         <view class='storeContactInfoView'>
           <view class='storeNameView'>

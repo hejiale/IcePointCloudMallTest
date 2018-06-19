@@ -187,24 +187,41 @@
 .editCartNumView {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-left: 35%;
-  margin-top: 5px;
-  width: 65%;
-  height: 30px;
+  margin-left: calc(100% - 240rpx);
+  border: 1rpx solid #e6e6e6;
+  border-radius: 3px;
+  width: 220rpx;
 }
 
-.reduceCartImage {
-  width: 46px;
-  height: 26px;
+.editCartButton {
+  width: 60rpx;
+  height: 49rpx;
+}
+
+.cartNumInputView {
+  display: flex;
+  justify-content: center;
+  width: 100rpx;
+  height: 49rpx;
+  border-left: 1rpx solid #e6e6e6;
+  border-right: 1rpx solid #e6e6e6;
+}
+
+.cartNumInputImage {
+  width: 100%;
+  height: 100%;
 }
 
 .cartNumText {
-  width: 30px;
-  height: 26px;
-  line-height: 26px;
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
+  height: 100%;
+  line-height: 49rpx;
+}
+
+.parameterLineImage {
+  width: 100%;
+  height: 1px;
 }
 
 .footView {

@@ -222,7 +222,6 @@
 .storeContentView {
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin-left: 15px;
   width: calc(100% - 35px);
 }
@@ -251,7 +250,7 @@
 }
 
 .storeLineImage {
-  width: 100%;
+  width: calc(100% - 10px);
   height: 1px;
 }
 
