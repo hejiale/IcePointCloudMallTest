@@ -1,6 +1,5 @@
 .memberRightsView {
   display: flex;
-  margin-top: 5px;
   width: 100%;
   background-color: white;
   padding-bottom: 5px;
@@ -17,7 +16,7 @@
   display: flex;
   flex-direction: column;
   margin-left: 15px;
-  width: calc(100% - 35px);
+  width: calc(100% - 45px);
 }
 
 .memberRightsTitleView {
@@ -36,7 +35,7 @@
 .memberDiscountView {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: calc(100% - 5px);
   padding-top: 5px;
 }
 
@@ -51,6 +50,7 @@
 .memberDiscounTextTitleView{
   display: flex;
   align-items: center;
+  width: 70%;
 }
 
 .memberDiscounTextTitle {
@@ -59,14 +59,15 @@
 }
 
 .memberDiscounTextMemo{
-  margin-left: 10px;
+  margin-left: 20%;
   color: #999999;
   font-size: 12px;
 }
 
 .memberDiscounTextValue {
-  margin-right: 10px;
   font-size: 14px;
   text-align: right;
-  color: #999;
+  color: #333;
+  width: calc(30% - 20px);
+  font-weight: 500;
 }

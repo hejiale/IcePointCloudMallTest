@@ -38,6 +38,10 @@ Page({
     var pages = getCurrentPages();
     if (pages.length == 1) {
       that.setData({ isFromShare: true });
+    } else {
+      if (app.globalData.isRequireLoad) {
+        app.globalData.isRequireLoad = false;
+      }
     }
   },
   onBook: function (event) {
@@ -139,9 +143,12 @@ Page({
 
     request.addShoppingCart(cart, function (data) {
       if (data.retCode >= 301 && data.retCode <= 305) {
-        wx.showToast({
-          title: data.retMsg,
-          icon: "none"
+        wx.showModal({
+          content: data.retMsg,
+          showCancel:false,
+          success: function (res) {
+            that.queryParameterRequest();
+          }
         })
       } else {
         that.queryCartCountRequest();
@@ -272,12 +279,13 @@ Page({
     }
 
     request.queryProductDetailParameter(JSON.stringify(options), function (data) {
+      //是否有不同规格价格
       if (data.price) {
         that.setData({ parameterPrice: data.price });
       } else {
         that.setData({ parameterPrice: that.data.DetailObject.goods.goodsRetailPrice });
       }
-
+      //首次加载规格参数
       if (that.data.isFirstShowParameter && data.specifications) {
         for (var i = 0; i < data.specifications.length; i++) {
           var specification = data.specifications[i];
@@ -294,13 +302,15 @@ Page({
               if (selectNum == 1) {
                 that.data.selectParameters.push(parameter);
                 selectNum = 0;
+              } else if (selectNum == 0) {
+
               }
             }
           }
         }
         that.setData({ isFirstShowParameter: false });
       }
-
+      //刷新规格参数选中状态
       for (var z = 0; z < that.data.selectParameters.length; z++) {
         var selectParameter = that.data.selectParameters[z];
         for (var i = 0; i < data.specifications.length; i++) {
@@ -313,8 +323,29 @@ Page({
           }
         }
       }
+      //判断当前可否编辑
+      if (data.specifications) {
+        for (var i = 0; i < data.specifications.length; i++) {
+          var specification = data.specifications[i];
+          var ableNum = 0;
+          for (var j = 0; j < specification.values.length; j++) {
+            var value = specification.values[j];
+            if (value.enableSelect) {
+              ableNum += 1;
+            }
+            if (j == specification.values.length - 1) {
+              if (ableNum == 0) {
+                that.setData({ isCanEdit: false, parameterObject: data, isEndLoad: true });
+                wx.hideLoading();
+                return;
+              }
+              ableNum = 0;
+            }
+          }
+        }
+      }
 
-      that.setData({ parameterObject: data, isEndLoad: true });
+      that.setData({ parameterObject: data, isEndLoad: true, isCanEdit: true });
       wx.hideLoading();
     })
   },
@@ -358,6 +389,7 @@ Page({
     request.queryProductDetail({ goodsId: that.data.goodsId },
       function (data) {
         that.setData({ DetailObject: data });
+        //查询商品规格
         that.queryParameterRequest();
         //获取图文详情
         request.queryProductDetailRemark({ goodsId: that.data.goodsId },

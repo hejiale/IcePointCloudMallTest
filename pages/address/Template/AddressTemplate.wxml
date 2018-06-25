@@ -22,9 +22,11 @@
         </view>
         <view class='editAddressView' bindtap='editAddress' data-key='{{item}}'>
           <image class='editAddressImage' src='../images/icon_editAddress@2x.png' mode="aspectFit"></image>
+          <text class='editTitle'>编辑</text>
         </view>
         <view class='deleteAddressView' bindtap='onDeleteAddress' data-key='{{item}}'>
           <image class='deleteAddressImage' src='../images/icon_deleteAddress@2x.png' mode="aspectFit"></image>
+          <text class='deleteTitle'>删除</text>
         </view>
       </view>
     </view>

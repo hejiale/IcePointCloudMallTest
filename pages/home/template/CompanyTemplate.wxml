@@ -2,7 +2,7 @@
 <template name="CompanyTemplate">
   <view class='templateSessionView' bindtap='onTemplateDetail' data-key='{{template}}'>
     <image src='{{template.mainPic[0]}}' style='width: 100%;height:{{(deviceWidth*9)/16}}px;' wx:if="{{template.mainPic.length > 0}}"></image>
-    <view class='templateTitleView' style='{{(template.mainTitle.length == 0 && template.subTitle.length == 0) ? "padding-bottom: 4rpx;":"padding-bottom: 0rpx;"}}'>
+    <view class='templateTitleView' style='{{(template.mainTitle.length == 0 && template.subTitle.length == 0 && template.productBeans == null) ? "padding-bottom: 4rpx;":"padding-bottom: 0rpx;"}}'>
       <text class='templateMainTitle' wx:if="{{template.mainTitle.length}}">{{template.mainTitle}}</text>
       <text class='templateSubTitle' wx:if="{{template.subTitle.length}}">{{template.subTitle}}</text>
     </view>

@@ -32,12 +32,12 @@ Page({
     var pages = getCurrentPages();
     if (pages.length == 1) {
       that.setData({ isFromShare: true });
+    }else{
+      if (app.globalData.isRequireLoad) {
+        app.globalData.isRequireLoad = false;
+      }
     }
-
-    if (app.globalData.isRequireLoad) {
-      app.globalData.isRequireLoad = false;
-      that.queryTemplateDetail();
-    }
+    that.queryTemplateDetail();
   },
   onGoodsDetail: function (e) {
     var that = this;
@@ -70,6 +70,16 @@ Page({
       if (data.retCode == 400) {
         that.setData({ isEmpty: true });
       } else {
+        if (data.result.mainTitle.length > 0){
+          wx.setNavigationBarTitle({
+            title: data.result.mainTitle,
+          })
+        }else{
+          wx.setNavigationBarTitle({
+            title: "专场详情",
+          })
+        }
+        
         that.setData({ templateObject: data.result });
       }
       wx.hideLoading();

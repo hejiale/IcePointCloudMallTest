@@ -18,7 +18,7 @@
       <text class="productName">{{DetailObject.goods.goodsName}}</text>
       <text class="priceText">￥{{parameterPrice}}</text>
     </view>
-    <template is="ParameterTemplate" data="{{DetailObject,parameterPrice,parameterObject,cartNum}}"></template>
+    <template is="ParameterTemplate" data="{{DetailObject,parameterPrice,parameterObject,cartNum,isCanEdit}}"></template>
     <view class="specificationView">
       <view class='specificationTitleView'>
         <text class='specificationDetailText' style='{{isSelectDetail ? "color:#222;font-weight: 500;" : "color:#999;font-weight: 400;"}}' bindtap='onDetail'>图文详情</text>
@@ -27,7 +27,7 @@
       </view>
       <image class="lineImage" src='../images/icon_line@2x.png' mode="aspectFit" wx:if="{{!isSelectDetail && DetailObject.details.length > 0}}"></image>
       <view class="webView" wx:if="{{isSelectDetail && DetailObject != null}}">
-           <template is="wxParse" data="{{wxParseData:article.nodes}}" />   
+        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
       </view>
       <view class="specifications" wx:else>
         <view class="FrameView">
@@ -52,11 +52,14 @@
         <view class='cornerMarkView' wx:if="{{cartCount > 0}}">{{cartCount}}</view>
       </view>
     </view>
-    <view class="addCartButton" bindtap='onCart'>
+    <view class="addCartButton" bindtap='onCart' wx:if="{{isCanEdit}}">
       <text class='addCartText'>加入购物车</text>
     </view>
-    <view class="payOrderButton" bindtap='onBook'>
+    <view class="payOrderButton" bindtap='onBook' wx:if="{{isCanEdit}}">
       <text class='bookText'>立即支付</text>
+    </view>
+    <view class='noneAblePayView' wx:if="{{!isCanEdit && isEndLoad}}">
+      <text class='noneAblePayText'>不可购买</text>
     </view>
   </view>
   <view class='HomeMenu' wx:if="{{isFromShare}}" bindtap='onToHomePage'>

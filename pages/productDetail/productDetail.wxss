@@ -241,6 +241,24 @@
   text-align: center;
 }
 
+.noneAblePayView{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  width: calc(60% + 10px);
+  height: 36px;
+  background-color: #3DA8F5;
+  border-radius: 3px;
+  opacity: 0.4;
+}
+
+.noneAblePayText{
+  font-size: 14px;
+  color: white;
+  text-align: center;
+}
+
 .tryImage {
   width: 40px;
   height: 40px;

@@ -4,14 +4,15 @@
     <image class="memberRightsIconImage" src='../images/icon_memberRights@2x.png' mode="aspectFit"></image>
     <view class="memberContentView">
       <view class="memberRightsTitleView">会员权益</view>
-      <image class="memberLineImage" src='../images/icon_line@2x.png' ></image>
+      <image class="memberLineImage" src='../images/icon_line@2x.png'></image>
       <view class='memberDiscountView'>
         <view class="memberDiscounTextView" wx:if="{{payInfo.memberInfo.mallCustomer.discount != null}}">
           <view class='memberDiscounTextTitleView'>
             <text class="memberDiscounTextTitle">会员折扣</text>
-            <text class="memberDiscounTextMemo">{{payInfo.memberInfo.mallCustomer.discount*10}}%</text>
+            <text class="memberDiscounTextMemo">{{payInfo.memberInfo.mallCustomer.discount}}折</text>
           </view>
           <text class='memberDiscounTextValue'>-￥{{filter.numberToFix(payInfo.discountPrice)}}</text>
+          <image class="rightIconImage"></image>
         </view>
         <view class="memberDiscounTextView" catchtap='onSelectMemberCard' wx:if="{{payInfo.memberInfo.mallCustomer.useCashCoupon}}">
           <view class='memberDiscounTextTitleView'>
@@ -21,20 +22,23 @@
           </view>
           <text class='memberDiscounTextValue' wx:if="{{payInfo.coupon}}">-￥{{filter.numberToFix(payInfo.realCouponPrice)}}</text>
           <text class='memberDiscounTextValue' wx:else>{{payInfo.couponCount > 0 ? '去使用':'无可用'}}</text>
+          <image class="rightIconImage" src='../images/icon_arrow@2x.png' mode="aspectFit"></image>
         </view>
         <view class="memberDiscounTextView" catchtap='onShowInputBalance' wx:if="{{payInfo.memberInfo.mallCustomer.balance != null}}">
           <view class='memberDiscounTextTitleView'>
             <text class="memberDiscounTextTitle">储值抵扣</text>
-            <text class="memberDiscounTextMemo">账户储值余额 ￥{{payInfo.memberInfo.mallCustomer.balance}}</text>
+            <text class="memberDiscounTextMemo">余额￥{{payInfo.memberInfo.mallCustomer.balance}}</text>
           </view>
           <text class='memberDiscounTextValue'>-￥{{filter.numberToFix(payInfo.balancePrice)}}</text>
+          <image class="rightIconImage" src='../images/icon_arrow@2x.png' mode="aspectFit"></image>
         </view>
         <view class="memberDiscounTextView" catchtap='onShowInputPoint' wx:if="{{payInfo.memberInfo.mallCustomer.integral != null}}">
           <view class='memberDiscounTextTitleView'>
             <text class="memberDiscounTextTitle">积分抵扣</text>
-            <text class="memberDiscounTextMemo">账户积分{{payInfo.memberInfo.mallCustomer.integral}}</text>
+            <text class="memberDiscounTextMemo">共{{payInfo.memberInfo.mallCustomer.integral}}分</text>
           </view>
           <text class='memberDiscounTextValue'>-￥{{filter.numberToFix(payInfo.pointPrice)}}</text>
+          <image class="rightIconImage" src='../images/icon_arrow@2x.png' mode="aspectFit"></image>
         </view>
       </view>
     </view>

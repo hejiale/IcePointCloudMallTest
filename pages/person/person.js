@@ -4,7 +4,7 @@ var app = getApp();
 
 Page({
   data: {
-    personLinkURL:'https://dev.icepointcloud.com/wechat/user/userInfo.html?key='
+    personLinkURL:'https://dev.icepointcloud.com/wx/userInfo?key='
   },
   onLoad: function () {
     var that = this;

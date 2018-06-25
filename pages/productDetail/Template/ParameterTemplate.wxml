@@ -29,11 +29,12 @@
       <text class='parameterNumTitle'>数量</text>
       <view class='editCartNumView'>
          <image class='editCartButton' src='../images/stepper_decrease@2x.png' catchtap='onReduceCart' mode="aspectFit" wx:if="{{cartNum > 1}}"></image>
-         <image class='editCartButton' src='../images/none_stepper_decrease@2x.png' catchtap='onReduceCart' mode="aspectFit" wx:else></image>
+         <image class='editCartButton' src='../images/none_stepper_decrease@2x.png' mode="aspectFit" wx:else></image>
          <view class='cartNumInputView'>
            <text class='cartNumText'>{{cartNum}}</text> 
         </view> 
-        <image class='editCartButton' src='../images/stepper_increase@2x.png' catchtap='onAddCart' mode="aspectFit"></image> 
+        <image class='editCartButton' src='../images/stepper_increase@2x.png' catchtap='onAddCart' mode="aspectFit" wx:if="{{isCanEdit}}"></image> 
+        <image class='editCartButton' src='../images/none_stepper_increase@2x.png' mode="aspectFit" wx:else></image> 
       </view>
     </view>
   </view>

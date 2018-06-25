@@ -41,7 +41,7 @@
             <text class='specificationsText' wx:if="{{item.specifications != null}}">{{item.specification}}</text>
             <view class="priceView">
               <text class="numText">x{{item.shoppingCart.count}}</text>
-              <text class="price">￥ {{filter.numberToFix(item.specifications != null ? item.specifications.price: item.goods.goodsRetailPrice)}}</text>
+              <text class="price">￥{{filter.numberToFix(item.specifications != null ? item.specifications.price: item.goods.goodsRetailPrice)}}</text>
             </view>
           </view>
         </view>

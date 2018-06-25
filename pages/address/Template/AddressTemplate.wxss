@@ -117,15 +117,19 @@
 }
 
 .editAddressImage {
-  margin-left: 20px;
-  width: 57px;
-  height: 19px;
+  width: 18px;
+  height: 18px;
 }
 
 .deleteAddressImage {
-  margin-left: 20px;
-  width: 53px;
-  height: 18px;
+  width: 21px;
+  height: 21px;
+}
+
+.editTitle, .deleteTitle{
+  margin-left: 10px;
+  font-size: 14px;
+  color: #3DA8F5;
 }
 
 .line {

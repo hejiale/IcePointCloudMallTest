@@ -364,11 +364,11 @@ Page({
 
     if (that.data.payInfo.coupon) {
       wx.navigateTo({
-        url: '../memberCard/memberCard?price=' + that.data.payInfo.shouldPayPrice + "&id=" + that.data.payInfo.coupon.id
+        url: '../memberCard/memberCard?price=' + that.data.payInfo.afterPrice + "&id=" + that.data.payInfo.coupon.id
       })
     } else {
       wx.navigateTo({
-        url: '../memberCard/memberCard?price=' + that.data.payInfo.shouldPayPrice
+        url: '../memberCard/memberCard?price=' + that.data.payInfo.afterPrice
       })
     }
   },
