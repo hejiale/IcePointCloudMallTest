@@ -115,6 +115,8 @@ Page({
       order: { orderStatus: that.data.orderType, orderSerialNumber: that.data.keyword },
     };
 
+    wx.showLoading();
+
     request.queryOrderList(options, function (data) {
       for (var i = 0; i < data.result.resultList.length; i++) {
         var order = data.result.resultList[i].order;
@@ -140,6 +142,8 @@ Page({
       if (data.result.resultList.length == 0 && that.data.orderList.length > 0) {
         that.setData({ isEndLoad: true });
       }
+
+      wx.hideLoading();
     });
   }
 })

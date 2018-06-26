@@ -38,10 +38,12 @@
       <template is="CompanyTemplate" data="{{template,deviceWidth,singleLayoutHeight,doubleLayoutHeight}}"></template>
     </block>
   </view>
-  <scroll-view scroll-y="true" class='productListView' bindscrolltolower="onLoadMore" lower-threshold='200' style='{{classList.length > 1 ? "top: 95px;":"top: 45px;"}}' wx:if="{{isShowProductListView}}">
+  <scroll-view scroll-y="true" class='productListView' bindscrolltolower="onLoadMore" lower-threshold='100' style='top: 100px; height:{{scrollHeight - 100}}px;' wx:if="{{isShowProductListView}}">
     <block wx:for-items="{{productList}}">
       <template is='normalLayOut' data="{{item,doubleLayoutHeight}}"></template>
     </block>
+    <wxc-loadmore wx:if="{{isEndLoad}}" is-end="{{true}}" text="到底啦" _pid="{{_pid}}">
+    </wxc-loadmore>
   </scroll-view>
   <view class='bottomCoverMenuView'>
     <view class='personMenu' bindtap='onBottomMenuToPerson'>

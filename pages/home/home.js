@@ -26,7 +26,8 @@ Page({
     app.getSystemInfo(function (systemInfo) {
       that.setData({
         deviceWidth: systemInfo.windowWidth,
-        classItemWidth: (systemInfo.windowWidth - 30 - 2 * 13) / 3
+        classItemWidth: (systemInfo.windowWidth - 30 - 2 * 13) / 3,
+        scrollHeight: systemInfo.windowHeight
       })
     })
     //初始化动画
@@ -49,6 +50,7 @@ Page({
       app.globalData.isRequireLoad = false;
     }
   },
+  //跳转搜索商品页面
   onSearchProduct: function () {
     wx.navigateTo({
       url: '../searchPage/searchPage',
@@ -73,9 +75,8 @@ Page({
 
     var that = this;
     var item = e.currentTarget.dataset.key;
-
     that.chooseClassItem(item);
-    //创建节点查询器 query
+
     var query = wx.createSelectorQuery()
     query.select('#classOutItem-' + item.typeId).boundingClientRect(function (rect) {
       if (rect != null) {
@@ -88,7 +89,6 @@ Page({
         that.setData({ scrollLeft: 0 });
       }
     }).exec()
-    //动画
     that.classAnimation();
   },
   //选择类目
@@ -97,6 +97,7 @@ Page({
 
     that.setData({
       currentType: item.typeName,
+      isEndLoad: false
     });
 
     if (item.typeName == '精选') {
@@ -105,9 +106,11 @@ Page({
       that.setData({
         isShowProductListView: true,
         isShowTemplateView: false,
-        productList: []
+        productList: [],
+        typeId: item.typeId,
+        currentPage: 1
       });
-      that.queryProductsRequest(item.typeId);
+      that.queryProductsRequest();
     }
   },
   onTemplateDetail: function (e) {
@@ -206,7 +209,7 @@ Page({
       animationRotate: that.animation.export()
     })
   },
-  closeRotateAnimation:function(){
+  closeRotateAnimation: function () {
     var that = this;
 
     that.animation.rotate(0).step()
@@ -288,10 +291,15 @@ Page({
       companyId: Login.Customer.companyId,
       pageNumber: that.data.currentPage,
       pageSize: that.data.pageSize,
-      typeId: typeId
+      typeId: that.data.typeId
     };
 
     request.queryProductList(options, function (data) {
+      if (data.resultList.length == 0) {
+        if (that.data.productList.length > 0) {
+          that.setData({ isEndLoad: true });
+        }
+      }
       that.setData({ productList: that.data.productList.concat(data.resultList) });
     })
   }

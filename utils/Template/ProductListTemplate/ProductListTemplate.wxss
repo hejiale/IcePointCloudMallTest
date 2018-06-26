@@ -20,10 +20,15 @@
   padding-bottom: 20px;
 }
 
-.productImage {
+.productImageView{
   margin-left: 10%;
   width: 80%;
   height: 112px;
+}
+
+.productImage {
+  width: 100%;
+  height: 100%;
 }
 
 .productSingleImage {
@@ -107,4 +112,9 @@
   text-align: right;
   width: 85%;
 } 
+
+.gray{
+  background-color: #e6e6e6;
+}
+
 

@@ -12,20 +12,5 @@ Page({
     that.setData({ personLinkURL: that.data.personLinkURL + encodeURIComponent(Login.ConfigData.wechatAppKey) + '&from=mini'});
 
     console.log(that.data.personLinkURL);
-
-    // wx.showLoading()
-
-    // app.getUserInfo(function (userInfo) {
-    //   that.setData({
-    //     userInfo: userInfo
-    //   })
-    // })
-
-    // app.userLogin(function () {
-    //   that.setData({
-    //     memberCustomer: app.globalData.customer
-    //   })
-    //   wx.hideLoading();
-    // })
   }
 })

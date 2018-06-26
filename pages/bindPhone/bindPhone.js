@@ -117,8 +117,11 @@ Page({
         userAccount: Login.Customer.openId,
         weChatAccount: Login.Customer.weChatAccount
       };
+      wx.showLoading();
 
       request.sendVerityCode(options, function (data) {
+        wx.hideLoading();
+        
         count_down(that);
         that.setData({ isSendCode: true })
 

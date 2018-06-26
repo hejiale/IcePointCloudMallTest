@@ -26,11 +26,14 @@ function userLogin(cb) {
 }
 //校验用户登录状态
 function valityLogigStatus(cb) {
-  var that = this;
+   wx.showLoading();
 
+  var that = this;
   request.valityLoginStatus(function (data) {
     if (data.retCode == 201 || data.retCode == 203) {
       userLogin(function (customer) {
+        wx.hideLoading();
+        
         if (customer != null) {
           typeof cb == "function" && cb(true);
         } else {
@@ -38,6 +41,7 @@ function valityLogigStatus(cb) {
         }
       })
     } else {
+      wx.hideLoading();
       typeof cb == "function" && cb(true);
     }
   });
