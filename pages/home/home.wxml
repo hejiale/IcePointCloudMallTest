@@ -33,18 +33,29 @@
   <view class='emptyCartView' wx:if="{{noneWechatAccount}}" style='{{classList.length > 1 ? "top: 95px;":"top: 45px;"}}'>
     <image src='../images/icon_emptyTemplate@2x.png' class='emptyImage' mode="aspectFit"></image>
   </view>
-  <view class='templateContentView' wx:if="{{templateList.length > 0 && isShowTemplateView}}" style='{{classList.length > 1 ? "top: 95px;":"top: 45px;"}}'>
+   <view class='templateContentView' wx:if="{{templateList.length > 0 && isShowTemplateView}}" style='{{classList.length > 1 ? "top: 95px;":"top: 45px;"}}'>
     <block wx:for-items="{{templateList}}" wx:for-item="template">
       <template is="CompanyTemplate" data="{{template,deviceWidth,singleLayoutHeight,doubleLayoutHeight}}"></template>
     </block>
-  </view>
-  <scroll-view scroll-y="true" class='productListView' bindscrolltolower="onLoadMore" lower-threshold='100' style='top: 100px; height:{{scrollHeight - 100}}px;' wx:if="{{isShowProductListView}}">
+  </view> 
+  <!-- <swiper class="swiperView" current="{{swiperPgae}}" bindchange="bindChange">
+    <swiper-item  wx:for="{{classList}}">
+      <scroll-view scroll-y="true" class='productListView' bindscrolltolower="onLoadMore" lower-threshold='100' style='top: 100px; height:{{scrollHeight - 100}}px;'>
+        <block wx:for-items="{{productList}}">
+          <template is='normalLayOut' data="{{item,doubleLayoutHeight}}"></template>
+        </block>
+        <wxc-loadmore wx:if="{{isEndLoad}}" is-end="{{true}}" text="到底啦" _pid="{{_pid}}">
+        </wxc-loadmore>
+      </scroll-view>
+    </swiper-item>
+  </swiper> -->
+   <scroll-view scroll-y="true" class='productListView' bindscrolltolower="onLoadMore" lower-threshold='100' style='top: 100px; height:{{scrollHeight - 100}}px;' wx:if="{{isShowProductListView}}">
     <block wx:for-items="{{productList}}">
       <template is='normalLayOut' data="{{item,doubleLayoutHeight}}"></template>
     </block>
     <wxc-loadmore wx:if="{{isEndLoad}}" is-end="{{true}}" text="到底啦" _pid="{{_pid}}">
     </wxc-loadmore>
-  </scroll-view>
+  </scroll-view> 
   <view class='bottomCoverMenuView'>
     <view class='personMenu' bindtap='onBottomMenuToPerson'>
       <image class='personMenuImage' mode="aspectFit" src="../images/person_menu@2x.png"></image>

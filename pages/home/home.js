@@ -11,7 +11,8 @@ Page({
     currentPage: 1,
     pageSize: 20,
     currentPageIndex: 0,
-    animationRotate: {}
+    animationRotate: {},
+    swiperPgae:0
   },
   onLoad: function (options) {
     var that = this;
@@ -303,4 +304,26 @@ Page({
       that.setData({ productList: that.data.productList.concat(data.resultList) });
     })
   }
+  // bindChange:function(e){
+  //   console.log(e);
+  //   var that = this;
+  //   var currentType = that.data.classList[e.detail.current];
+
+  //   that.setData({
+  //     currentType: currentType.typeName,
+  //     isEndLoad: false
+  //   });
+
+  //   if (currentType.typeName == '精选') {
+  //     that.getCompanyTemplate();
+  //   } else {
+  //     that.setData({
+  //       productList: [],
+  //       typeId: currentType.typeId,
+  //       currentPage: 1
+  //     });
+  //     that.queryProductsRequest();
+  //   }
+
+  // }
 })
