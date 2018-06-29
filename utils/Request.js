@@ -730,7 +730,14 @@ function http(msg) {
       method: msg.method,
       success: function (res) {
         if (res.statusCode == 200 && res != null) {
-          resolve(res.data);
+          if (res.data.retCode != 400){
+            resolve(res.data);
+          }else{
+            wx.showToast({
+              title: res.data.retMsg,
+              icon: 'none'
+            })
+          }
           console.log(res);
         } else {
           wx.showToast({

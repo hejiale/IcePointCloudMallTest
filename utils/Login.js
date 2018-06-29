@@ -16,6 +16,7 @@ function userLogin(cb) {
         //保存客户登录信息
         Customer.openId = data.result.weChatUserInfo.weChatUserKey.openId;
         Customer.weChatAccount = data.result.weChatAccountObject.wechatAccount;
+        Customer.weChatUserInfo = data.result.weChatUserInfo;
         //登录sessionId
         request.setSessionId(data.result.sessionId);
 
@@ -61,6 +62,7 @@ var ConfigData = {
 var Customer = {
   sessionId: null,
   weChatAccount: null,
+  weChatUserInfo:null,
   openId: null,
   companyId: null
 }

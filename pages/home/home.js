@@ -136,16 +136,8 @@ Page({
     that.queryProductsRequest();
   },
   onBottomMenuToPerson: function () {
-    Login.valityLogigStatus(function (e) {
-      if (e == false) {
-        wx.navigateTo({
-          url: '../bindPhone/bindPhone',
-        })
-      } else {
-        wx.navigateTo({
-          url: '../person/person',
-        })
-      }
+    wx.navigateTo({
+      url: '../person/person',
     })
   },
   onBottomMenuToOrder: function () {

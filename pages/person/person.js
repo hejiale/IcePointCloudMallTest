@@ -4,18 +4,48 @@ var app = getApp();
 
 Page({
   data: {
-    personLinkURL:'https://dev.icepointcloud.com/wx/userInfo?key='
+    personLinkURL: 'https://dev.icepointcloud.com/wx/userInfo?key='
   },
-  onLoad: function () {
+  onLoad: function() {
+    Login.valityLogigStatus(function(e) {
+      if (e == false) {
+        wx.navigateTo({
+          url: '../bindPhone/bindPhone',
+        })
+      }
+    })
+  },
+  onShow: function() {
     var that = this;
 
-    that.setData({ personLinkURL: that.data.personLinkURL + encodeURIComponent(Login.ConfigData.wechatAppKey) + '&from=mini' + '&back=true'});
+    if (!that.data.isLoad) {
+      Login.valityLogigStatus(function(e) {
+        if (e) {
+          that.loadWebView();
+        }
+      })
+    }
+  },
+  loadWebView: function() {
+    var that = this;
+
+    var pages = getCurrentPages();
+
+    var linkURL = that.data.personLinkURL + encodeURIComponent(Login.ConfigData.wechatAppKey) + '&from=mini';
+
+    if (pages.length > 1) {
+      linkURL = linkURL + '&back=true';
+    }
+
+    if (Login.Customer.weChatUserInfo) {
+      linkURL = linkURL + '&phone=' + Login.Customer.weChatUserInfo.phoneNumber;
+    }
+
+    that.setData({
+      personLinkURL: linkURL,
+      isLoad: true
+    });
 
     console.log(that.data.personLinkURL);
-  },
-  bindGetMsg: function (e) {
-    wx.reLaunch({
-      url: '../home/home'
-    })
   }
 })
