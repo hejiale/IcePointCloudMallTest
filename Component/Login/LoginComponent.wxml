@@ -1,0 +1,63 @@
+ <view class='showMemberRightMemoView' wx:if="{{isShowMemberRightsMemo}}">
+  <view class="classViewCover"></view>
+  <view class='showMemberRightMemoBgView'>
+    <text class='memberRightsTitle'>会员权益</text>
+    <text class='memberRightsText'>1. 消费即享受会员专属优惠权益</text>
+    <text class='memberRightsText'>2. 随时追踪每一笔订单实时进度</text>
+    <text class='memberRightsText'>3. 特享各种惊喜活动与福利组合</text>
+    <text class='closeMemberRightsText' bindtap='onCloseMemberRightBg'>我知道了</text>
+  </view>
+</view> 
+<view class="page">
+  <view class='infoAlertView' wx:if="{{isShowInfoAlert}}">
+    <image class="companyImage" src='../Images/167.png' mode="aspectFit"></image>
+    <image class="infoLineImage" src='../Images/icon_line@2x.png' mode="aspectFit"></image>
+    <text class='infoContentMainTitle'>登录后应用将获得以下权限:</text>
+    <text class='infoContentSubTitle'>• 获得你的公开信息 (昵称、头像等)</text>
+    <button class='infoSureButton' bindgetuserinfo='onGetUserInfo' open-type="getUserInfo">确认登录</button>
+  </view>
+  <view class='contentView' wx:if="{{isShowContent}}">
+    <view class="topView">
+      <image class="top_bg_image" src="../Images/icon_login_head_bg@2x.png" />
+      <view class='personInfoContentView'>
+        <view class='personInfoView'>
+          <view class='headBorderView'>
+            <image src="{{userInfo.avatarUrl}}" class="photo" mode="aspectFit"></image>
+          </view>
+          <view class='userInfoView'>
+            <text class='userNameText'>{{userInfo.nickName}}</text>
+            <text class='tipText'>立即开卡，尊享会员权益</text>
+          </view>
+        </view>
+        <view class='personBottomView' bindtap='onLookMemberRightsMemo'>
+          <text class='showMemberRightsText'>查看会员权益 ></text>
+        </view>
+      </view>
+    </view>
+    <view class="inputView">
+      <text class='inputTitle'>成为会员后，即可享受积分、储值等更多会员福利。</text>
+      <view class="userNameView">
+        <view class="inputTextView">
+          <input placeholder="请输入您的手机号码" placeholder-style="font-size: 16px;color: #E8E8E8;" class="inputText" bindinput="onPhoneTextFieldChange" maxlength='11' type='number' />
+        </view>
+      </view>
+      <view class="inputLine"></view>
+      <view class="passwordView">
+        <view class="inputTextView">
+          <input placeholder="请输入收到的验证码" placeholder-style="font-size: 16px;color: #E8E8E8;" class="inputText" bindinput="onCodeTextFieldChange" maxlength="6" type='number' />
+        </view>
+        <image class='passwordSpaceLine' src='../Images/icon_columnLine@2x.png'></image>
+        <view class="codeButton" bindtap="onSendCode">
+          <text class='codeText' style="{{!isSendCode ? 'color: #3DA7F6':'color: #E8E8E8'}};">{{clock}}</text>
+        </view>
+      </view>
+      <view class="inputLine"></view>
+      <view class="bindView" bindtap="onBindPhone" wx:if="{{isCanBind}}" style='color: white; background-color: #63a0d4;'>
+        立即开卡
+      </view>
+      <view class="bindView" bindtap="onBindPhone" wx:else style='color: white; background-color: #C3C3C3;'>
+        立即开卡
+      </view>
+    </view>
+  </view>
+</view>

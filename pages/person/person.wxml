@@ -1,3 +1,4 @@
 <view class="page">
-  <web-view src="{{personLinkURL}}"></web-view>
+  <LoginComponent id="LoginComponent" wx:if="{{!isLogin && isShow}}" bindmyevent="onMyEvent"></LoginComponent>
+  <web-view src="{{personLinkURL}}" wx:else></web-view>
 </view>

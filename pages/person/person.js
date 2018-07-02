@@ -4,16 +4,11 @@ var app = getApp();
 
 Page({
   data: {
-    personLinkURL: 'https://dev.icepointcloud.com/wx/userInfo?key='
+
   },
   onLoad: function() {
-    Login.valityLogigStatus(function(e) {
-      if (e == false) {
-        wx.navigateTo({
-          url: '../bindPhone/bindPhone',
-        })
-      }
-    })
+    var that = this;
+    that.LoginComponent = that.selectComponent('#LoginComponent');
   },
   onShow: function() {
     var that = this;
@@ -21,17 +16,32 @@ Page({
     if (!that.data.isLoad) {
       Login.valityLogigStatus(function(e) {
         if (e) {
+          wx.setNavigationBarTitle({
+            title: '',
+          })
+          that.setData({
+            isLogin: true
+          });
           that.loadWebView();
+        } else {
+          wx.setNavigationBarTitle({
+            title: '立即开卡',
+          })
+          that.setData({
+            isLogin: false
+          });
         }
+        that.setData({isShow: true})
       })
     }
   },
   loadWebView: function() {
     var that = this;
+    var personLinkURL = 'https://dev.icepointcloud.com/wx/userInfo?key=';
 
     var pages = getCurrentPages();
 
-    var linkURL = that.data.personLinkURL + encodeURIComponent(Login.ConfigData.wechatAppKey) + '&from=mini';
+    var linkURL = personLinkURL + encodeURIComponent(Login.ConfigData.wechatAppKey) + '&from=mini';
 
     if (pages.length > 1) {
       linkURL = linkURL + '&back=true';
@@ -47,5 +57,9 @@ Page({
     });
 
     console.log(that.data.personLinkURL);
+  },
+  onMyEvent: function(e) {
+    console.log(e);
+    this.onShow();
   }
 })

@@ -51,7 +51,7 @@ Component({
       })
     },
 
-    cancleOrderRequest: function () {
+    cancleOrderRequest() {
       var that = this;
 
       let parameter = {
