@@ -64,10 +64,15 @@ Page({
   onShow: function () {
     var that = this;
 
-    if (that.data.isShowContent && that.data.preAddress != (that.data.currentAddress.region + that.data.currentAddress.address)) {
-      that.setData({ preAddress: (that.data.currentAddress.region + that.data.currentAddress.address) });
-      that.queryStoreList();
+    if (that.data.currentAddress){
+      if (that.data.isShowContent && that.data.preAddress != (that.data.currentAddress.region + that.data.currentAddress.address)) {
+        that.setData({ preAddress: (that.data.currentAddress.region + that.data.currentAddress.address) });
+        that.queryStoreList();
+      }
+    }else{
+      that.setData({ preAddress: ''});
     }
+    
     //处理优惠券抵扣金额
     if (that.data.payInfo.coupon) {
       if (that.data.payInfo.couponPrice > that.data.payInfo.afterPrice) {

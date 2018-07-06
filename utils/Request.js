@@ -1,6 +1,8 @@
 var HostURL = 'https://dev.icepointcloud.com';
 // var HostURL = 'http://192.168.1.45:8080';
 var LocalHostURL = 'http://192.168.1.45:9080';
+//小程序id
+var miniAppId = 'wx6703326230ba4ecd';
 //端口
 var port = '/wechat/api/mall';
 var sessionId = null;
@@ -48,12 +50,12 @@ function valityLoginStatus(callBack) {
 
 
 //获取公司信息
-function getCompanyInfo(options, callBack) {
+function getCompanyInfo(callBack) {
   var that = this;
 
   let msg = {
-    data: options,
-    url: port + '/getCompanyInfo',
+    data: { miniAppId: miniAppId },
+    url: port + '/getWeChatAccountInfo',
     method: 'GET'
   }
 

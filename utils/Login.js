@@ -27,14 +27,14 @@ function userLogin(cb) {
 }
 //校验用户登录状态
 function valityLogigStatus(cb) {
-   wx.showLoading();
+  wx.showLoading();
 
   var that = this;
   request.valityLoginStatus(function (data) {
     if (data.retCode == 201 || data.retCode == 203) {
       userLogin(function (customer) {
         wx.hideLoading();
-        
+
         if (customer != null) {
           typeof cb == "function" && cb(true);
         } else {
@@ -48,13 +48,20 @@ function valityLogigStatus(cb) {
   });
 }
 
+function parseCompanyInfo(result) {
+  Customer.companyId = result.wechatAccount.belongedCompany.id;//公司id
+  ConfigData.wechatAppKey = result.key;//公众号key
+  ConfigData.wechatSecret = result.wechatAccount.paySecret;//支付密钥
+  ConfigData.wechatId = result.wechatAccount.appId;
+}
+
 var ConfigData = {
   //公众号key
-  wechatAppKey: 'FCtwvJYVNagFHA+a0IJbNxTSsxFoLTy6CFzpKDmPnc8=',
+  wechatAppKey: null,
   //公众号密钥
-  wechatSecret: 'E1AF5770A1770C4C572415DA17306504',
+  wechatSecret: null,
   //公众号id 
-  wechatId: 'wxb6c27db2d85fd508',
+  wechatId: null,
   //qq地图key
   qqMapKey: '7KFBZ-DM533-AJE3Q-YOEM3-ZLKOS-EGBBL'
 }
@@ -62,7 +69,7 @@ var ConfigData = {
 var Customer = {
   sessionId: null,
   weChatAccount: null,
-  weChatUserInfo:null,
+  weChatUserInfo: null,
   openId: null,
   companyId: null
 }
@@ -70,6 +77,7 @@ var Customer = {
 module.exports = {
   userLogin: userLogin,
   valityLogigStatus: valityLogigStatus,
+  parseCompanyInfo: parseCompanyInfo,
   ConfigData,
   Customer
 }

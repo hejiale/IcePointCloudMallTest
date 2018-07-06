@@ -35,6 +35,12 @@ Page({
       })
     }
   },
+  onHide:function(){
+    console.log('person hide');
+  },
+  onUnload:function(){
+    console.log('person unload');
+  },
   loadWebView: function() {
     var that = this;
     var personLinkURL = 'https://dev.icepointcloud.com/wx/userInfo?key=';
@@ -61,5 +67,8 @@ Page({
   onMyEvent: function(e) {
     console.log(e);
     this.onShow();
+  },
+  bindGetMsg:function(e){
+    console.log(e);
   }
 })
