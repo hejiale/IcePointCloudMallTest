@@ -84,6 +84,7 @@
   line-height: 30px;
   font-size: 20px;
   color: white;
+  font-weight: 700;
 }
 
 .tipText {
@@ -91,6 +92,7 @@
   line-height: 30px;
   font-size: 15px;
   color: white;
+  font-weight: 700;
 }
 
 .inputView {

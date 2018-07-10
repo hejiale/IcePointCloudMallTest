@@ -24,23 +24,19 @@
   <template is="bgTemplate"></template>
   <view class='contentView'>
     <view class="contacterView">
-      <text class="contacterText">收货人</text>
-      <input class="inputText" bindfocus='onInputFocus' bindinput="bindContacterInput" value="{{contacter}}" />
+      <input class="inputText" placeholder='收货人' placeholder-style='font-size: 14px;color: #999999;' bindfocus='onInputFocus' bindinput="bindContacterInput" value="{{contacter}}" />
     </view>
     <view class="line"></view>
     <view class="contacterView">
-      <text class="contacterText">联系电话</text>
-      <input class="inputText" bindfocus='onInputFocus' bindinput="bindContacterPhoneInput" type="number" value="{{contactPhone}}" maxlength="11" />
-    </view>
-    <view class="line"></view>
-    <view class="contacterView" bindtap='selectDistrict'>
-      <text class="contacterText">省市区</text>
-      <text class="provinceText">{{areaInfo}}</text>
+      <input class="inputText" placeholder='联系电话' placeholder-style='font-size: 14px;color: #999999;' bindfocus='onInputFocus' bindinput="bindContacterPhoneInput" type="number" value="{{contactPhone}}" maxlength="11" />
     </view>
     <view class="line"></view>
     <view class="contacterView">
-      <text class="contacterText">详细地址</text>
-      <input class="inputText" bindfocus='onInputFocus' bindinput="bindContacterAddressInput" value="{{contactAddress}}" />
+      <input class="inputText" placeholder='省市区' placeholder-style='font-size: 14px;color: #999999;' value="{{areaInfo}}" disabled="true" bindtap='selectDistrict' />
+    </view>
+    <view class="line"></view>
+    <view class="contacterView">
+      <input class="inputText" placeholder='详细地址' placeholder-style='font-size: 14px;color: #999999;' bindfocus='onInputFocus' bindinput="bindContacterAddressInput" value="{{contactAddress}}" />
     </view>
     <view class="footView">
       <text class="sureText" bindtap="onSaveAddress">保存</text>

@@ -1,6 +1,7 @@
 var Login = require('../utils/Login.js')
 var MD5 = require('../utils/md5.js')
 var request = require('../utils/Request.js')
+var app = getApp();
 
 //微信支付
 function wechatPayOrder(orderId, shouldPayPrice, callBack) {
@@ -11,7 +12,7 @@ function wechatPayOrder(orderId, shouldPayPrice, callBack) {
     openId: Login.Customer.openId,
     orderId: orderId,
     appId: Login.ConfigData.wechatId,
-    body: '冰点云线上商城测试-'
+    body: app.globalData.miniAppName
   }
 
   request.wechatPayOrder(options, function (data) {

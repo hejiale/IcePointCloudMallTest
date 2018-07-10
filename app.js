@@ -3,11 +3,8 @@ App({
   onLaunch: function (options) {
 
   },
-  onShow:function(){
+  onShow: function () {
     this.globalData.isRequireLoad = true;
-  },
-  onHide:function(){
-    console.log('hide');
   },
   getSystemInfo: function (cb) {
     var that = this;
@@ -25,6 +22,12 @@ App({
   },
   globalData: {
     systemInfo: null,
-    isRequireLoad:false
-  }  
+    isRequireLoad: false,
+    //主域名
+    HostURL: 'https://dev.icepointcloud.com',
+    //小程序id
+    miniAppId: 'wx6703326230ba4ecd',
+    //小程序名
+    miniAppName: '冰点云智慧零售测试'
+  }
 })

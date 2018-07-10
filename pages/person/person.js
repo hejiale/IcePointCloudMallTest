@@ -1,5 +1,6 @@
 // pages/person/person.js
 var Login = require('../../utils/Login.js')
+var request = require('../../utils/Request.js')
 var app = getApp();
 
 Page({
@@ -14,36 +15,42 @@ Page({
     var that = this;
 
     if (!that.data.isLoad) {
-      Login.valityLogigStatus(function(e) {
-        if (e) {
-          wx.setNavigationBarTitle({
-            title: '',
-          })
-          that.setData({
-            isLogin: true
-          });
-          that.loadWebView();
-        } else {
-          wx.setNavigationBarTitle({
-            title: '立即开卡',
-          })
-          that.setData({
-            isLogin: false
-          });
-        }
-        that.setData({isShow: true})
-      })
+      if(Login.ConfigData.wechatId == null){
+        request.getCompanyInfo(function (data) {
+          Login.parseCompanyInfo(data.result);
+          that.onLogin();
+        });
+      }else{
+        that.onLogin();
+      }
     }
   },
-  onHide:function(){
-    console.log('person hide');
-  },
-  onUnload:function(){
-    console.log('person unload');
+  onLogin:function(){
+    var that = this;
+
+    Login.valityLogigStatus(function (e) {
+      if (e) {
+        wx.setNavigationBarTitle({
+          title: '',
+        })
+        that.setData({
+          isLogin: true
+        });
+        that.loadWebView();
+      } else {
+        wx.setNavigationBarTitle({
+          title: '立即开卡',
+        })
+        that.setData({
+          isLogin: false
+        });
+      }
+      that.setData({ isShow: true })
+    })
   },
   loadWebView: function() {
     var that = this;
-    var personLinkURL = 'https://dev.icepointcloud.com/wx/userInfo?key=';
+    var personLinkURL = app.globalData.HostURL + '/wx/userInfo?key=';
 
     var pages = getCurrentPages();
 

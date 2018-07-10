@@ -4,7 +4,7 @@ var app = getApp();
 
 Page({
   data: {
-    tryLinkURL: 'https://dev.icepointcloud.com/wechat/mall/getStartExperience.html?type=miniprogram'
+    tryLinkURL: app.globalData.HostURL + '/wechat/mall/getStartExperience.html?type=miniprogram'
   },
 
   onLoad: function (options) {

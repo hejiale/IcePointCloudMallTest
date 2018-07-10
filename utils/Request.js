@@ -1,8 +1,4 @@
-var HostURL = 'https://dev.icepointcloud.com';
-// var HostURL = 'http://192.168.1.45:8080';
-var LocalHostURL = 'http://192.168.1.45:9080';
-//小程序id
-var miniAppId = 'wx6703326230ba4ecd';
+var app = getApp();
 //端口
 var port = '/wechat/api/mall';
 var sessionId = null;
@@ -54,7 +50,9 @@ function getCompanyInfo(callBack) {
   var that = this;
 
   let msg = {
-    data: { miniAppId: miniAppId },
+    data: {
+      miniAppId: app.globalData.miniAppId
+    },
     url: port + '/getWeChatAccountInfo',
     method: 'GET'
   }
@@ -726,54 +724,20 @@ function http(msg) {
 
   return new Promise((resolve, reject) => {
     wx.request({
-      url: HostURL + msg.url,
+      url: app.globalData.HostURL + msg.url,
       data: msg.data,
       header: header,
       method: msg.method,
       success: function (res) {
         if (res.statusCode == 200 && res != null) {
-          if (res.data.retCode != 400){
+          if (res.data.retCode != 400) {
             resolve(res.data);
-          }else{
+          } else {
             wx.showToast({
               title: res.data.retMsg,
               icon: 'none'
             })
           }
-          console.log(res);
-        } else {
-          wx.showToast({
-            title: '服务器繁忙，请重试',
-            icon: 'none'
-          })
-        }
-      },
-      fail: function (res) {
-        reject(res);
-      }
-    })
-  })
-}
-
-//测试localHost后台请求
-function localHttp(msg) {
-  var header = {
-    'content-type': 'application/json'
-  };
-
-  if (msg.sessionId != null) {
-    header.Cookie = msg.sessionId;
-  }
-
-  return new Promise((resolve, reject) => {
-    wx.request({
-      url: LocalHostURL + msg.url,
-      data: msg.data,
-      header: header,
-      method: msg.method,
-      success: function (res) {
-        if (res.statusCode == 200 && res != null) {
-          resolve(res.data);
           console.log(res);
         } else {
           wx.showToast({

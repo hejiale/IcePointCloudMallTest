@@ -88,7 +88,7 @@ Page({
   onSelectAddress: function () {
     var that = this;
 
-    if (that.data.currentAddress != null) {
+    if (that.data.pickUp == 'MAIL' && that.data.currentAddress != null ) {
       wx.navigateTo({
         url: '../address/address?id=' + that.data.currentAddress.id,
       })

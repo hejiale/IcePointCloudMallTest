@@ -18,6 +18,10 @@ Page({
       })
     })
 
+    if (options.address != null) {
+      that.setData({ currentAddress: options.address })
+    }
+
     that.setData({ currentAddress: options.address })
     that.queryStoreList();
   },
