@@ -12,7 +12,7 @@ function wechatPayOrder(orderId, shouldPayPrice, callBack) {
     openId: Login.Customer.openId,
     orderId: orderId,
     appId: Login.ConfigData.wechatId,
-    body: app.globalData.miniAppName
+    body: '商城消费'
   }
 
   request.wechatPayOrder(options, function (data) {

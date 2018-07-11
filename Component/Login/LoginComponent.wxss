@@ -62,8 +62,6 @@
   margin-left: 20px;
   width: 70px;
   height: 70px;
-  border: 1px solid #e8e8e8;
-  border-radius: 35px;
 }
 
 .photo {

@@ -5,6 +5,7 @@ App({
   },
   onShow: function () {
     this.globalData.isRequireLoad = true;
+    wx.clearStorage()
   },
   getSystemInfo: function (cb) {
     var that = this;

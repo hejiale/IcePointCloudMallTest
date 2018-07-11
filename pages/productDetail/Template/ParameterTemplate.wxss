@@ -89,7 +89,7 @@
 
 .TitleText {
   line-height: 20px;
-  font-size: 14px;
+  font-size: 12px;
   color: #afafaf;
 }
 
@@ -102,7 +102,7 @@
 
 .parameterNumTitle {
   margin-left: 20px;
-  font-size: 14px;
+  font-size: 12px;
   color: #afafaf;
   width: 50px;
 }
